@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: Service-Now-Gamification
+Version: 0.0.0
+Summary: Service Now Gamification
+Home-page: https://github.com/RS4327/ServicenowGamification
+Author: RS4327
+Author-email: raju.meenige@Coforge.com
+Project-URL: Bug Tracker, https://github.com/RS4327/ServicenowGamification/issues
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# ServicenowGamification
+AI-powered Service Desk platform integrated with ServiceNow to analyze agent performance, gamify achievements, predict SLA breaches using ML, and provide LLM-driven recommendations. It improves agent engagement, service quality, first-call resolution, SLA compliance, and overall operational efficiency. 
+Find the below steps 
+1) Update config.yaml
+2) Update params.yaml
+3) Update entity
+4) update the Configuration Manager in src config
+5) Update the Components
+6) Update the Pipeline
+7) Update the Main.py
+8) Update the app.py

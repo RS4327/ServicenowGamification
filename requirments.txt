@@ -1,0 +1,27 @@
+numpy
+pandas
+matplotlib
+tensorflow
+scikit-learn
+dvc
+seaborn
+nltk
+python-box==6.0.2
+pyyaml                # ✅ correct lowercase spelling
+ensure==1.0.2
+joblib 
+types-PyYAML
+scipy
+Flask
+Flask-Cors
+-e .                  # For local package installation (editable mode)
+transformers          # ✅ corrected spelling
+transformers[sentencepiece]  # ✅ fixed typo 'semtencepiece'
+datasets
+sacrebleu             # ✅ correct spelling is sacrebleu, not sacreblue
+py7zr
+tqdm
+torch
+fastapi
+uvicorn==0.18.3
+Jinja2==3.1.2         # ✅ Correct package name is Jinja2
