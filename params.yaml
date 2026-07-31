@@ -1,0 +1,24 @@
+model:
+  type: linear_regression        # lr, ridge, lasso, elasticnet
+  fit_intercept: true            # whether to fit the intercept
+  normalize: false               # standardization before fitting
+  copy_X: true                   # safe copy of input data
+  n_jobs: -1                     # parallelization (-1 = use all CPUs)
+
+data:
+  target: lpsa
+  features:
+    - lcavol
+    - lweight
+    - age
+    - lbph
+    - svi
+    - lcp
+    - gleason
+    - pgg45
+
+train:
+  test_size: 0.2                 # train/test split
+  random_state: 42               # reproducibility
+  cross_validation: 5            # (optional) k-fold cv
+  scaling: standard              # none/standard/minmax

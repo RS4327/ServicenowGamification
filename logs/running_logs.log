@@ -1,0 +1,158 @@
+[2026-07-31 18:33:35,478: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:34:22,041: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:34:55,565: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:34:56,135: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:34:56,138: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:34:56,141: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:34:56,165: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:34:56,165: ERROR: main: 'ConfigurationManager' object has no attribute 'root_dir']
+Traceback (most recent call last):
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\main.py", line 25, in <module>
+    df=obj.main()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 28, in main
+    raise e
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 20, in main
+    config = ConfigurationManager().get_data_ingestion_config()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\Config\ConfigurationManager.py", line 41, in get_data_ingestion_config
+    create_directories([self.root_dir])
+                        ^^^^^^^^^^^^^
+AttributeError: 'ConfigurationManager' object has no attribute 'root_dir'
+[2026-07-31 18:35:51,168: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:35:51,782: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:35:51,785: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:35:51,787: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:35:51,792: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:35:51,793: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:35:51,793: ERROR: main: 'DataIngestion' object has no attribute 'Incidents']
+Traceback (most recent call last):
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\main.py", line 25, in <module>
+    df=obj.main()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 28, in main
+    raise e
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 23, in main
+    ingestion.Incidents()
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataIngestion' object has no attribute 'Incidents'. Did you mean: 'LoadIncidents'?
+[2026-07-31 18:36:55,966: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:36:56,536: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:36:56,540: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:36:56,544: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:36:56,548: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:36:56,549: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:36:59,559: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 18:46:14,026: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:46:15,911: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:46:15,917: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:46:15,923: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:46:15,955: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:46:15,956: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:46:18,814: ERROR: main: 'int' object has no attribute 'iloc']
+Traceback (most recent call last):
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\main.py", line 25, in <module>
+    df=obj.main()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 28, in main
+    raise e
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 23, in main
+    df=ingestion.LoadIncidents()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\Components\Data_Sng_Ingestion.py", line 58, in LoadIncidents
+    print(df.head(2))
+          ~~~~~~~^^^
+  File "C:\Users\rajum\anaconda3\Lib\site-packages\pandas\core\generic.py", line 5893, in head
+    return self.iloc[:n]
+           ^^^^^^^^^
+AttributeError: 'int' object has no attribute 'iloc'
+[2026-07-31 18:46:54,767: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:46:55,376: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:46:55,379: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:46:55,383: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:46:55,394: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:46:55,395: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:46:58,092: ERROR: main: 'int' object has no attribute 'iloc']
+Traceback (most recent call last):
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\main.py", line 25, in <module>
+    df=obj.main()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 28, in main
+    raise e
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 23, in main
+    df=ingestion.LoadIncidents()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\Components\Data_Sng_Ingestion.py", line 58, in LoadIncidents
+    print(df.head(2))
+          ~~~~~~~^^^
+  File "C:\Users\rajum\anaconda3\Lib\site-packages\pandas\core\generic.py", line 5893, in head
+    return self.iloc[:n]
+           ^^^^^^^^^
+AttributeError: 'int' object has no attribute 'iloc'
+[2026-07-31 18:47:53,845: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:47:54,465: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:47:54,467: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:47:54,470: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:47:54,479: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:47:54,480: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:47:57,181: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 18:49:28,745: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:49:29,333: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:49:29,336: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:49:29,340: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:49:29,348: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:49:29,350: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:49:32,203: ERROR: main: object of type 'type' has no len()]
+Traceback (most recent call last):
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\main.py", line 25, in <module>
+    df=obj.main()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 28, in main
+    raise e
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\PipeLine\Stage_01_Data_Ingestion.py", line 23, in main
+    df=ingestion.LoadIncidents()
+  File "C:\Users\RSR\PYTHON\ServicenowGamification\src\ServicenowGamification\Components\Data_Sng_Ingestion.py", line 55, in LoadIncidents
+    print("Data Frame : Total Incidents:", len(df))
+                                           ~~~^^^^
+TypeError: object of type 'type' has no len()
+[2026-07-31 18:50:49,872: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:50:50,459: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:50:50,462: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:50:50,465: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:50:50,472: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:50:50,473: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:50:53,307: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 18:52:06,692: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:52:07,458: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:52:07,460: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:52:07,464: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:52:07,469: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:52:07,470: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:52:10,455: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 18:58:56,767: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 18:58:58,154: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 18:58:58,160: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 18:58:58,165: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 18:58:58,187: INFO: Common: Created directory : Artifacts]
+[2026-07-31 18:58:58,187: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 18:59:01,397: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 19:02:20,488: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 19:02:21,946: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 19:02:21,949: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 19:02:21,953: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 19:02:21,963: INFO: Common: Created directory : Artifacts]
+[2026-07-31 19:02:21,964: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 19:02:25,275: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 19:03:24,795: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 19:03:25,535: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 19:03:25,540: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 19:03:25,544: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 19:03:25,548: INFO: Common: Created directory : Artifacts]
+[2026-07-31 19:03:25,549: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 19:03:28,433: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 19:03:50,743: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 19:03:51,320: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 19:03:51,322: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 19:03:51,326: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 19:03:51,334: INFO: Common: Created directory : Artifacts]
+[2026-07-31 19:03:51,335: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 19:03:54,242: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]
+[2026-07-31 19:04:59,302: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-07-31 19:04:59,889: INFO: main: >>>>>>>>>> Stage : Data Ingestion Started <<<<<<<<<<]
+[2026-07-31 19:04:59,891: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-07-31 19:04:59,894: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-07-31 19:04:59,901: INFO: Common: Created directory : Artifacts]
+[2026-07-31 19:04:59,902: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-07-31 19:05:02,915: INFO: main: >>>>>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<<<<]

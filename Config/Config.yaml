@@ -1,0 +1,8 @@
+artifacts_root : Artifacts
+
+Data_Ingestion:
+  root_dir : Artifacts/DataIngestion 
+  source_url : "https://dev394794.service-now.com"
+  user_name  : "admin"
+  password   : "TyMdk!/WQa00"
+  local_data_file : Artifacts/DataIngestion/Incidents.csv
