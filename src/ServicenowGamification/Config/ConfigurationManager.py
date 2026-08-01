@@ -4,6 +4,7 @@ from ServicenowGamification.Utils.Common import *
 
 from ServicenowGamification.Constant import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from ServicenowGamification.Entity.Config_Entity import  DataIngestionConfig 
+from ServicenowGamification.Entity.Config_Entity import DataPreProcessingConfig
 
 
 
@@ -35,6 +36,7 @@ class ConfigurationManager:
             print("Found YAML:", p.resolve())
          create_directories([self.config.artifacts_root])        
          self.Data_Ingestion = self.config.Data_Ingestion
+         self.Data_PreProcessing = self.config.Data_PreProcessing
         
     def get_data_ingestion_config(self)->DataIngestionConfig:
         Config=self.Data_Ingestion
@@ -49,6 +51,17 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    def get_data_preprocessing_config(self)->DataPreProcessingConfig:
+             
+        Config=self.Data_PreProcessing
+        create_directories([Config.root_dir])
+        data_preprocessingconfig=DataPreProcessingConfig(
+            root_dir=Config.root_dir,
+            data_path=Config.data_path,
+            local_data_file=Config.local_data_file
+        )
+        return data_preprocessingconfig
+    
 
 
 

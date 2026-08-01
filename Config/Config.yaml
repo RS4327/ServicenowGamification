@@ -6,3 +6,9 @@ Data_Ingestion:
   user_name  : "admin"
   password   : "TyMdk!/WQa00"
   local_data_file : Artifacts/DataIngestion/Incidents.csv
+
+Data_PreProcessing:
+  root_dir : Artifacts/DataPreProcessing
+  data_path : Artifacts/DataIngestion/Incidents.csv
+  local_data_file : Artifacts/DataPreProcessing/Datapreprocessing.csv
+  

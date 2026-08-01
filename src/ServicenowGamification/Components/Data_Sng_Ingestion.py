@@ -57,7 +57,7 @@ class DataIngestion:
         print("Data Frame : Total Incidents:", len(df))
         print(f"\n*-------------------------- Data Frame Total Columns or Features ----------------------------*\n")
 
-        print(f"Data Frame : Columns/Features Details: {df.columns.tolist()}")
+        #print(f"Data Frame : Columns/Features Details: {df.columns.tolist()}")
         print(f"\n*-------------------------- Data Frame Share(Row,Clumns) ------------------------------------*\n")
         
         print(f"Data Frame Shape (Rows, Columns): {df.shape}")
@@ -75,6 +75,6 @@ class DataIngestion:
             "category",
             "assigned_to"]
 
-        print(df[features].head(2))
+        #print(df[features].head(2))
 
         #return df 

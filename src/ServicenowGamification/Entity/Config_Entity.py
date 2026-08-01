@@ -9,3 +9,9 @@ class DataIngestionConfig:
     user_name : str 
     password : str 
     local_data_file : Path
+
+@dataclass 
+class DataPreProcessingConfig:
+    root_dir : Path
+    data_path : str
+    local_data_file : str
