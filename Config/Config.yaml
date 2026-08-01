@@ -11,4 +11,13 @@ Data_PreProcessing:
   root_dir : Artifacts/DataPreProcessing
   data_path : Artifacts/DataIngestion/Incidents.csv
   local_data_file : Artifacts/DataPreProcessing/Datapreprocessing.csv
-  
+
+Data_MetricsCalculation:
+ root_dir : Artifacts/MetricsCalculation
+ data_path : Artifacts/DataPreProcessing/Datapreprocessing.csv
+ local_data_file : Artifacts/MetricsCalculation/mttr.csv
+ 
+Data_Gamification:
+  root_dir : Artifacts/DataGamification
+  data_path : Artifacts/MetricsCalculation/mttr.csv
+  local_data_file : Artifacts/DataGamification/sla.csv

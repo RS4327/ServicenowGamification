@@ -15,3 +15,16 @@ class DataPreProcessingConfig:
     root_dir : Path
     data_path : str
     local_data_file : str
+    
+@dataclass
+class DataMetricsCalculationConfig:
+    root_dir : Path
+    data_path : str
+    local_data_file : str
+
+@dataclass
+class DataGamificationConfig:
+  root_dir : Path 
+  data_path : str
+  local_data_file : str
+ 
