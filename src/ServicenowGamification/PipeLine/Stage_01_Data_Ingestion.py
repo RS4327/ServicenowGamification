@@ -1,5 +1,5 @@
 import os
-os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification/src")
+os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification")
 from ServicenowGamification.Entity.Config_Entity import *
 from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
 from ServicenowGamification.Components.Data_Sng_Ingestion import DataIngestion
@@ -22,7 +22,7 @@ class DataIngestionPipeLine:
             #ingestion.create_table()
             df=ingestion.LoadIncidents()
             #print(df.head())
-            #return df
+            return df
             
         except Exception as e:
             raise e

@@ -1,18 +1,19 @@
 import os
 from pathlib import Path
-
+os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification")
 import pandas as pd
 import requests
 from ServicenowGamification.Config.ConfigurationManager import *
 from ServicenowGamification.Utils.Common import *
 from ServicenowGamification.Entity.Config_Entity import *
 
-os.chdir(r"C:\Users\RSR\PYTHON\LLMIssueTracker\src")
+
 
 
 class DataIngestion:
     def __init__(self,config:DataIngestionConfig):
         self.config=config
+        create_directories([self.config.root_dir])
         
     def LoadIncidents(self):
         INSTANCE = self.config.source_url
@@ -77,4 +78,4 @@ class DataIngestion:
 
         #print(df[features].head(2))
 
-        #return df 
+        return df 

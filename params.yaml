@@ -3,3 +3,114 @@ sla:
   priority_2: 8
   priority_3: 24
   priority_4: 48
+
+points:
+  priority:
+    P1: 50
+    P2: 30
+    P3: 20
+    P4: 10
+
+gamification:
+
+  points:
+
+    incident_closed: 10
+
+    sla_met: 20
+
+    first_call_resolution: 25
+
+    high_priority_bonus: 30
+
+    customer_rating_bonus: 15
+
+    reopen_penalty: -10
+
+    reassignment_penalty: -5
+  
+  badges:
+
+    legend:
+      min_points: 1000
+
+    platinum:
+      min_points: 750
+
+    gold:
+      min_points: 500
+
+    silver:
+      min_points: 300
+
+    bronze:
+      min_points: 100
+
+    rookie:
+      min_points: 0
+
+  levels:
+
+    level_1:
+      name: Beginner
+      min_points: 0
+
+    level_2:
+      name: Explorer
+      min_points: 100
+
+    level_3:
+      name: Performer
+      min_points: 250
+
+    level_4:
+      name: Expert
+      min_points: 500
+
+    level_5:
+      name: Master
+      min_points: 750
+
+    level_6:
+      name: Champion
+      min_points: 1000
+  
+  leaderboard:
+
+    top_n: 10
+
+    sort_by:
+      - total_points
+      - level
+      - total_incidents
+      - average_resolution
+      
+  achievements:
+
+    incident_master:
+      incidents: 100
+
+    point_master:
+      points: 1000
+
+    sla_champion:
+      sla: 100
+
+    speed_star:
+      mttr: 4
+
+    elite_level:
+      level: 6
+
+    top_rank:
+      rank: 1
+      
+  monthly_ranking:
+
+    top_n: 10
+
+    ranking_columns:
+
+      - total_points
+      - total_incidents
+      - average_resolution

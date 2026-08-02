@@ -15,7 +15,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from ServicenowGamification.PipeLine.Stage_01_Data_Ingestion import DataIngestionPipeLine
 from ServicenowGamification.PipeLine.Stage_02_Data_PreProcessing import DataPreProcessingPipeLine
 from ServicenowGamification.PipeLine.Stage_03_Data_Metricalculation import DataMetricsCalculationPipeLine
- 
+from ServicenowGamification.PipeLine.Stage_04_Data_Gamification import DataGamificationPipeLine
 from ServicenowGamification import logger
 
 STAGE_NAME = "Data Ingestion"
@@ -40,7 +40,7 @@ try :
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Started <<<<<<<")
     #print("\n")
     obj=DataPreProcessingPipeLine()
-    df=obj.main()
+    df=obj.main(df)
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<")
           
 except Exception as e:
@@ -55,6 +55,17 @@ try :
     obj=DataMetricsCalculationPipeLine()
     df=obj.main()
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<")
+        
+except Exception as e:
+    logger.info(e)
+    raise e
+
+STAGE_NAME = "Data Gamification"
+try :
+    logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Started <<<<<<<<<<")
+    obj=DataGamificationPipeLine()
+    df=obj.main()
+    logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<<<<")
         
 except Exception as e:
     logger.info(e)

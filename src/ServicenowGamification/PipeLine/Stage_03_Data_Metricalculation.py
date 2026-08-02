@@ -1,5 +1,5 @@
 import os
-os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification/src")
+#os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification/src")
 from ServicenowGamification.Entity.Config_Entity import *
 from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
 from ServicenowGamification.Components.Data_Sng_MetricsCalculation import MetricsCalculation
@@ -20,8 +20,13 @@ class DataMetricsCalculationPipeLine:
 
             metrics_calculation_config = config.get_metricscalculationconfig()
 
-            metrics_calculation = MetricsCalculation(metrics_calculation_config)   
+            metrics_calculation = MetricsCalculation(metrics_calculation_config)   # ✅ Correct
             df=metrics_calculation.MTTR()
+            df,art=metrics_calculation.calculate_art(df)
+            df=metrics_calculation.calculate_sla(df)
+            df=metrics_calculation.calculate_fcr(df)
+            df,metrics=metrics_calculation.performance_metrics(df)
+            return df,metrics
         except Exception as e:
             raise e
         

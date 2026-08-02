@@ -27,4 +27,21 @@ class DataGamificationConfig:
   root_dir : Path 
   data_path : str
   local_data_file : str
+  incident_points : str
+  analyst_points  : str
+  badgeresults  : Path
+  badgesummary : Path
+  levelresults : Path
+  levelsummary : Path
+  leaderboardfile : Path 
+  topfile : Path 
+  bottomfile : Path
+  teamfile : Path 
+  groupfile : Path 
+  achievementfile : Path
+  summaryfile : Path
+  monthlyranking : Path
+  monthlytopfile  : Path
+  monthlysummaryfile : Path
+
  

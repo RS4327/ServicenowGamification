@@ -55,7 +55,10 @@ def Read_Yaml(path_to_yaml: Path) -> ConfigBox:
 def create_directories(paths: list, verbose=True):
 
     for path in paths:
+        #print(f"Received path : {path}")
         os.makedirs(path, exist_ok=True)
+        #print(f"Directory exists : {Path(path).exists()}")
+        #print(f"Absolute path : {Path(path).resolve()}")
 
         if verbose:
             logger.info(

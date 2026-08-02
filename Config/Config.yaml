@@ -21,3 +21,19 @@ Data_Gamification:
   root_dir : Artifacts/DataGamification
   data_path : Artifacts/MetricsCalculation/mttr.csv
   local_data_file : Artifacts/DataGamification/sla.csv
+  incident_points : Artifacts/DataGamification/IncidentPoints.csv
+  analyst_points  : Artifacts/DataGamification/AnalystPoints.csv
+  badgeresults  : Artifacts/DataGamification/BadgeResults.csv
+  badgesummary : Artifacts/DataGamification/BadgeSummary.csv
+  levelresults : Artifacts/DataGamification/LevelResults.csv
+  levelsummary : Artifacts/DataGamification/LevelSummary.csv
+  leaderboardfile : Artifacts/DataGamification/Leaderboard.csv
+  topfile : Artifacts/DataGamification/TopPerformers.csv 
+  bottomfile : Artifacts/DataGamification/BottomPerformers.csv
+  teamfile : Artifacts/DataGamification/TeamSummary.csv
+  groupfile : Artifacts/DataGamification/AssignmentGroupLeaderboard.csv
+  achievementfile : Artifacts/DataGamification/AchievementResults.csv
+  summaryfile : Artifacts/DataGamification/AchievementSummary.csv
+  monthlyranking : Artifacts/DataGamification/MonthlyRanking.csv
+  monthlytopfile : Artifacts/DataGamification/TopMonthlyPerformers.csv
+  monthlysummaryfile : Artifacts/DataGamification/MonthlySummary.csv

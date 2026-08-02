@@ -1,5 +1,5 @@
 import os
-os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification/src")
+#os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification/src")
 from ServicenowGamification.Entity.Config_Entity import *
 from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
 from ServicenowGamification.Components.Data_Sng_DataPreProcessing import DataPreProcessing
@@ -13,13 +13,14 @@ Stage_Name='Data PreProcessing'
 class DataPreProcessingPipeLine:
     def __init__(self):
         pass
-    def main(self):
+    def main(self,df):
 
         try:
             config = ConfigurationManager()
             data_preprocessing_config = config.get_data_preprocessing_config()
             data_PreProcess = DataPreProcessing(data_preprocessing_config)   # ✅ Correct
-            df=data_PreProcess.Datapreprocessing()
+            df=data_PreProcess.Datapreprocessing(df)
+            return df
             
         except Exception as e:
             raise e

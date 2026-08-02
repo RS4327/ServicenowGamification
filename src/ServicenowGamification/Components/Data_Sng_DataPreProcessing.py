@@ -1,22 +1,22 @@
 import os 
 import pandas as pd 
-
+import numpy as np
 from ServicenowGamification.Utils.Common import * 
 from ServicenowGamification.Constant import * 
 from ServicenowGamification.Config import * 
 from ServicenowGamification.Entity.Config_Entity import *
 
-os.chdir(r"C:\Users\RSR\PYTHON\LLMIssueTracker\src")
+os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification")
 
 class DataPreProcessing:
     def __init__(self,config:DataPreProcessingConfig):
 
         self.config=config
 
-        create_directories([self.config.root_dir])
+        #create_directories([self.config.root_dir])
 
-    def Datapreprocessing(self):
-        df=pd.read_csv(self.config.data_path)
+    def Datapreprocessing(self,df):
+        df=df
         #print(df.head(2))
         #print(df.shape)           
         features=[
@@ -34,6 +34,8 @@ class DataPreProcessing:
             "description",
             "sys_created_on",
             "sys_updated_on",
+            "reassignment_count",
+            "reopen_count",
         ]
         df=df[features]
         #print(df.head(1))
@@ -53,7 +55,7 @@ class DataPreProcessing:
 
         print(f"\n*-------------- Handle missing values from Incident Data Frame ----------------*\n")
         print(f"Checking Missing Values count for every object features  before Handle missing values ")
-       
+        df.replace(r'^\s*$', np.nan, regex=True, inplace=True)
         fill_values = {
              
             "assigned_to": ["Venkat", "Vamsi", "Raju", "Ganesh", "Chaitanya"],
@@ -124,6 +126,7 @@ class DataPreProcessing:
         local_path=self.config.local_data_file
         print(f"Preprocessed data saved to: {local_path}")
         df.to_csv(local_path, index=False)
+        return df
 
 
 
