@@ -44,4 +44,23 @@ class DataGamificationConfig:
   monthlytopfile  : Path
   monthlysummaryfile : Path
 
- 
+@dataclass 
+class DataMachineLearningModelsConfig:
+    root_dir : Path 
+    data_path : Path
+    X_train : Path
+    X_test : Path
+    y_train : Path
+    y_test : Path
+    scalerpkl : Path
+    Xtrainengineered : Path
+    Xtestengineered : Path
+
+@dataclass
+class DataPredictionConfig:   
+    root_dir : Path
+    data_path : Path
+    model_path: Path
+    scaler_path: Path
+    prediction_output: Path
+    probability_threshold: float  

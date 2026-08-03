@@ -16,6 +16,7 @@ from ServicenowGamification.PipeLine.Stage_01_Data_Ingestion import DataIngestio
 from ServicenowGamification.PipeLine.Stage_02_Data_PreProcessing import DataPreProcessingPipeLine
 from ServicenowGamification.PipeLine.Stage_03_Data_Metricalculation import DataMetricsCalculationPipeLine
 from ServicenowGamification.PipeLine.Stage_04_Data_Gamification import DataGamificationPipeLine
+from ServicenowGamification.PipeLine.Stage_05_Data_MachineLearning_Models import DataMachineLearningModelsPipeLine
 from ServicenowGamification import logger
 
 STAGE_NAME = "Data Ingestion"
@@ -53,7 +54,7 @@ STAGE_NAME = "Data Metrics Calculation"
 try :
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Started <<<<<<<")
     obj=DataMetricsCalculationPipeLine()
-    df=obj.main()
+    df,metrics=obj.main(df)
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<")
         
 except Exception as e:
@@ -61,10 +62,23 @@ except Exception as e:
     raise e
 
 STAGE_NAME = "Data Gamification"
+
 try :
     logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Started <<<<<<<<<<")
     obj=DataGamificationPipeLine()
-    df=obj.main()
+    df=obj.main(df)
+    logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<<<<")
+        
+except Exception as e:
+    logger.info(e)
+    raise e
+
+STAGE_NAME = "Data Machine Learning"
+
+try :
+    logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Started <<<<<<<<<<")
+    obj=DataMachineLearningModelsPipeLine()
+    df=obj.main(df)
     logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<<<<")
         
 except Exception as e:

@@ -11,14 +11,16 @@ Stage_Name='Data Gamification'
 class DataGamificationPipeLine:
     def __init__(self):
         pass
-    def main(self):
+    def main(self,df):
         try :
             config = ConfigurationManager()
 
             gamification_config = config.get_datagamificationconfig()
 
             gamification = Gamification(gamification_config)   
-            df=gamification.calculate_points()
+            print(type(df))
+            df=gamification.calculate_points(df)
+            print(type(df))
             df_f,df_analyst_summary=gamification.p_save(df)
             df_b=gamification.assign_badges(df_f)
             df=gamification.b_save(df_b)
@@ -30,6 +32,7 @@ class DataGamificationPipeLine:
             df=gamification.ach_save(df_ach)
             df_m=gamification.generate_monthly_ranking(df_f)
             df=gamification.mon_save(df_m)
+            return df_l
         except Exception as e:
             raise e
 

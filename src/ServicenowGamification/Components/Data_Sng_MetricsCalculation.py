@@ -13,8 +13,10 @@ class MetricsCalculation:
     def __init__(self,config:DataMetricsCalculationConfig):
         self.config=config
         self.params = Read_Yaml(PARAMS_FILE_PATH)
-    def MTTR(self):
-        df=pd.read_csv(self.config.data_path)
+    def MTTR(self,df):
+        if df is None:
+            df = pd.read_csv(self.config.data_path)
+            
       
         #print(f"\n*-------------- Calculate MTTR(Mean Time To Resolve) ----------------*\n")
         date_columns = ["opened_at", "resolved_at", "closed_at"]
@@ -89,7 +91,7 @@ class MetricsCalculation:
                 return "Met" if row["resolution_hours"] <= self.params.sla.priority_4 else "Breached"
         
             else:
-                return "5 - Planning"
+                return "Breached"
 
         df["sla_status"] = df.apply(
             get_status,

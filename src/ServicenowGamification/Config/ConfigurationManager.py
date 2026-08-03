@@ -7,6 +7,7 @@ from ServicenowGamification.Entity.Config_Entity import  DataIngestionConfig
 from ServicenowGamification.Entity.Config_Entity import DataPreProcessingConfig
 from ServicenowGamification.Entity.Config_Entity import DataMetricsCalculationConfig
 from ServicenowGamification.Entity.Config_Entity import DataGamificationConfig
+from ServicenowGamification.Entity.Config_Entity import DataMachineLearningModelsConfig
 
 
 
@@ -44,6 +45,7 @@ class ConfigurationManager:
          self.Data_PreProcessing = self.config.Data_PreProcessing
          self.Data_MetricsCalculation = self.config.Data_MetricsCalculation
          self.Data_Gamification=self.config.Data_Gamification
+         self.Data_MachineLearningModels = self.config.Data_MachineLearningModels
         #  print("Artifacts Root:", self.config.artifacts_root)
         #  print("Data Ingestion Root:", self.Data_Ingestion.root_dir)
         #  print("Data PreProcessing Root:", self.Data_PreProcessing.root_dir)
@@ -108,6 +110,20 @@ class ConfigurationManager:
              )
              return data_gamification_config
     
-
+    def get_data_machinelearningmodels(self)->DataMachineLearningModelsConfig:
+            Config=self.Data_MachineLearningModels
+            create_directories([Config.root_dir])
+            data_machinelearningmodels_config=DataMachineLearningModelsConfig(
+                root_dir=Config.root_dir,
+                data_path=Config.data_path, 
+                X_train =Config.X_train, 
+                X_test =Config.X_test, 
+                y_train =Config.y_train, 
+                y_test =Config.y_test,
+                scalerpkl =Config.scalerpkl, 
+                Xtrainengineered =Config.Xtrainengineered, 
+                Xtestengineered =Config.Xtestengineered  
+            )
+            return data_machinelearningmodels_config
 
 

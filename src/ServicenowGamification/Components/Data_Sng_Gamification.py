@@ -17,86 +17,73 @@ class Gamification:
     ##################################################################
     # Calculate Points
     ##################################################################
-        
+    def calculate_points(self,df):
+        df=df
+        if df is None:
+            df = pd.read_csv(self.config.data_path)
+        ##########################################################
+        # Convert numeric columns BEFORE iterrows()
+        ##########################################################
+        if "reopen_count" in df.columns:
+            df["reopen_count"] = (
+                pd.to_numeric(df["reopen_count"], errors="coerce")
+                .fillna(0)
+                .astype(int)
+            )
 
-    def calculate_points(self):
-        print("##################################################################")
-        print(f" # Point calculation")
-        print("##################################################################")
-        df = pd.read_csv(self.config.data_path)
+        if "reassignment_count" in df.columns:
+            df["reassignment_count"] = (
+                pd.to_numeric(df["reassignment_count"], errors="coerce")
+                .fillna(0)
+                .astype(int)
+            )
+
+        if "customer_rating" in df.columns:
+            df["customer_rating"] = (
+                pd.to_numeric(df["customer_rating"], errors="coerce")
+                .fillna(0)
+            )
+
+        print(df[["reopen_count","reassignment_count"]].dtypes)
+
         total_points = []
 
         for _, row in df.iterrows():
-
             points = 0
-
-            ##########################################################
-            # Incident Closed
-            ##########################################################
-
-            if str(row["state"]).lower() == "Closed":
-
+            if str(row["state"]).lower() == "closed":
                 points += self.params.gamification.points["incident_closed"]
 
-            ##########################################################
-            # SLA Met
-            ##########################################################
-
             if row["sla_status"] == "Met":
-
                 points += self.params.gamification.points["sla_met"]
 
-            ##########################################################
-            # First Call Resolution
-            ##########################################################
-
             if row["fcr"] == 1:
-
                 points += self.params.gamification.points["first_call_resolution"]
 
-            ##########################################################
-            # High Priority Bonus
-            ##########################################################
-
             if str(row["priority"]) == "1 - Critical":
-
                 points += self.params.gamification.points["high_priority_bonus"]
 
-            ##########################################################
-            # Customer Rating Bonus
-            ##########################################################
-
             if "customer_rating" in df.columns:
-
                 if row["customer_rating"] >= 4.5:
-
                     points += self.params.gamification.points["customer_rating_bonus"]
 
-            ##########################################################
-            # Reopen Penalty
-            ##########################################################
+            if row["reopen_count"] > 0:
+                points -= (
+                    abs(self.params.gamification.points["reopen_penalty"])
+                    * row["reopen_count"]
+                )
 
-            if "reopen_count" in df.columns:
-
-                if row["reopen_count"] > 0:
-
-                    points += abs(self.params.gamification.points["reopen_penalty"]) * row["reopen_count"] * -1
-
-            ##########################################################
-            # Reassignment Penalty
-            ##########################################################
-
-            if "reassignment_count" in df.columns:
-
-                if row["reassignment_count"] > 0:
-
-                    points += abs(self.params.gamification.points["reassignment_penalty"]) * row["reassignment_count"] * -1
+            if row["reassignment_count"] > 0:
+                points -= (
+                    abs(self.params.gamification.points["reassignment_penalty"])
+                    * row["reassignment_count"]
+                )
 
             total_points.append(points)
 
         df["points"] = total_points
 
-        return df
+        return df    
+    
     ##################################################################
     # Analyst Wise Summary
     ##################################################################

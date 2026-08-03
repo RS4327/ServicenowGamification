@@ -37,3 +37,23 @@ Data_Gamification:
   monthlyranking : Artifacts/DataGamification/MonthlyRanking.csv
   monthlytopfile : Artifacts/DataGamification/TopMonthlyPerformers.csv
   monthlysummaryfile : Artifacts/DataGamification/MonthlySummary.csv
+Data_MachineLearningModels: 
+  root_dir : Artifacts/MachineLearningModels
+  data_path : Artifacts/DataGamification/LevelResults.csv
+  X_train : Artifacts/MachineLearningModels/X_train.csv
+  X_test : Artifacts/MachineLearningModels/X_test.csv
+  y_train : Artifacts/MachineLearningModels/y_train.csv
+  y_test : Artifacts/MachineLearningModels/y_test.csv
+  scalerpkl : Artifacts/MachineLearningModels/StandardScaler.pkl
+  Xtrainengineered : Artifacts/MachineLearningModels/X_train_engineered.csv
+  Xtestengineered : Artifacts/MachineLearningModels/X_test_engineered.csv
+
+Data_Prediction:
+  root_dir : Artifacts/PredictionModel
+  data_path : Artifacts/DataIngestion/Incidents.csv 
+  model_path: Artifacts/MachineLearningModels/Best_Model.pkl
+  scaler_path: Artifacts/MachineLearningModels/StandardScaler.pkl
+  prediction_output: Artifacts/PredictionModel
+  probability_threshold: 0.50  
+
+  

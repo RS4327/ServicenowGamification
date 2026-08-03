@@ -114,3 +114,89 @@ gamification:
       - total_points
       - total_incidents
       - average_resolution
+
+machine_learning:
+
+  target_column: sla_status
+
+  test_size: 0.20
+
+  random_state: 42
+
+  categorical_columns:
+
+    - priority
+    - assignment_group
+    - assigned_to
+    - state
+
+  feature_columns:
+
+    - priority
+    - assignment_group
+    - assigned_to
+    - resolution_hours
+    - reopen_count
+    - reassignment_count
+    - points
+    - level
+
+  scaling : standard
+  create_features: True
+  save_scaler: True
+  date_column: opened_at  
+
+model_training:
+
+
+  random_forest:
+      n_estimators: 200
+      max_depth: 10
+      min_samples_split: 2
+      min_samples_leaf: 1
+      max_features: "sqrt"
+      bootstrap: true
+      random_state: 42
+
+  xgboost:
+    objective: "binary:logistic"
+    eval_metric: "logloss"
+    learning_rate: 0.1
+    max_depth: 6
+    n_estimators: 200
+    subsample: 0.8
+    colsample_bytree: 0.8
+    gamma: 0
+    min_child_weight: 1
+    random_state: 42
+
+  svm:
+    C: 1.0
+    kernel: "rbf"
+    gamma: "scale"
+    probability: true
+    random_state: 42
+
+  logistic_regression:
+    C: 1.0
+    solver: "liblinear"
+    max_iter: 1000
+    random_state: 42
+
+  decision_tree:
+    criterion: "gini"
+    max_depth: 10
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+
+  knn:
+    n_neighbors: 5
+    weights: "uniform"
+    metric: "minkowski"
+
+  gradient_boosting:
+    learning_rate: 0.1
+    n_estimators: 200
+    max_depth: 3
+    random_state: 42

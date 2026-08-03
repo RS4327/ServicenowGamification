@@ -14,14 +14,14 @@ Stage_Name='Data Metrics Calculation'
 class DataMetricsCalculationPipeLine:
     def __init__(self):
         pass
-    def main(self):
+    def main(self,df):
         try :
             config = ConfigurationManager()
 
             metrics_calculation_config = config.get_metricscalculationconfig()
 
             metrics_calculation = MetricsCalculation(metrics_calculation_config)   # ✅ Correct
-            df=metrics_calculation.MTTR()
+            df=metrics_calculation.MTTR(df)
             df,art=metrics_calculation.calculate_art(df)
             df=metrics_calculation.calculate_sla(df)
             df=metrics_calculation.calculate_fcr(df)
