@@ -8,6 +8,7 @@ from ServicenowGamification.Entity.Config_Entity import DataPreProcessingConfig
 from ServicenowGamification.Entity.Config_Entity import DataMetricsCalculationConfig
 from ServicenowGamification.Entity.Config_Entity import DataGamificationConfig
 from ServicenowGamification.Entity.Config_Entity import DataMachineLearningModelsConfig
+from ServicenowGamification.Entity.Config_Entity import DataPredictionConfig
 
 
 
@@ -46,6 +47,7 @@ class ConfigurationManager:
          self.Data_MetricsCalculation = self.config.Data_MetricsCalculation
          self.Data_Gamification=self.config.Data_Gamification
          self.Data_MachineLearningModels = self.config.Data_MachineLearningModels
+         self.Data_Prediction = self.config.Data_Prediction
         #  print("Artifacts Root:", self.config.artifacts_root)
         #  print("Data Ingestion Root:", self.Data_Ingestion.root_dir)
         #  print("Data PreProcessing Root:", self.Data_PreProcessing.root_dir)
@@ -125,5 +127,17 @@ class ConfigurationManager:
                 Xtestengineered =Config.Xtestengineered  
             )
             return data_machinelearningmodels_config
+    def get_dataprediction(self)->DataPredictionConfig:
+             Config=self.Data_Prediction
+             create_directories([Config.root_dir])
+             data_prediction_config=DataPredictionConfig(
+                  root_dir=Config.root_dir,
+                  data_path=Config.data_path,
+                  model_path=Config.model_path, 
+                  scaler_path =Config.scaler_path, 
+                  prediction_output =Config.prediction_output, 
+                  probability_threshold =Config.probability_threshold 
+             )
+             return data_prediction_config
 
 
