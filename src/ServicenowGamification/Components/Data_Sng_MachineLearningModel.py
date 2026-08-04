@@ -83,7 +83,7 @@ class MachineLearningModels:
 
     def encode_features(self,df):
         df=df
-        print('encoding ',df.columns)
+        #print('encoding ',df.columns)
         encoders={}
         print('###########################################################')
         print('# Encode Categorical Columns')

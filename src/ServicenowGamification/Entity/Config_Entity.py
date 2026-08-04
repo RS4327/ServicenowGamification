@@ -63,4 +63,16 @@ class DataPredictionConfig:
     model_path: Path
     scaler_path: Path
     prediction_output: Path
-    probability_threshold: float  
+    probability_threshold: float
+
+@dataclass 
+class DataPredictWorkloadConfig:
+    root_dir :Path
+    data_path : Path 
+    model_path: Path
+    scaler_path: Path
+    output_path: Path
+    prediction_file: Path
+    high_workload: int
+    medium_workload: int
+    low_workload: int

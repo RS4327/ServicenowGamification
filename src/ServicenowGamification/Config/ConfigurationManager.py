@@ -9,6 +9,7 @@ from ServicenowGamification.Entity.Config_Entity import DataMetricsCalculationCo
 from ServicenowGamification.Entity.Config_Entity import DataGamificationConfig
 from ServicenowGamification.Entity.Config_Entity import DataMachineLearningModelsConfig
 from ServicenowGamification.Entity.Config_Entity import DataPredictionConfig
+from ServicenowGamification.Entity.Config_Entity import DataPredictWorkloadConfig
 
 
 
@@ -48,10 +49,7 @@ class ConfigurationManager:
          self.Data_Gamification=self.config.Data_Gamification
          self.Data_MachineLearningModels = self.config.Data_MachineLearningModels
          self.Data_Prediction = self.config.Data_Prediction
-        #  print("Artifacts Root:", self.config.artifacts_root)
-        #  print("Data Ingestion Root:", self.Data_Ingestion.root_dir)
-        #  print("Data PreProcessing Root:", self.Data_PreProcessing.root_dir)
-        #  print("Data Metrics Root:", self.Data_MetricsCalculation.root_dir)
+         self.Predict_Workload = self.config.Predict_Workload 
 
         
     def get_data_ingestion_config(self)->DataIngestionConfig:
@@ -139,5 +137,21 @@ class ConfigurationManager:
                   probability_threshold =Config.probability_threshold 
              )
              return data_prediction_config
+    
+    def get_datapredictworkload(self)->DataPredictWorkloadConfig:
+                 Config=self.Predict_Workload
+                 create_directories([Config.root_dir])
+                 data_prediction_config=DataPredictWorkloadConfig(
+                      root_dir=Config.root_dir,
+                      data_path=Config.data_path,
+                      model_path=Config.model_path, 
+                      scaler_path =Config.scaler_path, 
+                      output_path =Config.output_path,                   
+                      prediction_file =Config.prediction_file, 
+                      high_workload =Config.high_workload, 
+                      medium_workload =Config.medium_workload, 
+                      low_workload =Config.low_workload, 
+                 )
+                 return data_prediction_config
 
 

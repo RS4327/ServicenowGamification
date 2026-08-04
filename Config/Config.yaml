@@ -56,4 +56,16 @@ Data_Prediction:
   prediction_output: Artifacts/PredictionModel
   probability_threshold: 0.50  
 
+Predict_Workload:
+    root_dir : Artifacts/Workload
+    data_path : Artifacts/DataIngestion/Incidents.csv 
+    model_path: Artifacts/Workload/Best_Model.pkl
+    scaler_path: Artifacts/Workload/ScalerWork.pkl
+    output_path: Artifacts/Workload
+    prediction_file: Artifacts/Workload/WorkloadPrediction.csv
+    high_workload: 40
+    medium_workload: 20
+    low_workload: 10
+
+
   

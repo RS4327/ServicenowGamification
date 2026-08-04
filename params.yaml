@@ -200,3 +200,31 @@ model_training:
     n_estimators: 200
     max_depth: 3
     random_state: 42
+
+
+predict_workload:
+
+  target_column: sla_status
+  test_size: 0.20
+
+  random_state: 42
+
+  high_workload: 0.80
+  medium_workload: 0.50
+  
+  feature_columns:
+
+    - priority
+    - assignment_group
+    - assigned_to
+    - resolution_hours
+    - reopen_count
+    - reassignment_count
+    - points
+    - level
+    - hour
+    - day
+    - weekday
+    - month
+    - complexity
+    - priority_score
