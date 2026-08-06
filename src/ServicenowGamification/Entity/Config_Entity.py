@@ -76,3 +76,14 @@ class DataPredictWorkloadConfig:
     high_workload: int
     medium_workload: int
     low_workload: int
+    
+@dataclass 
+class DataAgentPerformanceConfig:
+    root_dir : Path
+    data_path : Path
+    model_path: Path 
+    scaler_path: Path 
+    feature_path: Path
+    achievements_path: Path
+    output_path: Path
+    prediction_file: Path

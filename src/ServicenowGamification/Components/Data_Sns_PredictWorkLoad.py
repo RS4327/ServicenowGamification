@@ -215,9 +215,9 @@ class PredictWorkLoad:
         
                         df["resolution_rating"] = (df["resolution_hours"] * df["customer_rating"])
         
-                    if {"total_points", "level"}.issubset(df.columns):
+                    if {"points", "level"}.issubset(df.columns):
         
-                        df["points_per_level"] = np.where( df["level"] == 0,0,df["total_points"] / df["level"])
+                        df["points_per_level"] = np.where( df["level"] == 0,0,df["points"] / df["level"])
                 # print("Training Shape :", X_train.shape)
                 # print("Testing Shape :", X_test.shape)
                 return df,train_df, test_df

@@ -44,7 +44,7 @@ class Gamification:
                 .fillna(0)
             )
 
-        print(df[["reopen_count","reassignment_count"]].dtypes)
+        #print(df[["reopen_count","reassignment_count"]].dtypes)
 
         total_points = []
 
@@ -153,17 +153,17 @@ class Gamification:
 
         )
 
-        print(f"Incident points saved to : {incident_path}")
+        # print(f"Incident points saved to : {incident_path}")
 
-        print(f"Analyst summary saved to : {summary_path}")
+        # print(f"Analyst summary saved to : {summary_path}")
 
         return df,df_analyst_summary
            
 
     def assign_badges(self,df):
-        print("##################################################################")
-        print(f" #  Badge Assignment")
-        print("##################################################################") 
+        # print("##################################################################")
+        # print(f" #  Badge Assignment")
+        # print("##################################################################") 
         badge_list = []
 
         for _, row in df.iterrows():
@@ -249,16 +249,16 @@ class Gamification:
                         )
        
 
-        print(f"Badge results saved to : {badge_file}")
-        print(f"Badge summary saved to : {summary_file}")
+        #print(f"Badge results saved to : {badge_file}")
+        #print(f"Badge summary saved to : {summary_file}")
 
         return df
 
     def calculate_level(self, df):
 
-        print("##################################################################")
-        print("# Calculate Level")
-        print("##################################################################")
+        # print("##################################################################")
+        # print("# Calculate Level")
+        # print("##################################################################")
 
         level_numbers = []
         level_names = []
@@ -372,8 +372,8 @@ class Gamification:
             index=False
         )
 
-        print(f"Level results saved to : {levelresults}")
-        print(f"Level summary saved to : {levelsummary}")
+        # print(f"Level results saved to : {levelresults}")
+        # print(f"Level summary saved to : {levelsummary}")
 
         return df
 
@@ -384,9 +384,9 @@ class Gamification:
 
     def generate_leaderboard(self,df):
         df=df    
-        print('##############################################################')
-        print('# Overall Leaderboard')
-        print('##############################################################')
+        # print('##############################################################')
+        # print('# Overall Leaderboard')
+        # print('##############################################################')
 
         df = df.sort_values(
 
@@ -539,15 +539,15 @@ class Gamification:
             index=False
         )
 
-        print(f"Leaderboard saved : {leaderboardfile}")
+        # print(f"Leaderboard saved : {leaderboardfile}")
 
-        print(f"Top performers saved : {topfile}")
+        # print(f"Top performers saved : {topfile}")
 
-        print(f"Bottom performers saved : {bottomfile}")
+        # print(f"Bottom performers saved : {bottomfile}")
 
-        print(f"Team summary saved : {teamfile}")
+        # print(f"Team summary saved : {teamfile}")
 
-        print(f"Assignment Group Leaderboard : {groupfile}")
+        # print(f"Assignment Group Leaderboard : {groupfile}")
         return df
     ##############################################################
     # Achievement Calculation
@@ -555,9 +555,9 @@ class Gamification:
 
     def calculate_achievements(self,df):
         df=df
-        print('##############################################################')
-        print('# Achievement Calculation')
-        print('##############################################################')
+        # print('##############################################################')
+        # print('# Achievement Calculation')
+        # print('##############################################################')
         
         achievement_names = []
         achievement_count = []
@@ -682,13 +682,13 @@ class Gamification:
             index=False
         )
 
-        print(
-            f"Achievement results saved : {achievementfile}"
-        )
+        # print(
+        #     f"Achievement results saved : {achievementfile}"
+        # )
 
-        print(
-            f"Achievement summary saved : {summaryfile}"
-        )
+        # print(
+        #     f"Achievement summary saved : {summaryfile}"
+        # )
 
         return df
 
@@ -698,9 +698,9 @@ class Gamification:
 
     def generate_monthly_ranking(self,df):
         df=df
-        print('##############################################################')
-        print('# Generate Monthly Ranking')
-        print('##############################################################')
+        # print('##############################################################')
+        # print('# Generate Monthly Ranking')
+        # print('##############################################################')
 
         if "resolved_at" not in df.columns:
 
@@ -851,15 +851,15 @@ class Gamification:
             index=False
         )
 
-        print(
-            f"Monthly Ranking saved : {monthlyranking}"
-        )
+        # print(
+        #     f"Monthly Ranking saved : {monthlyranking}"
+        # )
 
-        print(
-            f"Top Performers saved : {monthlytopfile}"
-        )
-        print(
-            f"Monthly Summary saved : {monthlysummaryfile}"
-        )
+        # print(
+        #     f"Top Performers saved : {monthlytopfile}"
+        # )
+        # print(
+        #     f"Monthly Summary saved : {monthlysummaryfile}"
+        # )
     
     

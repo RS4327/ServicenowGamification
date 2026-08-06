@@ -10,6 +10,7 @@ from ServicenowGamification.Entity.Config_Entity import DataGamificationConfig
 from ServicenowGamification.Entity.Config_Entity import DataMachineLearningModelsConfig
 from ServicenowGamification.Entity.Config_Entity import DataPredictionConfig
 from ServicenowGamification.Entity.Config_Entity import DataPredictWorkloadConfig
+from ServicenowGamification.Entity.Config_Entity import DataAgentPerformanceConfig
 
 
 
@@ -50,6 +51,7 @@ class ConfigurationManager:
          self.Data_MachineLearningModels = self.config.Data_MachineLearningModels
          self.Data_Prediction = self.config.Data_Prediction
          self.Predict_Workload = self.config.Predict_Workload 
+         self.Agent_Performance=self.config.Agent_Performance
 
         
     def get_data_ingestion_config(self)->DataIngestionConfig:
@@ -153,5 +155,22 @@ class ConfigurationManager:
                       low_workload =Config.low_workload, 
                  )
                  return data_prediction_config
+    def get_dataagentperformance(self)->DataAgentPerformanceConfig:
+               
+               Config=self.Agent_Performance
+               create_directories([Config.root_dir])
+    
+               data_agent_performance=DataAgentPerformanceConfig(
+                     root_dir=Config.root_dir,
+                     data_path=Config.data_path,
+                     model_path=Config.model_path, 
+                     scaler_path =Config.scaler_path, 
+                     feature_path =Config.feature_path, 
+                     achievements_path =Config.achievements_path,                  
+                     output_path =Config.output_path, 
+                     prediction_file =Config.prediction_file
+                     
+               )
+               return data_agent_performance
 
 

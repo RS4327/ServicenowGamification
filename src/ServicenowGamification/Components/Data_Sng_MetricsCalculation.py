@@ -65,9 +65,9 @@ class MetricsCalculation:
 
         )
 
-        print("\nAverage Resolution Time")
+        #print("\nAverage Resolution Time")
 
-        print(art)
+        #print(art)
 
         return df,art
 
@@ -110,9 +110,9 @@ class MetricsCalculation:
 
         )
 
-        print(
-            f"\nOverall SLA Compliance : {compliance}%"
-        )
+        # print(
+        #     f"\nOverall SLA Compliance : {compliance}%"
+        # )
 
         return df
     def calculate_fcr(self,df):
@@ -139,7 +139,7 @@ class MetricsCalculation:
 
         )
 
-        print(f"\nFirst Call Resolution : {fcr}%")
+        #print(f"\nFirst Call Resolution : {fcr}%")
 
         return df
     def performance_metrics(self,df):
@@ -208,11 +208,11 @@ class MetricsCalculation:
 
         }
 
-        print("\nPerformance Metrics")
+        #print("\nPerformance Metrics")
 
-        for key, value in metrics.items():
+        # for key, value in metrics.items():
 
-            print(f"{key} : {value}")
+        #     print(f"{key} : {value}")
          #print(df[["number", "resolution_hours"]].head(1))   
         local_path=self.config.local_data_file
                 #print(f"Preprocessed data saved to: {local_path}")

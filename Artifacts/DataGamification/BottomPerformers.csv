@@ -1,6 +1,6 @@
 assigned_to,total_incidents,total_points,sla_met,average_resolution,rank
-Venkat,15,505,4,462.65,1
-Chaitanya,10,335,2,882.0,2
-Raju,15,215,0,798.84,3
-Vamsi,15,215,1,792.8,4
-Ganesh,14,190,1,826.67,5
+Venkat,15,565,4,462.65,1
+Chaitanya,10,365,2,882.0,2
+Raju,15,340,0,798.84,3
+Vamsi,15,280,1,792.8,4
+Ganesh,14,280,1,826.67,5

@@ -19,7 +19,7 @@ from ServicenowGamification.PipeLine.Stage_04_Data_Gamification import DataGamif
 from ServicenowGamification.PipeLine.Stage_05_Data_MachineLearning_Models import DataMachineLearningModelsPipeLine
 from ServicenowGamification.PipeLine.Stage_06_Data_PredictSLABreach import DataPredictSLABreachPipeLine
 from ServicenowGamification.PipeLine.Stage_07_Data_PredictWorkLoad import DataPredictWorkLoadPipeLine
-
+from ServicenowGamification.PipeLine.Stage_08_Data_AgentPerformance import  DataAgentPerformancePipeLine
 from ServicenowGamification import logger
 
 STAGE_NAME = "Data Ingestion"
@@ -113,3 +113,14 @@ if __name__=="__main__":
     except Exception as e:
         logger.info(e)
         raise e
+
+STAGE_NAME='Data Agent Performance'
+try :
+      logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Started <<<<<<<<<<")
+      obj=DataAgentPerformancePipeLine()
+      df=obj.main()
+      logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<<<<")
+                
+except Exception as e:
+    logger.info(e)
+    raise e

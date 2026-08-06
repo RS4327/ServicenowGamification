@@ -228,3 +228,47 @@ predict_workload:
     - month
     - complexity
     - priority_score
+
+
+agent_performance:
+
+  target_column: performance_rating
+  test_size: 0.20
+
+  random_state: 42
+
+  high_workload: 0.80
+  medium_workload: 0.50
+  
+  feature_columns:
+
+    - priority
+    - assignment_group
+    - resolution_hours
+    - reopen_count
+    - reassignment_count
+    - mttr
+    - fcr
+    - sla_percentage
+    - total_incidents
+    - resolved_incidents
+    - active_incidents
+    - pending_incidents
+    - points
+    - badges
+    - rewards
+    - achievements
+    - level
+    - leaderboard_rank
+    - monthly_rank
+    - customer_rating
+    - workload
+    - workload_level
+    - skill_score
+    - opened_hour
+    - opened_weekday
+    - quality_score
+    - recognition_score
+    - points_per_ticket
+    - complexity_score
+    - performance_index

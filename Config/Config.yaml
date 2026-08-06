@@ -67,5 +67,16 @@ Predict_Workload:
     medium_workload: 20
     low_workload: 10
 
+Agent_Performance:
+
+    root_dir : Artifacts/AgentPerformance
+    data_path : Artifacts/DataGamification/LevelResults.csv  
+    model_path: Artifacts/AgentPerformance/AgentPerformanceModel.pkl
+    scaler_path: Artifacts/AgentPerformance/AgentPerformanceScaler.pkl
+    feature_path: Artifacts/AgentPerformance/AgentPerformanceFeatures.pkl
+    achievements_path : Artifacts/DataGamification/AchievementResults.csv
+    output_path: Artifacts/AgentPerformance
+    prediction_file: Artifacts/AgentPerformance/AgentPerformancePrediction.csv
+
 
   
