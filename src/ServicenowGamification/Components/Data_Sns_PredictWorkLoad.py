@@ -135,7 +135,7 @@ class PredictWorkLoad:
         #print("calculate_level :", type(df_l))
         df = self.gamification.l_save(df_l)
         #print("l_save :", type(df))
-        df_lead = self.gamification.generate_leaderboard(df_analyst_summary)
+        df,df_lead = self.gamification.generate_leaderboard(df_analyst_summary,df)
         #print("generate_leaderboard :", type(df_lead))
         df = self.gamification.lead_save(df_lead)
         #print("lead_save :", type(df))

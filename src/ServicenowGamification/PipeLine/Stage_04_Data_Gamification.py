@@ -16,17 +16,15 @@ class DataGamificationPipeLine:
             config = ConfigurationManager()
 
             gamification_config = config.get_datagamificationconfig()
-
+            
             gamification = Gamification(gamification_config)   
-            print(type(df))
             df=gamification.calculate_points(df)
-            print(type(df))
             df_f,df_analyst_summary=gamification.p_save(df)
             df_b=gamification.assign_badges(df_f)
             df=gamification.b_save(df_b)
             df_l=gamification.calculate_level(df)
             df=gamification.l_save(df_l)
-            df_lead=gamification.generate_leaderboard(df_analyst_summary)
+            df,df_lead=gamification.generate_leaderboard(df_analyst_summary,df)
             df=gamification.lead_save(df_lead)
             df_ach=gamification.calculate_achievements(df_lead)
             df=gamification.ach_save(df_ach)

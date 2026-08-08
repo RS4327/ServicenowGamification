@@ -39,7 +39,7 @@ Data_Gamification:
   monthlysummaryfile : Artifacts/DataGamification/MonthlySummary.csv
 Data_MachineLearningModels: 
   root_dir : Artifacts/MachineLearningModels
-  data_path : Artifacts/DataGamification/LevelResults.csv
+  data_path : Artifacts/DataGamification/AchievementResults.csv
   X_train : Artifacts/MachineLearningModels/X_train.csv
   X_test : Artifacts/MachineLearningModels/X_test.csv
   y_train : Artifacts/MachineLearningModels/y_train.csv
@@ -70,7 +70,7 @@ Predict_Workload:
 Agent_Performance:
 
     root_dir : Artifacts/AgentPerformance
-    data_path : Artifacts/DataGamification/LevelResults.csv  
+    data_path : Artifacts/DataGamification/AchievementResults.csv  
     model_path: Artifacts/AgentPerformance/AgentPerformanceModel.pkl
     scaler_path: Artifacts/AgentPerformance/AgentPerformanceScaler.pkl
     feature_path: Artifacts/AgentPerformance/AgentPerformanceFeatures.pkl
@@ -78,5 +78,37 @@ Agent_Performance:
     output_path: Artifacts/AgentPerformance
     prediction_file: Artifacts/AgentPerformance/AgentPerformancePrediction.csv
 
+LLM_Connect:
 
+  root_dir: Artifacts/LLM
+  provider: ollama
+  model: llama3.2
+  base_url: http://127.0.0.1:11434
+  temperature: 0.2
+  top_p: 0.9
+  max_tokens: 150
+  timeout: 120
+
+  prediction_file: Artifacts/AgentPerformance/AgentPerformancePrediction.csv
+  output_path: Artifacts/LLM
+  response_file: Artifacts/LLM/LLMRecommendations.csv
+
+  system_prompt: |
+    You are an AI Service Desk Assistant.
+    Answer based only on the provided context.
+    If the answer is unavailable, say:
+    "Information not found in knowledge base."
   
+
+  prompt_output_path: Artifacts/LLM
+  prompt_output_file: PromptData.csv
+  include_similar_incidents: true
+  max_similar_incidents: 5
+  include_gamification: true
+  include_sla_prediction: true
+  include_workload_prediction: true
+  include_agent_performance: true
+  include_manager_insights: true
+  include_knowledge_suggestion: true
+  max_prompt_length: 4000
+  prompt_version: "v1"

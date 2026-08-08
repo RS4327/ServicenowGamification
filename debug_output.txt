@@ -2,63 +2,152 @@ Config\Config.yaml
 path config yaml Config\Config.yaml
 Reading YAML : Config\Config.yaml
 Reading YAML : params.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
-Config\Config.yaml
-path config yaml Config\Config.yaml
-Reading YAML : Config\Config.yaml
 Reading YAML : params.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
-Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
-Reading YAML : params.yaml
-Reading YAML : params.yaml
-Reading YAML : params.yaml
-Reading YAML : params.yaml
-
-Average Resolution Time
-  assignment_group  average_resolution_time
-0            Cloud                   882.00
-1             Data                   798.84
-2         Database                   792.80
-3          Network                   462.65
-4               QA                   826.67
-
-Overall SLA Compliance : 11.59%
-
-First Call Resolution : 40.58%
-
-Performance Metrics
-Total Incidents : 69
-Closed Incidents : 29
-Open Incidents : 40
-MTTR(Hours) : 742.14
-SLA Compliance(%) : 11.59
-FCR(%) : 40.58
-reopen_count          int64
-reassignment_count    int64
-dtype: object
+##################################################################
+ # Point calculation
+##################################################################
 Incident points saved to : Artifacts/DataGamification/IncidentPoints.csv
 Analyst summary saved to : Artifacts/DataGamification/AnalystPoints.csv
 ##################################################################
  #  Badge Assignment
 ##################################################################
+badge columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge'],
+      dtype='str')
 Badge results saved to : Artifacts/DataGamification/BadgeResults.csv
 Badge summary saved to : Artifacts/DataGamification/BadgeSummary.csv
 ##################################################################
 # Calculate Level
 ##################################################################
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='str')
 Level results saved to : Artifacts/DataGamification/LevelResults.csv
 Level summary saved to : Artifacts/DataGamification/LevelSummary.csv
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='str')
+l df_lead  c: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='str')
+Type of df: <class 'pandas.DataFrame'>
 ##############################################################
 # Overall Leaderboard
 ##############################################################
+l svae   df  : Index(['assigned_to', 'total_incidents', 'total_points', 'sla_met',
+       'average_resolution', 'rank'],
+      dtype='str')
+df_lead columns before Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='str')
+df_lead columns Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='str')
+Type of df: <class 'pandas.DataFrame'>
+Type of df: <class 'pandas.DataFrame'>
+lead_board_file        number            opened_at          resolved_at            closed_at  \
+0  INC0010007  2026-08-01 02:10:06  2026-08-01 02:13:25  2026-08-01 02:14:12   
+1  INC0000060  2016-12-12 07:19:57  2016-12-13 13:43:14  2016-12-13 18:46:44   
+
+       priority   state assigned_to assignment_group        category  \
+0  1 - Critical  Closed      Venkat          Network        Database   
+1  3 - Moderate  Closed      Venkat          Network  Inquiry / Help   
+
+  subcategory  ... fcr total_incidents points average_resolution   badge  \
+0      Oracle  ...   0              15   50.0             462.65  Rookie   
+1       Email  ...   0              15  -10.0             462.65  Rookie   
+
+   level level_name  points_to_next_level level_progress  leaderboard_rank  
+0      1   Beginner                  50.0           50.0                 1  
+1      1   Beginner                   0.0          100.0                 1  
+
+[2 rows x 29 columns]
+lead_board_file columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='str')
+team_summary        number            opened_at          resolved_at            closed_at  \
+0  INC0010007  2026-08-01 02:10:06  2026-08-01 02:13:25  2026-08-01 02:14:12   
+1  INC0000060  2016-12-12 07:19:57  2016-12-13 13:43:14  2016-12-13 18:46:44   
+
+       priority   state assigned_to assignment_group        category  \
+0  1 - Critical  Closed      Venkat          Network        Database   
+1  3 - Moderate  Closed      Venkat          Network  Inquiry / Help   
+
+  subcategory  ... fcr total_incidents points average_resolution   badge  \
+0      Oracle  ...   0              15   50.0             462.65  Rookie   
+1       Email  ...   0              15  -10.0             462.65  Rookie   
+
+   level level_name  points_to_next_level level_progress  leaderboard_rank  
+0      1   Beginner                  50.0           50.0                 1  
+1      1   Beginner                   0.0          100.0                 1  
+
+[2 rows x 29 columns]
+team_summary columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='str')
+
+Generating Assignment Group Leaderboard...
+Input shape: (69, 29)
+
+Assignment Group Leaderboard:
+  assignment_group  total_incidents  total_points  group_rank
+3          Network               15         165.0           1
+2         Database               15         165.0           1
+0            Cloud               10         160.0           2
+1             Data               15         140.0           3
+4               QA               14          90.0           4
 Leaderboard saved : Artifacts/DataGamification/Leaderboard.csv
 Top performers saved : Artifacts/DataGamification/TopPerformers.csv
 Bottom performers saved : Artifacts/DataGamification/BottomPerformers.csv
 Team summary saved : Artifacts/DataGamification/TeamSummary.csv
 Assignment Group Leaderboard : Artifacts/DataGamification/AssignmentGroupLeaderboard.csv
+calculate_achievements: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reassignment_count', 'reopen_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents', 'points',
+       'average_resolution', 'badge', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='str')
 ##############################################################
 # Achievement Calculation
 ##############################################################
@@ -70,131 +159,3 @@ Achievement summary saved : Artifacts/DataGamification/AchievementSummary.csv
 Monthly Ranking saved : Artifacts/DataGamification/MonthlyRanking.csv
 Top Performers saved : Artifacts/DataGamification/TopMonthlyPerformers.csv
 Monthly Summary saved : Artifacts/DataGamification/MonthlySummary.csv
-###########################################################
-# Data Cleaning
-###########################################################
-X_train Shape : (55, 30)
-X_test Shape : (14, 30)
-Selected Features : ['priority', 'assignment_group', 'resolution_hours', 'reopen_count', 'reassignment_count', 'mttr', 'fcr', 'sla_percentage', 'total_incidents', 'resolved_incidents', 'active_incidents', 'pending_incidents', 'points', 'badges', 'rewards', 'achievements', 'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating', 'workload', 'workload_level', 'skill_score', 'opened_hour', 'opened_weekday', 'quality_score', 'recognition_score', 'points_per_ticket', 'complexity_score', 'performance_index']
-Models Created Successfully
-X_train : Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
-       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
-       'total_incidents', 'resolved_incidents', 'active_incidents',
-       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
-       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
-       'workload', 'workload_level', 'skill_score', 'opened_hour',
-       'opened_weekday', 'quality_score', 'recognition_score',
-       'points_per_ticket', 'complexity_score', 'performance_index',
-       'resolution_reopen', 'resolution_rating', 'points_per_level'],
-      dtype='str')
-X_test : Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
-       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
-       'total_incidents', 'resolved_incidents', 'active_incidents',
-       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
-       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
-       'workload', 'workload_level', 'skill_score', 'opened_hour',
-       'opened_weekday', 'quality_score', 'recognition_score',
-       'points_per_ticket', 'complexity_score', 'performance_index',
-       'resolution_reopen', 'resolution_rating', 'points_per_level'],
-      dtype='str')
-
-================================================================================
-Training : Random Forest
-================================================================================
-best_estimator  RandomForestClassifier(max_depth=5, random_state=42)
-Predict Proba Shape: (14, 1)
-Only one class present. ROC AUC skipped.
-
-Best Parameters
-{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}
-
-Accuracy : 1.0
-Precision : 1.0
-Recall : 1.0
-F1 Score : 1.0
-ROC AUC : nan
-
-Confusion Matrix
-[[14]]
-
-Classification Report
-              precision    recall  f1-score   support
-
-        Poor       1.00      1.00      1.00        14
-
-    accuracy                           1.00        14
-   macro avg       1.00      1.00      1.00        14
-weighted avg       1.00      1.00      1.00        14
-
-
-================================================================================
-Training : XGBoost
-================================================================================
-
-XGBoost Failed
-Invalid classes inferred from unique values of `y`.  Expected: [0], got ['Poor']
-
-================================================================================
-Training : Decision Tree
-================================================================================
-best_estimator  DecisionTreeClassifier(max_depth=5, random_state=42)
-Predict Proba Shape: (14, 1)
-Only one class present. ROC AUC skipped.
-
-Best Parameters
-{'max_depth': 5, 'min_samples_split': 2}
-
-Accuracy : 1.0
-Precision : 1.0
-Recall : 1.0
-F1 Score : 1.0
-ROC AUC : nan
-
-Confusion Matrix
-[[14]]
-
-Classification Report
-              precision    recall  f1-score   support
-
-        Poor       1.00      1.00      1.00        14
-
-    accuracy                           1.00        14
-   macro avg       1.00      1.00      1.00        14
-weighted avg       1.00      1.00      1.00        14
-
-
-================================================================================
-Training Completed
-================================================================================
-Best Model : Random Forest
-Best Accuracy : 1.0
-
-Evaluation Results
-           Model  Accuracy  Precision  Recall  F1 Score  ROC AUC  \
-0  Random Forest       1.0        1.0     1.0       1.0      NaN   
-1  Decision Tree       1.0        1.0     1.0       1.0      NaN   
-
-                                                 Best Parameters  
-0  {'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}  
-1                       {'max_depth': 5, 'min_samples_split': 2}  
-Artifacts Loaded Successfully
-numeric :  Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
-       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
-       'total_incidents', 'resolved_incidents', 'active_incidents',
-       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
-       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
-       'workload', 'workload_level', 'skill_score', 'opened_hour',
-       'opened_weekday', 'quality_score', 'recognition_score',
-       'points_per_ticket', 'complexity_score', 'performance_index',
-       'resolution_reopen', 'resolution_rating', 'points_per_level'],
-      dtype='str')
-Data Preprocessing Completed
-Last Step
-Categorizing Agent Performance...
-Performance Categorization Completed
-Generating Recommendations...
-Recommendation Generation Completed
-Generating Performance Summary...
-Generating Incident Level Performance Summary...
-Saving Prediction...
-Prediction Saved Successfully

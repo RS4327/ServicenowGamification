@@ -91,124 +91,242 @@ class AgentPerformance:
     # Feature Engineering
     ##########################################################
     def feature_engineering(self,df):
-         if "sla_percentage" not in df.columns : 
-            sla = (df.groupby("assigned_to")["sla_status"].apply(
-                lambda x: (x == "Met").mean() * 100
-                ).reset_index(name="sla_percentage")
-                )
-         
-            df = df.merge(
-                    sla,
-                    on="assigned_to",
-                    how="left"
-                )
-         df["customer_rating"] = np.where(df["sla_status"] == "Met",5,3)     
-         #print(df.columns.tolist())
-         df["quality_score"] = (df["sla_percentage"] * df["customer_rating"])
-      
-         badge_map = {
-               "Rookie":0,
-               "Bronze":1,
-                "Silver":2,
-                "Gold":3,
-                "Diamond":4
-                }
+         # ============================================================
+        # SLA Percentage
+        # ============================================================
 
-         df["badges"] = df["badge"].map(badge_map)
-         if 'achievement' not in df.columns:
-            ach_df=pd.read_csv(self.config.achievements_path)
+        if "sla_percentage" not in df.columns:
+
+            sla = (
+                df.groupby("assigned_to")["sla_status"]
+                .apply(lambda x: (x == "Met").mean() * 100)
+                .reset_index(name="sla_percentage")
+            )
 
             df = df.merge(
-                ach_df[["assigned_to", "achievements"]],
+                sla,
                 on="assigned_to",
                 how="left"
             )
 
-            df = df.rename(columns={"achievements": "achievement"})
-            df = df.rename(columns={"complexity": "complexity_score"})
 
-         achievement_map = {
-             "None":0,
-             "Top Performer":1,
-             "SLA Master":2,
-             "Speed Resolver":3
-             }
+        # ============================================================
+        # Customer Rating
+        # ============================================================
 
-         df["achievements"] = (df["achievement"].map(achievement_map))
-         df["recognition_score"] = (df["badges"]+df["achievements"])
-         if 'total_incidents' not in df.columns:
-            incidents = (df.groupby("assigned_to") .size() .reset_index(name="total_incidents"))
+        df["customer_rating"] = np.where(
+            df["sla_status"] == "Met",
+            5,
+            3
+        )
+
+
+        # ============================================================
+        # Quality Score
+        # ============================================================
+
+        df["quality_score"] = (
+            df["sla_percentage"] * df["customer_rating"]
+        )
+
+
+        # ============================================================
+        # Badge Score
+        # ============================================================
+
+        badge_map = {
+            "Rookie": 0,
+            "Bronze": 1,
+            "Silver": 2,
+            "Gold": 3,
+            "Diamond": 4
+        }
+
+        df["badges"] = (
+            df["badge"]
+            .map(badge_map)
+            .fillna(0)
+            .astype(int)
+        )
+
+
+        # ============================================================
+        # Achievement Data
+        # ============================================================
+
+        ach_df = pd.read_csv(
+            self.config.achievements_path
+        )
+
+        # Keep only required columns
+        ach_df = ach_df[
+            ["assigned_to", "achievements"]
+        ].drop_duplicates(
+            subset=["assigned_to"]
+        )
+
+
+        # ============================================================
+        # Remove old achievement columns
+        # This makes the pipeline safe to run multiple times
+        # ============================================================
+
+        df.drop(
+            columns=[
+                "achievement",
+                "achievements",
+                "achievements_x",
+                "achievements_y",
+                "recognition_score"
+            ],
+            errors="ignore",
+            inplace=True
+        )
+
+
+        # ============================================================
+        # Merge Achievement
+        # ============================================================
+
+        df = df.merge(
+            ach_df,
+            on="assigned_to",
+            how="left"
+        )
+
+        print(
+            "Achievement columns after merge:",
+            [c for c in df.columns if "achievement" in c.lower()]
+        )
+
+
+        # ============================================================
+        # Rename
+        # ============================================================
+
+        df = df.rename(
+            columns={
+                "achievements": "achievement",
+                "complexity": "complexity_score"
+            }
+        )
+
+
+        # ============================================================
+        # Achievement Score
+        # ============================================================
+
+        achievement_map = {
+            "None": 0,
+            "Top Performer": 1,
+            "SLA Master": 2,
+            "Speed Resolver": 3
+        }
+
+        df["achievements"] = (
+            df["achievement"]
+            .fillna("None")
+            .map(achievement_map)
+            .fillna(0)
+            .astype(int)
+        )
+
+        # ============================================================
+        # Recognition Score
+        # ============================================================
+
+        df["recognition_score"] = (
+            df["badges"] +
+            df["achievements"]
+        )
+
+        
+
+        # ============================================================
+        # Total Incidents
+        # ============================================================
+
+        if "total_incidents" not in df.columns:
+
+            incidents = (
+                df.groupby("assigned_to")
+                .size()
+                .reset_index(name="total_incidents")
+            )
 
             df = df.merge(
                 incidents,
                 on="assigned_to",
                 how="left"
-                )
+            )
 
-            
-         df["points_per_ticket"] = (df["points"] /  df["total_incidents"].replace(0,1))
+
+        # ============================================================
+        # Points Per Ticket
+        # ============================================================
+
+        df["points_per_ticket"] = (df["points"] /df["total_incidents"].replace(0, 1)         )
         #
-         df["mttr"] = (df.groupby("assigned_to")["resolution_hours"].transform("mean"))
+        df["mttr"] = (df.groupby("assigned_to")["resolution_hours"].transform("mean"))
         #Average Response Time)
         #  df["art"] = (df.groupby("assigned_to")["response_hours"].transform("mean"))   
         #  ART was not included because the extracted ServiceNow Incident dataset does not contain first response timestamps. In a production ServiceNow environment,
         #  ART can be calculated from the task_sla table (Response SLA) or from journal/audit records.
 
-         df["resolved_incidents"] = (df.groupby("assigned_to")["state"].transform(lambda x: (x == "Resolved").sum()))
+        df["resolved_incidents"] = (df.groupby("assigned_to")["state"].transform(lambda x: (x == "Resolved").sum()))
 
-         resolved = (df["state"].isin(["Resolved", "Closed"]).groupby(df["assigned_to"]).sum())
+        resolved = (df["state"].isin(["Resolved", "Closed"]).groupby(df["assigned_to"]).sum())
 
-         df["resolved_incidents"] = (df["assigned_to"].map(resolved))
-         active = (df["state"].eq("In Progress").groupby(df["assigned_to"]).sum())
+        df["resolved_incidents"] = (df["assigned_to"].map(resolved))
+        active = (df["state"].eq("In Progress").groupby(df["assigned_to"]).sum())
 
-         df["active_incidents"] = (df["assigned_to"].map(active))
-         pending = (df["state"].eq("Pending").groupby(df["assigned_to"]).sum())
+        df["active_incidents"] = (df["assigned_to"].map(active))
+        pending = (df["state"].eq("Pending").groupby(df["assigned_to"]).sum())
 
-         df["pending_incidents"] = (df["assigned_to"].map(pending))
+        df["pending_incidents"] = (df["assigned_to"].map(pending))
 
-         reward_map = { "Bronze":100,
+        reward_map = { "Bronze":100,
                        "Silver":250,
                        "Gold":500,
                        "Diamond":1000
                        }
 
-         df["rewards"] = df["badge"].map(reward_map)
+        df["rewards"] = df["badge"].map(reward_map)
          #or 
          #df["rewards"] = df["total_points"] // 100
 
-         df["leaderboard_rank"] = (df["points"].rank(
+        # df["leaderboard_rank"] = (df["points"].rank(
+        #      ascending=False,
+        #      method="dense"
+        #      ).astype(int)
+        #      )
+        df["month"] = (pd.to_datetime(df["opened_at"]).dt.to_period("M"))
+
+        df["monthly_rank"] = (df.groupby("month")["points"].rank(
              ascending=False,
              method="dense"
-             ).astype(int)
-             )
-         df["month"] = (pd.to_datetime(df["opened_at"]).dt.to_period("M"))
-
-         df["monthly_rank"] = (df.groupby("month")["points"].rank(
-             ascending=False,
-             method="dense"
              )
              )
 
-         workload = (df.groupby("assigned_to").size())
+        workload = (df.groupby("assigned_to").size())
 
-         df["workload"] = (df["assigned_to"].map(workload))
+        df["workload"] = (df["assigned_to"].map(workload))
 
-         conditions = [
+        conditions = [
                df["workload"] >= 50,
                 df["workload"] >= 25
                 ]
 
-         choices = ["High","Medium"]
-
-         df["workload_level"] = np.select(
+        choices = ["High","Medium"]
+        df["workload_level"] = np.select(
              conditions,
              choices,
              default="Low"
              )
-         df["fcr_percentage"] = (df.groupby("assigned_to")["fcr"].transform("mean") * 100)
-         skill_map = {"Beginner": 40,"Intermediate": 70,"Expert": 100}
+        df["fcr_percentage"] = (df.groupby("assigned_to")["fcr"].transform("mean") * 100)
+        skill_map = {"Beginner": 40,"Intermediate": 70,"Expert": 100}
 
-         df["skill_score"] = (df["level_name"].map(skill_map))
+        df["skill_score"] = (df["level_name"].map(skill_map))
         # or
         #  df["skill_score"] = (
         #      0.40 * df["sla_percentage"]
@@ -217,9 +335,8 @@ class AgentPerformance:
         #      + 0.10 * df["experience_years"]
         #      )
 
-         df["opened_weekday"] = (pd.to_datetime(df["opened_at"]).dt.weekday )
-
-         df["performance_index"] = (
+        df["opened_weekday"] = (pd.to_datetime(df["opened_at"]).dt.weekday )
+        df["performance_index"] = (
              0.30 * df["sla_percentage"]
              + 0.25 * df["customer_rating"]
              + 0.20 * df["fcr_percentage"]
@@ -235,7 +352,7 @@ class AgentPerformance:
             # Total Points	10%
             # Reopen Count	5%
 
-         df["performance_score"] = (
+        df["performance_score"] = (
              0.30 * df["sla_percentage"]
              + 0.20 * (df["customer_rating"] * 20)   # 1-5 → 20-100
              + 0.20 * df["fcr_percentage"]
@@ -243,30 +360,30 @@ class AgentPerformance:
              + 0.10 * (df["points"] / df["points"].max() * 100)
              + 0.05 * (100 - df["reopen_count"] * 10)
              )
-         conditions = [
+        conditions = [
                df["performance_score"] >= 85,
                df["performance_score"] >= 70,
                df["performance_score"] >= 55
                ]
 
-         choices = [
+        choices = [
               "Excellent",
               "Good",
               "Average"
               ]
 
-         df["performance_rating"] = np.select(
+        df["performance_rating"] = np.select(
               conditions,
               choices,
               default="Poor"
               )
 
-         df["opened_at"] = pd.to_datetime(df["opened_at"] )
-         df["opened_hour"] = (df["opened_at"].dt.hour )
-         df["quality_score"] = (df["sla_percentage"] * df["customer_rating"])
+        df["opened_at"] = pd.to_datetime(df["opened_at"] )
+        df["opened_hour"] = (df["opened_at"].dt.hour )
+        df["quality_score"] = (df["sla_percentage"] * df["customer_rating"])
          
          #print(df.columns)
-         return df
+        return df
 
     ##########################################################
     # Feature Engineering
@@ -292,7 +409,7 @@ class AgentPerformance:
         df = self.gamification.b_save(df_b)
         df_l = self.gamification.calculate_level(df)
         df = self.gamification.l_save(df_l)
-        df_lead = self.gamification.generate_leaderboard(df_analyst_summary)
+        df,df_lead = self.gamification.generate_leaderboard(df_analyst_summary,df)
         df = self.gamification.lead_save(df_lead)
         df_ach = self.gamification.calculate_achievements(df_lead)
         df = self.gamification.ach_save(df_ach)

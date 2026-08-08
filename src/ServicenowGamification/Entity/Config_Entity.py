@@ -87,3 +87,30 @@ class DataAgentPerformanceConfig:
     achievements_path: Path
     output_path: Path
     prediction_file: Path
+@dataclass
+class LLMConfig:
+    root_dir : Path
+    provider: str
+    model: str
+    base_url : str
+    temperature: float
+    top_p : float
+    max_tokens: int
+    timeout : int 
+    prediction_file: Path
+    output_path: Path
+    response_file: Path
+    system_prompt  : str
+
+    prompt_output_path: str
+    prompt_output_file: str
+    include_similar_incidents: bool
+    max_similar_incidents: int
+    include_gamification: bool
+    include_sla_prediction: bool
+    include_workload_prediction: bool
+    include_agent_performance: bool
+    include_manager_insights: bool
+    include_knowledge_suggestion: bool
+    max_prompt_length: int
+    prompt_version: str
