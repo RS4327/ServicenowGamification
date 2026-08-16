@@ -1,0 +1,113 @@
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+
+*----------------- Remove duplicates from Incident Data Frame -----------------*
+
+ Data Frame Shape before Remove duplicates (59, 16)
+ Data Frame Shape after Remove duplicatess (59, 16)
+
+*-------- Date Features: Convert to datetime from Incident Data Frame ---------*
+
+
+*-------------- Handle missing values from Incident Data Frame ----------------*
+
+Checking Missing Values count for every object features  before Handle missing values 
+
+*-------------- Handle missing values from Incident Data Frame ----------------*
+
+
+*-------------- Handle missing values from Incident Data Frame ----------------*
+
+Checking Missing Values Before Handling
+assigned_to : 3
+assignment_group : 12
+category : 3
+subcategory : 46
+description : 0
+
+Checking Missing Values After Handling
+assigned_to : 0
+assignment_group : 0
+category : 0
+subcategory : 0
+description : 0
+
+Checking Missing Values count for Date features before Handle missing values 
+  resolved_at- Missing count :34 
+  closed_at- Missing count :26 
+
+resolved_at-Handle missing values based on opened_at 
+
+closed_at-Handle missing values based on closed_at 
+Preprocessed data saved to: Artifacts/DataPreProcessing/Datapreprocessing.csv
+Connecting the Oracle Database and loading the csv file into oracle table
+Received DataFrame - Incidents: (59, 16)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (59, 16)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : Incidents
+Incidents
+======================================================================
+PREPARING DATA
+======================================================================
+Input DataFrame shape: (59, 16)
+
+Columns received:
+ - number
+ - opened_at
+ - resolved_at
+ - closed_at
+ - priority
+ - state
+ - assigned_to
+ - assignment_group
+ - category
+ - subcategory
+ - short_description
+ - description
+ - sys_created_on
+ - sys_updated_on
+ - reopen_count
+ - reassignment_count
+
+Converting numeric column: reassignment_count
+
+Converting numeric column: reopen_count
+
+NaN / NaT values converted to None
+
+NULL values:
+
+Data preparation completed
+======================================================================
+TRUNCATING INCIDENTS TABLE
+======================================================================
+INCIDENTS table truncated successfully
+======================================================================
+INSERTING DATA INTO ORACLE
+======================================================================
+Total records prepared: 59
+======================================================================
+DATA INSERTED SUCCESSFULLY
+======================================================================
+Records inserted: 59
+======================================================================
+ORACLE DATA LOAD COMPLETED
+======================================================================
+Oracle connection closed

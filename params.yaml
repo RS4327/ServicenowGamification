@@ -272,3 +272,7 @@ agent_performance:
     - points_per_ticket
     - complexity_score
     - performance_index
+
+Oracle :
+  Loader : Oracle
+

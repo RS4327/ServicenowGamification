@@ -1,0 +1,415 @@
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+======================================================================
+Connecting to Ollama Server
+======================================================================
+Host  : http://127.0.0.1:11434
+Model : llama3.2
+Ollama Client Created Successfully
+You are an AI-powered IT Service Desk Performance Assistant.
+
+Analyze the following ServiceNow operational information:
+
+================ INCIDENT DATA ================
+
+Incident Number:
+INC001001
+
+Short Description:
+VPN connection failure
+
+Description:
+User unable to connect to corporate VPN.
+
+Category:
+Network
+
+Subcategory:
+VPN
+
+Priority:
+1
+
+Assignment Group:
+Network Support
+
+Assigned Agent:
+John
+
+Resolution Hours:
+6.5
+
+MTTR:
+5.2
+
+Customer Rating:
+4.5
+================ SLA PREDICTION ================
+
+Predicted SLA Status:
+Breached
+
+SLA Confidence:
+0.91
+
+SLA Percentage:
+72
+
+Predicted Resolution Hours:
+9.2
+================ WORKLOAD PREDICTION ================
+
+Predicted Workload:
+18
+
+Workload Level:
+High
+
+Workload Confidence:
+0.89
+
+Total Incidents:
+25
+
+Active Incidents:
+12
+
+Pending Incidents:
+6
+
+Resolved Incidents:
+7
+================ AGENT PERFORMANCE ================
+
+Agent:
+John
+
+Performance Prediction:
+3
+
+Performance Category:
+Excellent
+
+Performance Confidence:
+0.98
+
+Quality Score:
+91
+
+Skill Score:
+88
+
+FCR:
+92
+
+MTTR:
+5.2
+
+SLA Percentage:
+95
+================ GAMIFICATION ================
+
+Agent:
+John
+
+Total Points:
+850
+
+Points Per Ticket:
+42.5
+
+Badges:
+5
+
+Rewards:
+2
+
+Achievements:
+8
+
+Level:
+7
+
+Leaderboard Rank:
+3
+
+Monthly Rank:
+2
+
+Recognition Score:
+91
+================ FAISS SIMILAR INCIDENTS ================
+
+No similar incidents were retrieved from FAISS.
+
+Provide an actionable recommendation.
+
+Analyze:
+
+1. Incident situation
+2. SLA risk
+3. Workload risk
+4. Agent performance
+5. Gamification performance
+6. Similar incident patterns
+
+Then provide:
+
+7. Immediate action
+8. Preventive action
+9. Agent recommendation
+10. Escalation recommendation
+11. Recognition or reward recommendation
+
+Rules:
+
+- Use only the provided information.
+- Do not invent values.
+- Do not invent incident numbers.
+- Do not invent knowledge article numbers.
+- If information is unavailable, say "Not Available".
+- Use FAISS incidents only as supporting historical context.
+
+Return:
+
+Incident Analysis:
+<analysis>
+
+SLA Risk:
+<risk>
+
+Workload Risk:
+<risk>
+
+Agent Performance:
+<analysis>
+
+Gamification Analysis:
+<analysis>
+
+Immediate Action:
+<action>
+
+Preventive Action:
+<action>
+
+Escalation Recommendation:
+<action>
+
+Recognition Recommendation:
+<action>
+======================================================================
+GENERATED PROMPT
+======================================================================
+You are an AI-powered IT Service Desk Performance Assistant.
+
+Analyze the following ServiceNow operational information:
+
+================ INCIDENT DATA ================
+
+Incident Number:
+INC001001
+
+Short Description:
+VPN connection failure
+
+Description:
+User unable to connect to corporate VPN.
+
+Category:
+Network
+
+Subcategory:
+VPN
+
+Priority:
+1
+
+Assignment Group:
+Network Support
+
+Assigned Agent:
+John
+
+Resolution Hours:
+6.5
+
+MTTR:
+5.2
+
+Customer Rating:
+4.5
+================ SLA PREDICTION ================
+
+Predicted SLA Status:
+Breached
+
+SLA Confidence:
+0.91
+
+SLA Percentage:
+72
+
+Predicted Resolution Hours:
+9.2
+================ WORKLOAD PREDICTION ================
+
+Predicted Workload:
+18
+
+Workload Level:
+High
+
+Workload Confidence:
+0.89
+
+Total Incidents:
+25
+
+Active Incidents:
+12
+
+Pending Incidents:
+6
+
+Resolved Incidents:
+7
+================ AGENT PERFORMANCE ================
+
+Agent:
+John
+
+Performance Prediction:
+3
+
+Performance Category:
+Excellent
+
+Performance Confidence:
+0.98
+
+Quality Score:
+91
+
+Skill Score:
+88
+
+FCR:
+92
+
+MTTR:
+5.2
+
+SLA Percentage:
+95
+================ GAMIFICATION ================
+
+Agent:
+John
+
+Total Points:
+850
+
+Points Per Ticket:
+42.5
+
+Badges:
+5
+
+Rewards:
+2
+
+Achievements:
+8
+
+Level:
+7
+
+Leaderboard Rank:
+3
+
+Monthly Rank:
+2
+
+Recognition Score:
+91
+================ FAISS SIMILAR INCIDENTS ================
+
+No similar incidents were retrieved from FAISS.
+
+Provide an actionable recommendation.
+
+Analyze:
+
+1. Incident situation
+2. SLA risk
+3. Workload risk
+4. Agent performance
+5. Gamification performance
+6. Similar incident patterns
+
+Then provide:
+
+7. Immediate action
+8. Preventive action
+9. Agent recommendation
+10. Escalation recommendation
+11. Recognition or reward recommendation
+
+Rules:
+
+- Use only the provided information.
+- Do not invent values.
+- Do not invent incident numbers.
+- Do not invent knowledge article numbers.
+- If information is unavailable, say "Not Available".
+- Use FAISS incidents only as supporting historical context.
+
+Return:
+
+Incident Analysis:
+<analysis>
+
+SLA Risk:
+<risk>
+
+Workload Risk:
+<risk>
+
+Agent Performance:
+<analysis>
+
+Gamification Analysis:
+<analysis>
+
+Immediate Action:
+<action>
+
+Preventive Action:
+<action>
+
+Escalation Recommendation:
+<action>
+
+Recognition Recommendation:
+<action>
+======================================================================
+Connecting to Ollama Server
+======================================================================
+Host  : http://127.0.0.1:11434
+Model : llama3.2
+Ollama Client Created Successfully
+
+Checking Ollama Server...
+Connection Successful
+
+Available Models:
+ - llama3.2:latest
+LLM Generation Error:
+llama-server process has terminated: exit status 1: ggml_backend_cpu_buffer_type_alloc_buffer: failed to allocate buffer of size 1362493440
+alloc_tensor_range: failed to allocate CPU_REPACK buffer of size 1362493440
+error loading model: unable to allocate CPU_REPACK buffer (status code: 500)

@@ -1,6 +1,6 @@
 assignment_group,Employees,Total_Points,Average_Level,Average_MTTR
-Cloud,10,315,1.0,882.0
-Data,15,290,1.0,798.84
-Database,15,230,1.0,792.8
-Network,15,475,1.0,462.65
-QA,14,230,1.0,826.67
+Cloud,15,465,1.0,612.0
+Data,15,85,1.0,798.84
+Database,15,355,1.0,792.8
+Network,19,670,1.0,377.89
+QA,15,370,1.0,779.56

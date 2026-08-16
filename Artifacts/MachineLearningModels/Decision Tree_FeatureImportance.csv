@@ -1,10 +1,10 @@
 Feature,Importance
-resolution_hours,0.7193877551020408
-points,0.1870748299319728
-reassignment_count,0.0935374149659864
+resolution_hours,0.7857142857142857
+reassignment_count,0.10714285714285714
+assigned_to,0.10714285714285714
 priority,0.0
 assignment_group,0.0
 reopen_count,0.0
-assigned_to,0.0
+points,0.0
 level,0.0
 resolution_reopen,0.0

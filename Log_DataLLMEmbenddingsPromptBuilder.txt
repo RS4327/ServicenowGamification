@@ -1,0 +1,74 @@
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+======================================================================
+READING PREPROCESSED CSV
+======================================================================
+CSV Path: Artifacts\DataPreProcessing\Datapreprocessing.csv
+CSV loaded successfully
+DataFrame shape: (79, 16)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (79, 16)
+======================================================================
+PREPARING DATA
+======================================================================
+Input DataFrame shape: (79, 16)
+
+Columns received:
+ - number
+ - opened_at
+ - resolved_at
+ - closed_at
+ - priority
+ - state
+ - assigned_to
+ - assignment_group
+ - category
+ - subcategory
+ - short_description
+ - description
+ - sys_created_on
+ - sys_updated_on
+ - reassignment_count
+ - reopen_count
+
+Converting numeric column: reassignment_count
+
+Converting numeric column: reopen_count
+
+NaN / NaT values converted to None
+
+NULL values:
+reassignment_count: 3
+reopen_count: 50
+
+Data preparation completed
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+======================================================================
+TRUNCATING INCIDENTS TABLE
+======================================================================
+INCIDENTS table truncated successfully
+======================================================================
+INSERTING DATA INTO ORACLE
+======================================================================
+Total records prepared: 79
+======================================================================
+DATA INSERTED SUCCESSFULLY
+======================================================================
+Records inserted: 79
+======================================================================
+ORACLE DATA LOAD COMPLETED
+======================================================================
+Oracle connection closed
+======================================================================
+ORACLE DATA LOAD COMPLETED
+======================================================================

@@ -114,3 +114,36 @@ class LLMConfig:
     include_knowledge_suggestion: bool
     max_prompt_length: int
     prompt_version: str
+
+@dataclass
+class CreateEmbendingsConfig:
+    root_dir : Path 
+    source_path : str 
+    faiss_index : str
+    provider: str
+    model: str
+    base_url : str
+    temperature: float
+    top_p : float
+    max_tokens: int
+    timeout : int
+    embedding_model: str
+    load_faiss_index: str
+    documents_path: str
+    top_k : int
+    system_prompt  : str
+
+@dataclass(frozen=True)
+class AIRecommendationConfig:
+    root_dir : Path 
+    source_path : str 
+    local_datafile : str
+
+@dataclass(frozen=True)
+class OracleConnectConfig: 
+    username : str
+    password : str
+    host : str
+    port : str
+    service_name : str
+

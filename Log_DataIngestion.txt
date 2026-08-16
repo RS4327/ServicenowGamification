@@ -1,0 +1,79 @@
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+
+
+================================================================================
+SERVICENOW INCIDENT DATA INGESTION
+================================================================================
+ServiceNow URL: https://dev394794.service-now.com
+
+--------------------------------------------------------------------------------
+Fetching records Offset=0 Limit=1000
+Records received: 79
+Total records collected: 79
+Last page reached.
+
+
+================================================================================
+SERVICENOW DATA RECEIVED
+================================================================================
+Total incidents: 79
+DataFrame shape: (79, 21)
+Replacing assigned_to with assigned_to.display_value
+Replacing assignment_group with assignment_group.display_value
+Duplicates removed: 0
+
+
+================================================================================
+LATEST 20 INCIDENTS
+================================================================================
+    number           opened_at       state     priority                         assigned_to                    assignment_group
+INC0010020 2026-08-09 07:22:36     On Hold 3 - Moderate ATF_TestItilUser2 ATF_TestItilUser2               ATF_TestGroup_Network
+INC0010019 2026-08-09 07:07:35 In Progress 3 - Moderate                           David Loo                               NY DB
+INC0010018 2026-08-09 07:02:27 In Progress 1 - Critical                           David Loo                               NY DB
+INC0010017 2026-08-09 06:57:40 In Progress 3 - Moderate                          Fred Luddy                            Database
+INC0010014 2026-08-09 06:41:40 In Progress 1 - Critical                         Beth Anglin                            Database
+INC0010013 2026-08-09 06:36:28 In Progress 3 - Moderate                  Guillermo Frohlich             Application Development
+INC0010012 2026-08-09 06:32:28 In Progress 1 - Critical        ATF Service Level Management ATF Service Level Management  Group
+INC0010011 2026-08-09 06:30:34 In Progress 3 - Moderate ATF_TestItilUser1 ATF_TestItilUser1           ATF_TestGroup_ServiceDesk
+INC0010010 2026-08-09 06:27:20 In Progress 1 - Critical                           ITIL User                            Database
+INC0010009 2026-08-09 06:21:09 In Progress      4 - Low                          Fred Luddy                            Database
+INC0010008 2026-08-01 02:15:21      Closed     2 - High                          Fred Luddy                            Database
+INC0010007 2026-08-01 02:10:06      Closed 1 - Critical                           ITIL User                            Database
+INC0000601 2026-06-07 02:42:59      Closed      4 - Low                                 NaN                                 NaN
+INC0000055 2026-05-21 21:47:23 In Progress 1 - Critical                         Beth Anglin                        Service Desk
+INC0000046 2026-05-21 15:04:15         New 3 - Moderate                                 NaN                            Software
+INC0000050 2026-05-21 14:58:24 In Progress 1 - Critical                         Beth Anglin                            Hardware
+INC0000049 2026-05-21 14:56:37 In Progress     2 - High                       Don Goodliffe                            Hardware
+INC0000047 2026-05-21 13:53:18 In Progress 3 - Moderate                         Beth Anglin                            Software
+INC0000053 2026-05-21 13:48:46 In Progress 1 - Critical                         Beth Anglin                            Software
+INC0000052 2026-05-21 13:48:40 In Progress 1 - Critical                          Fred Luddy                            Software
+
+Assigned incidents: 60
+Assignment group populated: 51
+
+
+================================================================================
+DATA SAVED SUCCESSFULLY
+================================================================================
+CSV path: Artifacts/DataIngestion/Incidents.csv
+Total incidents: 79
+Final DataFrame shape: (79, 19)
+================================================================================
+                                    short_description  ...                          assigned_to
+0   ORA-00257: archiver is stuck. CONNECT INTERNAL...  ...  ATF_TestItilUser2 ATF_TestItilUser2
+1   ORA-00257: archiver is stuck. CONNECT INTERNAL...  ...                            David Loo
+2   ORA-00068: invalid value num for parameter num...  ...                            David Loo
+3   ORA-00051: time-out occurred while waiting for...  ...                           Fred Luddy
+4   ORA-00001: unique constraint (constraint_name)...  ...                          Beth Anglin
+..                                                ...  ...                                  ...
+74                   Unable to access team file share  ...                                  NaN
+75       Having problems with Sales Tools performance  ...                            ITIL User
+76  SAP Materials Management is slow or there is a...  ...                                  NaN
+77                       How do I create a sub-folder  ...                           Fred Luddy
+78               Need access to sales DB for the West  ...                            David Loo
+
+[79 rows x 19 columns]

@@ -20,7 +20,20 @@ from ServicenowGamification.PipeLine.Stage_05_Data_MachineLearning_Models import
 from ServicenowGamification.PipeLine.Stage_06_Data_PredictSLABreach import DataPredictSLABreachPipeLine
 from ServicenowGamification.PipeLine.Stage_07_Data_PredictWorkLoad import DataPredictWorkLoadPipeLine
 from ServicenowGamification.PipeLine.Stage_08_Data_AgentPerformance import  DataAgentPerformancePipeLine
+from ServicenowGamification.PipeLine.Stage_09_Data_LLM_Embenddings import DataLLMCreateEmbenddingsPipeLine
+from ServicenowGamification.PipeLine.Stage_10_Data_AI_Recommendation import DataAIRecommendationPipeLine
+
 from ServicenowGamification import logger
+import sys
+import logging
+
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("huggingface_hub").setLevel(logging.WARNING)
+logging.getLogger("transformers").setLevel(logging.WARNING)
+logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
+
+# log_file = open("Log_DataIngestion.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME = "Data Ingestion"
 
@@ -38,7 +51,13 @@ try:
 except Exception as e:
     logger.exception(e)
     raise
-print("\n")
+
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataPreProcessing.txt", "w")
+# sys.stdout = log_file
+
 STAGE_NAME = "Data Pre Processing"
 try :
     logger.info(f">>>>>>> Stage : {STAGE_NAME} Started <<<<<<<")
@@ -50,8 +69,12 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
 
-print("\n")
+# log_file = open("Log_DataMetricsCalculation.txt", "w")
+# sys.stdout = log_file
+
 STAGE_NAME = "Data Metrics Calculation"
 
 try :
@@ -63,6 +86,11 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataGamification.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME = "Data Gamification"
 
@@ -75,6 +103,11 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataMachineLearning.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME = "Data Machine Learning"
 
@@ -87,6 +120,11 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataPredictSLABreach.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME = "Data Predict SLA Breach"
 if __name__=="__main__":
@@ -100,6 +138,11 @@ if __name__=="__main__":
         logger.info(e)
         raise e
 
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataPredictWordLoad.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME='Data Predict WordLoad'
  
@@ -113,6 +156,11 @@ if __name__=="__main__":
     except Exception as e:
         logger.info(e)
         raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# log_file = open("Log_DataAgentPerformance.txt", "w")
+# sys.stdout = log_file
 
 STAGE_NAME='Data Agent Performance'
 try :
@@ -124,3 +172,36 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
+# sys.stdout = sys.__stdout__
+# log_file.close()
+
+# # log_file = open("Log_DataLLMEmbenddingsPromptBuilder.txt", "w")
+# # sys.stdout = log_file
+
+# STAGE_NAME='Data LLM Embenddings'
+        
+# if __name__=="__main__":
+#     try :
+#         logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Started <<<<<<<<<<")
+#         obj=DataLLMCreateEmbenddingsPipeLine()
+#         df=obj.main()
+#         logger.info(f">>>>>>>>>> Stage : {STAGE_NAME} Completed Successfully <<<<<<<<<<")
+                
+#     except Exception as e:
+#         logger.info(e)
+#         raise e
+# # sys.stdout = sys.__stdout__
+# # log_file.close()
+
+# STAGE_NAME='Data AI Recommendation'
+
+# try :
+#         logger.info(f">>>>>>>>>> Stage : {Stage_Name} Started <<<<<<<<<<")
+#         obj=DataAIRecommendationPipeLine()
+#         df=obj.main()
+#         logger.info(f">>>>>>>>>> Stage : {Stage_Name} Completed Successfully <<<<<<<<<<")
+                
+# except Exception as e:
+#         logger.info(e)
+#         raise e
+

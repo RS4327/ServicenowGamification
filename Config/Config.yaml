@@ -112,3 +112,37 @@ LLM_Connect:
   include_knowledge_suggestion: true
   max_prompt_length: 4000
   prompt_version: "v1"
+  
+Create_Embeddings:
+  root_dir : Artifacts/LLMEmbenddings
+  source_path : Artifacts/AgentPerformance/AgentPerformancePrediction.csv
+  faiss_index : Artifacts/LLMEmbenddings/faiss_index.index
+  provider: ollama
+  model: llama3.2
+  base_url: http://127.0.0.1:11434
+  temperature: 0.2
+  top_p: 0.9
+  max_tokens: 150
+  timeout: 120
+  embedding_model: Artifacts/LLMEmbenddings/embeddings.npy
+  load_faiss_index: Artifacts/LLMEmbenddings/save_faiss_index.index
+  documents_path: Artifacts/LLMEmbenddings/documents.pkl
+  top_k : 5
+  system_prompt: |
+    You are an AI Service Desk Assistant.
+    Answer based only on the provided context.
+    If the answer is unavailable, say:
+    "Information not found in knowledge base."
+
+AI_Recommendations:
+  root_dir : Artifacts/AIRecommendation 
+  source_path : Artifacts/AgentPerformance/AgentPerformancePrediction.csv 
+  local_datafile : Artifacts/AIRecommendation/AIRecommendation.csv
+  
+Oracle_Connect: 
+  username : ServicenowGamification
+  password : RSR
+  host : localhost
+  port : 1521
+  service_name : FREEPDB1
+  

@@ -5,6 +5,8 @@ from ServicenowGamification.Utils.Common import *
 from ServicenowGamification.Constant import * 
 from ServicenowGamification.Config import * 
 from ServicenowGamification.Entity.Config_Entity import *
+from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
+from ServicenowGamification.Components.Data_Sns_Oracle_Loader import IncidentDataLoader
 
 os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification")
 
@@ -12,11 +14,22 @@ class DataPreProcessing:
     def __init__(self,config:DataPreProcessingConfig):
 
         self.config=config
+        config_manager=ConfigurationManager()
+        self.params = Read_Yaml(PARAMS_FILE_PATH)
 
-        #create_directories([self.config.root_dir])
+        create_directories([self.config.root_dir])
+        self.loader = IncidentDataLoader(config_manager.get_oracle_connect_config() )
+       
 
     def Datapreprocessing(self,df):
         df=df
+        # Get records from 2025 onwards
+        df["opened_at"] = pd.to_datetime(df["opened_at"],errors="coerce")
+        df = df[df["opened_at"].notna()].copy()
+
+        df = df[df["opened_at"] >= pd.Timestamp("2025-01-01")].copy()
+
+        df = df[df["opened_at"] >= pd.Timestamp("2025-01-01")].copy()
         #print(df.head(2))
         #print(df.shape)           
         features=[
@@ -34,8 +47,8 @@ class DataPreProcessing:
             "description",
             "sys_created_on",
             "sys_updated_on",
-            "reassignment_count",
             "reopen_count",
+            "reassignment_count"
         ]
         df=df[features]
         #print(df.head(1))
@@ -55,9 +68,11 @@ class DataPreProcessing:
 
         print(f"\n*-------------- Handle missing values from Incident Data Frame ----------------*\n")
         print(f"Checking Missing Values count for every object features  before Handle missing values ")
-        df.replace(r'^\s*$', np.nan, regex=True, inplace=True)
+
+        print(f"\n*-------------- Handle missing values from Incident Data Frame ----------------*\n")
+        print("\n*-------------- Handle missing values from Incident Data Frame ----------------*\n")
+
         fill_values = {
-             
             "assigned_to": ["Venkat", "Vamsi", "Raju", "Ganesh", "Chaitanya"],
             "assignment_group": ["Network", "Database", "Data", "QA", "Cloud"],
             "category": ["Hardware", "Software", "Network", "Access", "Email"],
@@ -73,6 +88,22 @@ class DataPreProcessing:
 
         print("Checking Missing Values Before Handling")
 
+        df["reopen_count"] = (
+            pd.to_numeric(
+                df["reopen_count"],
+                errors="coerce"
+            )
+            .fillna(0)
+        )
+
+        df["reassignment_count"] = (
+            pd.to_numeric(
+                df["reassignment_count"],
+                errors="coerce"
+            )
+            .fillna(0)
+        )
+
         for col in fill_values.keys():
 
             if col not in df.columns:
@@ -87,7 +118,7 @@ class DataPreProcessing:
 
             for i, idx in enumerate(missing_idx):
 
-                value = fill_values[col][(i // 5) % len(fill_values[col])]
+                value = fill_values[col][(i // 2) % len(fill_values[col])]
 
                 df.loc[idx, col] = value
 
@@ -98,9 +129,7 @@ class DataPreProcessing:
             if col in df.columns:
                 print(f"{col} : {df[col].isna().sum()}")
 
-
-
-        
+      
         print(f"\nChecking Missing Values count for Date features before Handle missing values ")
         date_columns = df.select_dtypes(include=['datetime64[ns]', 'datetimetz']).columns
         for column in date_columns:
@@ -125,10 +154,18 @@ class DataPreProcessing:
                             )
         local_path=self.config.local_data_file
         print(f"Preprocessed data saved to: {local_path}")
-        df.to_csv(local_path, index=False)
-        return df
 
+        if self.params.Oracle["Loader"] is None:
+            print('Saved  the csv file in folder')
+            df.to_csv(local_path, index=False)
+        else:
 
+            df.to_csv(local_path, index=False)
+            print('Connecting the Oracle Database and loading the csv file into oracle table') 
+            self.loader.run(df,'Incidents')
+            
+        
+        return df    
 
         
             

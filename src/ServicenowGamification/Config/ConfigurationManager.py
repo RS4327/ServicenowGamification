@@ -11,6 +11,9 @@ from ServicenowGamification.Entity.Config_Entity import DataMachineLearningModel
 from ServicenowGamification.Entity.Config_Entity import DataPredictionConfig
 from ServicenowGamification.Entity.Config_Entity import DataPredictWorkloadConfig
 from ServicenowGamification.Entity.Config_Entity import DataAgentPerformanceConfig
+from ServicenowGamification.Entity.Config_Entity import CreateEmbendingsConfig
+from ServicenowGamification.Entity.Config_Entity import AIRecommendationConfig
+from ServicenowGamification.Entity.Config_Entity import OracleConnectConfig
 
 
 
@@ -52,6 +55,9 @@ class ConfigurationManager:
          self.Data_Prediction = self.config.Data_Prediction
          self.Predict_Workload = self.config.Predict_Workload 
          self.Agent_Performance=self.config.Agent_Performance
+         self.Create_Embeddings=self.config.Create_Embeddings
+         self.AI_Recommendation=self.config.AI_Recommendations
+         self.Oracle_Connect=self.config.Oracle_Connect
 
         
     def get_data_ingestion_config(self)->DataIngestionConfig:
@@ -172,5 +178,54 @@ class ConfigurationManager:
                      
                )
                return data_agent_performance
+
+    def get_create_embendings_config(self) -> CreateEmbendingsConfig:
+        Config=self.Create_Embeddings
+        create_directories([Config.root_dir])
+        
+        Create_Embeddings_Config=CreateEmbendingsConfig(
+            root_dir=Config.root_dir,
+            source_path=Config.source_path,
+            faiss_index=Config.faiss_index,
+            provider=Config.provider,
+            model=Config.model, 
+            base_url=Config.base_url, 
+            temperature =Config.temperature,
+            top_p =Config.top_p,
+            max_tokens =Config.max_tokens, 
+            timeout =Config.timeout,
+            embedding_model= Config.embedding_model,
+            load_faiss_index = Config.load_faiss_index,
+            documents_path =Config.documents_path ,
+            top_k =Config.top_k ,
+            system_prompt=Config.system_prompt,
+            )
+        return Create_Embeddings_Config
+
+    def get_ai_recommendation_config(self) -> AIRecommendationConfig:
+            Config=self.AI_Recommendation
+            create_directories([Config.root_dir])
+            
+            ai_recommendation_config=AIRecommendationConfig(
+                root_dir=Config.root_dir,
+                source_path=Config.source_path,           
+                local_datafile=Config.local_datafile
+            )
+            return ai_recommendation_config  
+
+    def get_oracle_connect_config(self) -> OracleConnectConfig:
+        Config=self.Oracle_Connect
+        #create_directories([Config.root_dir])
+        
+        oracle_connect_config=OracleConnectConfig(
+            username=Config.username,
+            password=Config.password,           
+            host=Config.host,
+            port=Config.port,
+            service_name=Config.service_name
+        )
+        return oracle_connect_config      
+    
+    
 
 
