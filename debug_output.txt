@@ -1,5420 +1,653 @@
+Config\Config.yaml
+path config yaml Config\Config.yaml
 Reading YAML : Config\Config.yaml
 Reading YAML : params.yaml
+Reading YAML : params.yaml
+Config\Config.yaml
+path config yaml Config\Config.yaml
 Reading YAML : Config\Config.yaml
 Reading YAML : params.yaml
-Reading YAML : params.yaml
-Reading YAML : params.yaml
-======================================================================
-Connecting to Ollama Server
-======================================================================
-Host  : http://127.0.0.1:11434
-Model : llama3.2
-Ollama Client Created Successfully
-
-Checking Ollama Server...
-Connection Successful
-
-Available Models:
- - llama3.2:latest
-======================================================================
-STEP 41 - AI RECOMMENDATIONS
-======================================================================
-======================================================================
-Connecting to Ollama Server
-======================================================================
-Host  : http://127.0.0.1:11434
-Model : llama3.2
-Ollama Client Created Successfully
-
-Checking Ollama Server...
-Connection Successful
-
-Available Models:
- - llama3.2:latest
-Input Shape: (63, 58)
-
-Processing 1/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-======================================================================
-LOADING FAISS INDEX
-======================================================================
-FAISS Index: C:\Users\RSR\PYTHON\ServicenowGamification\Artifacts\LLMEmbenddings\faiss_index.index
-FAISS Index Loaded Successfully
-Total Vectors: 56
-======================================================================
-LOADING INCIDENT DOCUMENTS
-======================================================================
-Documents: C:\Users\RSR\PYTHON\ServicenowGamification\Artifacts\LLMEmbenddings\documents.pkl
-Documents Loaded Successfully
-Total Documents: 63
-======================================================================
-LOADING EMBEDDING MODEL
-======================================================================
-Embedding Model: Artifacts/LLMEmbenddings/embeddings.npy
-Embedding Model Loaded Successfully
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Issue with email
-
-Category:
-Inquiry / Help
-
-Subcategory:
-Email
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Resolution Hours:
-48.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 31
-Distance: 0.3395
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000041
-
-Short Description:
-My desk phone does not work
-
-Category:
-Hardware
-
-Sub Category:
-Password
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-24.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-30
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 43
-Distance: 0.4845
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000019
-
-Short Description:
-Can't launch 64-bit Windows 7 virtual machine
-
-Category:
-Software
-
-Sub Category:
-Application
-
-Priority:
-2 - High
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-48.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 0
-Distance: 0.4987
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000047
-
-Short Description:
-Issue with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Email
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-48.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 48
-Distance: 0.5006
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000025
-
-Short Description:
-Need to add more memory to laptop
-
-Category:
-Hardware
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-96.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 7
-Distance: 0.5007
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000046
-
-Short Description:
-Can't access SFA software
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-72.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-3.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
+================================================================================
+              GAMIFICATION POINT CALCULATION
+================================================================================
+customer_rating column not found. Defaulting to 0.
 
 ================================================================================
-AI RECOMMENDATIONS COMPLETED
+INCIDENT LEVEL POINTS
 ================================================================================
-
-Processing 2/63
+    number                         assigned_to                    assignment_group  points
+INC0010020 ATF_TestItilUser2 ATF_TestItilUser2               ATF_TestGroup_Network    45.0
+INC0010019                           David Loo                               NY DB    25.0
+INC0010018                           David Loo                               NY DB    55.0
+INC0010017                          Fred Luddy                            Database    25.0
+INC0010014                         Beth Anglin                            Database    55.0
+INC0010013                  Guillermo Frohlich             Application Development    45.0
+INC0010012        ATF Service Level Management ATF Service Level Management  Group    55.0
+INC0010011 ATF_TestItilUser1 ATF_TestItilUser1           ATF_TestGroup_ServiceDesk    25.0
+INC0010010                           ITIL User                            Database    55.0
+INC0010009                          Fred Luddy                            Database    25.0
+INC0010008                          Fred Luddy                            Database    55.0
+INC0010007                           ITIL User                            Database    85.0
+INC0000601                              Venkat                             Network    35.0
+INC0000055                         Beth Anglin                        Service Desk    55.0
+INC0000046                              Venkat                            Software    -5.0
+INC0000050                         Beth Anglin                            Hardware    55.0
+INC0000049                       Don Goodliffe                            Hardware    25.0
+INC0000047                         Beth Anglin                            Software   -10.0
+INC0000053                         Beth Anglin                            Software    55.0
+INC0000052                          Fred Luddy                            Software    55.0
+INC0000051                       Don Goodliffe                            Software    55.0
+INC0000024                           ITIL User                        Service Desk     0.0
+INC0000013                           David Loo                            Software    30.0
+INC0000035                         Luke Wilson                        Service Desk     0.0
+INC0000030                           David Loo                             Network     5.0
+INC0000008                           ITIL User                            Hardware    35.0
+INC0000011                           ITIL User                            Hardware     0.0
+INC0000038                         Luke Wilson                        Service Desk     5.0
+INC0000036                         Luke Wilson                             Network     5.0
+INC0000021                         Beth Anglin                             Network     5.0
+INC0000009                           David Loo                        Service Desk    35.0
+INC0000004                         Bud Richman                        Service Desk    35.0
+INC0000044                          Fred Luddy                            Database    -5.0
+INC0000041                           ITIL User                            Database    -5.0
+INC0000040                           ITIL User                                Data    -5.0
+INC0000039                               Vamsi                             Network    25.0
+INC0000037                      Howard Johnson                        Service Desk    -5.0
+INC0000003                         Beth Anglin                             Network    20.0
+INC0000010                       Don Goodliffe                            Database     0.0
+INC0000029                       Don Goodliffe                        Service Desk   -10.0
+INC0000001                Charlie Whitherspoon                        Service Desk    35.0
+INC0000006                      Howard Johnson                            Software    30.0
+INC0000020                           ITIL User                                Data    -5.0
+INC0000027                           ITIL User                                  QA    -5.0
+INC0000005                         Bud Richman                            Hardware    35.0
+INC0000002                      Howard Johnson                             Network    25.0
+INC0000028                       Don Goodliffe                        Service Desk     0.0
+INC0000032                           David Loo                            Hardware     5.0
+INC0000019                         Bud Richman                                  QA    -5.0
+INC0000018                           ITIL User                               Cloud    25.0
+INC0000015                       Don Goodliffe                            Software    20.0
+INC0000033                       Don Goodliffe                            Hardware    35.0
+INC0000012                           David Loo                            Database     5.0
+INC0000026                       Don Goodliffe                            Hardware     0.0
+INC0000034                           David Loo                            Software    35.0
+INC0000016                           ITIL User                            Hardware    20.0
+INC0000025                           ITIL User                               Cloud    55.0
+INC0000014                         Bud Richman                             Network    35.0
+INC0000031                           David Loo                             Network    55.0
+Received DataFrame - InsGMF: (59, 31)
 ======================================================================
-SEARCHING RELEVANT INCIDENTS
+ORACLE DATA LOAD STARTED
 ======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-ORA-00001: unique constraint (constraint_name) violated
-
-Category:
-Database
-
-Subcategory:
-Oracle
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Resolution Hours:
-24.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 1
-Distance: 0.4824
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010014
-
-Short Description:
-ORA-00001: unique constraint (constraint_name) violated
-
-Category:
-Database
-
-Sub Category:
-Oracle
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 15
-Distance: 0.5104
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000004
-
-Short Description:
-Forgot email password
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2037.450555555556
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 48
-Distance: 0.6077
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000025
-
-Short Description:
-Need to add more memory to laptop
-
-Category:
-Hardware
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-96.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 29
-Distance: 0.6232
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000058
-
-Short Description:
-Performance problems with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-48.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 28
-Distance: 0.6331
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
+Received DataFrame: (59, 31)
 ======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : InsGMF
+================================================================================
+        INSERTING INCIDENT_GAMIFICATION
+================================================================================
+Input shape: (59, 31)
+
+Columns after rename:
+['NUMBER_ID', 'OPENED_AT', 'RESOLVED_AT', 'CLOSED_AT', 'PRIORITY', 'STATE', 'ASSIGNED_TO', 'ASSIGNMENT_GROUP', 'CATEGORY', 'SUBCATEGORY', 'SHORT_DESCRIPTION', 'DESCRIPTION', 'SYS_CREATED_ON', 'SYS_UPDATED_ON', 'REOPEN_COUNT', 'REASSIGNMENT_COUNT', 'RESOLUTION_TIME', 'RESOLUTION_HOURS', 'SLA_STATUS', 'FCR', 'total_incidents', 'CUSTOMER_RATING', 'INCIDENT_CLOSED_POINTS', 'SLA_POINTS', 'FCR_POINTS', 'PRIORITY_POINTS', 'CUSTOMER_RATING_POINTS', 'REOPEN_PENALTY_POINTS', 'REASSIGNMENT_PENALTY_POINTS', 'POINTS', 'average_points']
+
+Final Data Types
+--------------------------------------------------------------------------------
+NUMBER_ID                           str                  INC0010020
+OPENED_AT                           Timestamp            2026-08-09 07:22:36
+RESOLVED_AT                         Timestamp            2026-08-10 07:22:36
+CLOSED_AT                           Timestamp            2026-08-11 07:22:36
+PRIORITY                            str                  3 - Moderate
+STATE                               str                  On Hold
+ASSIGNED_TO                         str                  ATF_TestItilUser2 ATF_TestItilUser2
+ASSIGNMENT_GROUP                    str                  ATF_TestGroup_Network
+CATEGORY                            str                  Database
+SUBCATEGORY                         str                  MS SQL Server
+SHORT_DESCRIPTION                   str                  ORA-00257: archiver is stuck. CONNECT INTERNAL onl
+DESCRIPTION                         str                  While trying to archive a redo log file, the ARCH 
+SYS_CREATED_ON                      Timestamp            2026-08-09 07:24:15
+SYS_UPDATED_ON                      Timestamp            2026-08-09 07:24:15
+REOPEN_COUNT                        float                0.0
+REASSIGNMENT_COUNT                  float                0.0
+RESOLUTION_TIME                     str                  1 days 00:00:00
+RESOLUTION_HOURS                    float                24.0
+SLA_STATUS                          str                  Met
+FCR                                 float                1.0
+CUSTOMER_RATING                     int                  0
+INCIDENT_CLOSED_POINTS              int                  0
+SLA_POINTS                          int                  20
+FCR_POINTS                          int                  25
+PRIORITY_POINTS                     int                  0
+CUSTOMER_RATING_POINTS              int                  0
+REOPEN_PENALTY_POINTS               int                  0
+REASSIGNMENT_PENALTY_POINTS         float                0.0
+POINTS                              float                45.0
+
+Deleting old INCIDENT_GAMIFICATION data...
+Old rows deleted: 59
+
+Total records prepared: 59
+
+First record:
+('INC0010020', Timestamp('2026-08-09 07:22:36'), Timestamp('2026-08-10 07:22:36'), Timestamp('2026-08-11 07:22:36'), '3 - Moderate', 'On Hold', 'ATF_TestItilUser2 ATF_TestItilUser2', 'ATF_TestGroup_Network', 'Database', 'MS SQL Server', 'ORA-00257: archiver is stuck. CONNECT INTERNAL only, until freed', 'While trying to archive a redo log file, the ARCH process encountered an error.', Timestamp('2026-08-09 07:24:15'), Timestamp('2026-08-09 07:24:15'), 0.0, 0.0, '1 days 00:00:00', 24.0, 'Met', 1.0, 0, 0, 20, 25, 0, 0, 0, 0.0, 45.0)
+
+First record length: 29
+
+Executing Oracle executemany...
+Oracle executemany completed
+Rows inserted: 59
+
+Oracle COMMIT completed
+Rows currently in Oracle: 59
+================================================================================
+INCIDENT_GAMIFICATION INSERT SUCCESSFUL
+================================================================================
+Oracle connection closed
+Received DataFrame - AgentRNK: (15, 10)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 10)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentRNK
+======================================================================
+INSERTING AGENT RANKING
+======================================================================
+Old rows deleted: 15
+Records prepared: 15
+Rows inserted: 15
+Oracle COMMIT completed
+Rows currently in Oracle: 15
+======================================================================
+AGENT RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Agent Points saved: Artifacts/DataGamification\AgentPoints.csv
+Received DataFrame - GPRNK: (13, 10)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 10)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPRNK
+======================================================================
+INSERTING GROUP RANKING
+======================================================================
+Old rows deleted: 13
+Records prepared: 13
+Rows inserted: 13
+Oracle COMMIT completed
+Rows currently in Oracle: 13
+======================================================================
+GROUP RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Group Points saved: Artifacts/DataGamification\GroupPoints.csv
 
 ================================================================================
-AI RECOMMENDATIONS COMPLETED
+OVERALL GAMIFICATION POINTS
 ================================================================================
+ Total_Incidents  Total_Points  Average_Points_Per_Incident  Closed_Incidents  SLA_Met_Count  FCR_Count  Reopen_Count  Reassignment_Count
+              59        1440.0                        24.41                25              4         22           0.0                50.0
 
-Processing 3/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Getting Duplicate records
-
-Category:
-Database
-
-Subcategory:
-Oracle
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Resolution Hours:
-0.0552777777777777
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 15
-Distance: 0.2531
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000004
-
-Short Description:
-Forgot email password
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2037.450555555556
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 1
-Distance: 0.5302
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010014
-
-Short Description:
-ORA-00001: unique constraint (constraint_name) violated
-
-Category:
-Database
-
-Sub Category:
-Oracle
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 48
-Distance: 0.5799
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000025
-
-Short Description:
-Need to add more memory to laptop
-
-Category:
-Hardware
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-96.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 28
-Distance: 0.5911
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 7
-Distance: 0.6078
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000046
-
-Short Description:
-Can't access SFA software
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-72.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-3.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
+Overall Points saved: Artifacts/DataGamification\OverallGamificationPoints.csv
 
 ================================================================================
-AI RECOMMENDATIONS COMPLETED
+GAMIFICATION CALCULATION COMPLETED
 ================================================================================
-
-Processing 4/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-CPU load high for over 10 minutes
-
-Category:
-Hardware
-
-Subcategory:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Resolution Hours:
-2137.123888888889
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 45
-Distance: 0.2583
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010010
-
-Short Description:
-Antivirus unable to upgrade
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Antivirus
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-120.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 28
-Distance: 0.5508
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 50
-Distance: 0.6008
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0008112
-
-Short Description:
-Assessment :  ATF Assessor
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Password
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-72.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 18
-Distance: 0.6066
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0009009
-
-Short Description:
-Unable to access the shared folder.
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Password
-
-Priority:
-4 - Low
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-96.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 47
-Distance: 0.627
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000055
-
-Short Description:
-SAP Sales app is not accessible
-
-Category:
-Hardware
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-24.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
+Incident File : Artifacts/DataGamification\IncidentPoints.csv
+Agent File    : Artifacts/DataGamification\AgentPoints.csv
+Group File    : Artifacts/DataGamification\GroupPoints.csv
+Overall File  : Artifacts/DataGamification\OverallGamificationPoints.csv
 ================================================================================
-AI RECOMMENDATIONS COMPLETED
+Received DataFrame - AgentGpRNK: (40, 11)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (40, 11)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentGpRNK
+======================================================================
+INSERTING AGENT GROUP RANKING
+======================================================================
+Old rows deleted: 40
+Records prepared: 40
+Rows inserted: 40
+Oracle COMMIT completed
+Rows currently in Oracle: 40
+======================================================================
+AGENT GROUP RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Received DataFrame - AgentPerSMRY: (15, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentPerSMRY
+======================================================================
+INSERTING AGENT PERFORMANCE SUMMARY
+======================================================================
+Old rows deleted: 15
+Total records: 15
+Rows inserted: 15
+Commit successful
+Rows currently in Oracle: 15
+======================================================================
+AGENT PERFORMANCE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Incident points saved to : Artifacts/DataGamification/IncidentPoints.csv
+Analyst summary saved to : Artifacts/DataGamification/AnalystPoints.csv
+======================================================================
+BADGE ASSIGNMENT
+======================================================================
+
+1. INCIDENT LEVEL
+
+2. AGENT LEVEL
+Received DataFrame - AgentBdgeSMRY: (15, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentBdgeSMRY
+======================================================================
+INSERTING AGENT BADGE SUMMARY
+======================================================================
+Old rows deleted: 15
+Total records: 15
+Rows inserted: 15
+Commit successful
+Rows currently in Oracle: 15
+======================================================================
+AGENT BADGE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+3. GROUP LEVEL
+Received DataFrame - GPBdgeSMRY: (13, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPBdgeSMRY
+======================================================================
+INSERTING GROUP BADGE SUMMARY
+======================================================================
+Old rows deleted: 13
+Total records: 13
+Rows inserted: 13
+Commit successful
+Rows currently in Oracle: 13
+======================================================================
+GROUP BADGE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Group CSV saved: Artifacts/DataGamification\group_badge_summary.csv
+
+4. OVERALL LEVEL
+Overall CSV saved: Artifacts/DataGamification\overall_badge_summary.csv
+Badge results saved to : Artifacts/DataGamification/BadgeResults.csv
+Badge summary saved to : Artifacts/DataGamification/BadgeSummary.csv
 ================================================================================
-
-Processing 5/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Invalide object
-
-Category:
-Inquiry / Help
-
-Subcategory:
-Email
-
-Priority:
-4 - Low
-
-Assignment Group:
-Database
-
-Resolution Hours:
-48.0
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 48
-Distance: 0.3635
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000025
-
-Short Description:
-Need to add more memory to laptop
-
-Category:
-Hardware
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-96.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 31
-Distance: 0.4002
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000041
-
-Short Description:
-My desk phone does not work
-
-Category:
-Hardware
-
-Sub Category:
-Password
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-24.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-30
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 0
-Distance: 0.4731
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000047
-
-Short Description:
-Issue with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Email
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-48.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 7
-Distance: 0.4775
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000046
-
-Short Description:
-Can't access SFA software
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-72.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 37
-Distance: 0.5028
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000007
-
-Short Description:
-Need access to sales DB for the West
-
-Category:
-Database
-
-Sub Category:
-Outlook
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-120.0
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
+CALCULATING AGENT, GROUP AND OVERALL LEVELS
 ================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
+calculate_level columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge'],
+      dtype='str')
 
-Processing 6/63
+Configured Levels:
+Beginner -> 0 points
+Explorer -> 100 points
+Performer -> 250 points
+Expert -> 500 points
+Master -> 750 points
+Champion -> 1000 points
+
+Calculating Agent Level...
+agent_df Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress'],
+      dtype='str')
+Received DataFrame - AgentLvlSMRY: (59, 8)
 ======================================================================
-SEARCHING RELEVANT INCIDENTS
+ORACLE DATA LOAD STARTED
 ======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Need access to the common drive.
-
-Category:
-Inquiry / Help
-
-Subcategory:
-VPN
-
-Priority:
-4 - Low
-
-Assignment Group:
-Network
-
-Resolution Hours:
-96.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 38
-Distance: 0.2792
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000040
-
-Short Description:
-JavaScript error on hiring page of corporate website
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-120.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 9
-Distance: 0.3995
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000038
-
-Short Description:
-my PDF docs are all locked from editing
-
-Category:
-Software
-
-Sub Category:
-Password
-
-Priority:
-4 - Low
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-2035.324722222222
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 13
-Distance: 0.4402
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000028
-
-Short Description:
-My disk is still having issues. Can't delete a file
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-2372.97
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-6.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 35
-Distance: 0.4425
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0007001
-
-Short Description:
-Employee payroll application server is down.
-
-Category:
-Hardware
-
-Sub Category:
-VPN
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-72.0
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 55
-Distance: 0.4822
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000002
-
-Short Description:
-Network file shares access issue
-
-Category:
-Network
-
-Sub Category:
-Outlook
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-72.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
+Received DataFrame: (59, 8)
 ======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 7/63
+CONNECTING TO ORACLE
 ======================================================================
-SEARCHING RELEVANT INCIDENTS
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentLvlSMRY
+======================================================================
+INSERTING AGENT LEVEL SUMMARY
+======================================================================
+insert agent level summy  Index(['Agent', 'total_incidents', 'points', 'average_points', 'level',
+       'level_name', 'points_to_next_level', 'level_progress'],
+      dtype='str')
+Old rows deleted: 59
+Total records: 59
+Rows inserted: 59
+Commit successful
+Rows currently in Oracle: 59
+======================================================================
+AGENT LEVEL SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+Calculating Group Level...
+Received DataFrame - GPLvlSMRY: (13, 8)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 8)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPLvlSMRY
+======================================================================
+INSERTING GROUP LEVEL SUMMARY
+======================================================================
+Old rows deleted: 13
+Total records: 13
+Rows inserted: 13
+Commit successful
+Rows currently in Oracle: 13
+======================================================================
+GROUP LEVEL SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+Calculating Overall Level...
+Overall level saved: Artifacts/DataGamification\OverallLevel.csv
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress'],
+      dtype='str')
+Level results saved to : Artifacts/DataGamification/LevelResults.csv
+Level summary saved to : Artifacts/DataGamification/LevelSummary.csv
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress'],
+      dtype='str')
+l df_lead  c: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress'],
+      dtype='str')
+Type of df: <class 'pandas.DataFrame'>
+##############################################################
+# Overall Leaderboard
+##############################################################
+l svae   df  : Index(['assigned_to', 'total_incidents', 'total_points', 'sla_met',
+       'average_resolution', 'rank'],
+      dtype='str')
+df_lead columns before Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress'],
+      dtype='str')
+df_lead columns Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress', 'leaderboard_rank'],
+      dtype='str')
+Type of df: <class 'pandas.DataFrame'>
+Type of df: <class 'pandas.DataFrame'>
+lead_board_file        number            opened_at          resolved_at            closed_at  \
+0  INC0010020  2026-08-09 07:22:36  2026-08-10 07:22:36  2026-08-11 07:22:36   
+1  INC0010019  2026-08-09 07:07:35  2026-08-11 07:07:35  2026-08-12 07:07:35   
+
+       priority        state                          assigned_to  \
+0  3 - Moderate      On Hold  ATF_TestItilUser2 ATF_TestItilUser2   
+1  3 - Moderate  In Progress                            David Loo   
+
+        assignment_group  category    subcategory  ... average_resolution  \
+0  ATF_TestGroup_Network  Database  MS SQL Server  ...              24.00   
+1                  NY DB  Database         Oracle  ...            1504.54   
+
+    badge agent_badge group_badge  overall_badge  level level_name  \
+0  Rookie      Rookie      Rookie         Legend      1   Beginner   
+1  Rookie      Bronze      Rookie         Legend      1   Beginner   
+
+   points_to_next_level level_progress  leaderboard_rank  
+0                  55.0           45.0                10  
+1                  75.0           25.0                 2  
+
+[2 rows x 41 columns]
+lead_board_file columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress', 'leaderboard_rank'],
+      dtype='str')
+team_summary        number            opened_at          resolved_at            closed_at  \
+0  INC0010020  2026-08-09 07:22:36  2026-08-10 07:22:36  2026-08-11 07:22:36   
+1  INC0010019  2026-08-09 07:07:35  2026-08-11 07:07:35  2026-08-12 07:07:35   
+
+       priority        state                          assigned_to  \
+0  3 - Moderate      On Hold  ATF_TestItilUser2 ATF_TestItilUser2   
+1  3 - Moderate  In Progress                            David Loo   
+
+        assignment_group  category    subcategory  ... average_resolution  \
+0  ATF_TestGroup_Network  Database  MS SQL Server  ...              24.00   
+1                  NY DB  Database         Oracle  ...            1504.54   
+
+    badge agent_badge group_badge  overall_badge  level level_name  \
+0  Rookie      Rookie      Rookie         Legend      1   Beginner   
+1  Rookie      Bronze      Rookie         Legend      1   Beginner   
+
+   points_to_next_level level_progress  leaderboard_rank  
+0                  55.0           45.0                10  
+1                  75.0           25.0                 2  
+
+[2 rows x 41 columns]
+team_summary columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress', 'leaderboard_rank'],
+      dtype='str')
+
+Generating Assignment Group Leaderboard...
+Input shape: (59, 41)
+
+Assignment Group Leaderboard:
+                       assignment_group  total_incidents  total_points  \
+6                              Database               10         295.0   
+12                             Software                9         265.0   
+9                               Network                9         210.0   
+7                              Hardware                9         210.0   
+11                         Service Desk               10         150.0   
+8                                 NY DB                2          80.0   
+4                                 Cloud                2          80.0   
+0   ATF Service Level Management  Group                1          55.0   
+3               Application Development                1          45.0   
+1                 ATF_TestGroup_Network                1          45.0   
+2             ATF_TestGroup_ServiceDesk                1          25.0   
+5                                  Data                2         -10.0   
+10                                   QA                2         -10.0   
+
+    group_rank  
+6            1  
+12           2  
+9            3  
+7            3  
+11           4  
+8            5  
+4            5  
+0            6  
+3            7  
+1            7  
+2            8  
+5            9  
+10           9  
+Leaderboard saved : Artifacts/DataGamification/Leaderboard.csv
+Top performers saved : Artifacts/DataGamification/TopPerformers.csv
+Bottom performers saved : Artifacts/DataGamification/BottomPerformers.csv
+Team summary saved : Artifacts/DataGamification/TeamSummary.csv
+Assignment Group Leaderboard : Artifacts/DataGamification/AssignmentGroupLeaderboard.csv
+calculate_achievements: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_badge', 'group_badge',
+       'overall_badge', 'level', 'level_name', 'points_to_next_level',
+       'level_progress', 'leaderboard_rank'],
+      dtype='str')
+##############################################################
+# Achievement Calculation
+##############################################################
+Received DataFrame - GMFNL: (59, 43)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (59, 43)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GMFNL
+======================================================================
+INSERTING INCIDENT GAMIFICATION FINAL
 ======================================================================
 
-Creating query embedding...
-Query embedding shape: (1, 384)
+Deleting old INCIDENT_GAMIFICATION_FINAL data...
+Old rows deleted: 0
 
-Query: ServiceNow Incident
+Total records prepared: 59
 
-Short Description:
-Defect tracking tool is down.
+Checking Python data types...
+Data type validation successful.
 
-Category:
-Software
+Executing Oracle INSERT...
+Rows inserted: 59
 
-Subcategory:
-Outlook
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Network
-
-Resolution Hours:
-0.0897222222222222
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 11
-Distance: 0.2126
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000052
-
-Short Description:
-SAP Financial Accounting application appears to be down
-
-Category:
-Software
-
-Sub Category:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-72.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 28
-Distance: 0.5966
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 54
-Distance: 0.638
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010012
-
-Short Description:
-Install antivirus
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Antivirus
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 32
-Distance: 0.6707
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000039
-
-Short Description:
-Trouble getting to Oregon mail server
-
-Category:
-Network
-
-Sub Category:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-96.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 0
-Distance: 0.6763
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000047
-
-Short Description:
-Issue with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Email
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-48.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-4.0
-
+Oracle COMMIT successful.
+Rows currently in Oracle: 59
 ======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 8/63
+INCIDENT GAMIFICATION FINAL INSERT SUCCESSFUL
 ======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Can't access SFA software
-
-Category:
-Software
-
-Subcategory:
-Laptop
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Resolution Hours:
-72.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 29
-Distance: 0.2435
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000058
-
-Short Description:
-Performance problems with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-48.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 13
-Distance: 0.5533
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000028
-
-Short Description:
-My disk is still having issues. Can't delete a file
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-2372.97
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-6.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 6
-Distance: 0.5686
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0009004
-
-Short Description:
-Defect tracking tool is down.
-
-Category:
-Software
-
-Sub Category:
-Outlook
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-0.0897222222222222
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-60
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 26
-Distance: 0.5736
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000008
-
-Short Description:
-Printer in my office is out of toner
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Password
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2012.7925
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 28
-Distance: 0.5741
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 9/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Cannot sign into the company portal app
-
-Category:
-Inquiry / Help
-
-Subcategory:
-Outlook
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Network
-
-Resolution Hours:
-0.5291666666666667
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 0
-Distance: 0.3138
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000047
-
-Short Description:
-Issue with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Email
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-48.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 26
-Distance: 0.6236
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000008
-
-Short Description:
-Printer in my office is out of toner
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Password
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2012.7925
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 7
-Distance: 0.634
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000046
-
-Short Description:
-Can't access SFA software
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-72.0
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 44
-Distance: 0.6386
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010017
-
-Short Description:
-ORA-00051: time-out occurred while waiting for resource
-
-Category:
-Database
-
-Sub Category:
-MS SQL Server
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-96.0
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-4.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 5
-Distance: 0.6414
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0007002
-
-Short Description:
-Need access to the common drive.
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-4 - Low
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-96.0
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-2.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 10/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-my PDF docs are all locked from editing
-
-Category:
-Software
-
-Subcategory:
-Password
-
-Priority:
-4 - Low
-
-Assignment Group:
-QA
-
-Resolution Hours:
-2035.324722222222
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 3
-Distance: 0.2406
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000005
-
-Short Description:
-CPU load high for over 10 minutes
-
-Category:
-Hardware
-
-Sub Category:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-2137.123888888889
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 29
-Distance: 0.888
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000058
-
-Short Description:
-Performance problems with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-48.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 26
-Distance: 0.9209
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000008
-
-Short Description:
-Printer in my office is out of toner
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Password
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2012.7925
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 13
-Distance: 0.9231
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000028
-
-Short Description:
-My disk is still having issues. Can't delete a file
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-2372.97
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-6.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 28
-Distance: 0.9465
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000012
-
-Short Description:
-Customer didn't receive eFax
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-2565.82
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-4.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 11/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-ORA-00257: archiver is stuck. CONNECT INTERNAL only, until freed
-
-Category:
-Database
-
-Subcategory:
-Oracle
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-QA
-
-Resolution Hours:
-24.0
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 1
-Distance: 0.8577
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010014
-
-Short Description:
-ORA-00001: unique constraint (constraint_name) violated
-
-Category:
-Database
-
-Sub Category:
-Oracle
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 54
-Distance: 0.9099
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010012
-
-Short Description:
-Install antivirus
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Antivirus
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 22
-Distance: 0.9343
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000037
-
-Short Description:
-Request for a new service
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-72.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 9
-Distance: 0.9583
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000038
-
-Short Description:
-my PDF docs are all locked from editing
-
-Category:
-Software
-
-Sub Category:
-Password
-
-Priority:
-4 - Low
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-2035.324722222222
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 15
-Distance: 0.9697
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000004
-
-Short Description:
-Forgot email password
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Cloud
-
-Assigned To:
-Chaitanya
-
-Resolution Hours:
-2037.450555555556
-
-MTTR:
-611.9992222222223
-
-SLA Percentage:
-13.333333333333334
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-2
-
-Monthly Rank:
-1.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 12/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-SAP Financial Accounting application appears to be down
-
-Category:
-Software
-
-Subcategory:
-Application
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Resolution Hours:
-72.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 12
-Distance: 0.4168
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000051
-
-Short Description:
-Manager can't access SAP Controlling application
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-48.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 6
-Distance: 0.4503
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0009004
-
-Short Description:
-Defect tracking tool is down.
-
-Category:
-Software
-
-Sub Category:
-Outlook
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-0.0897222222222222
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-60
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 54
-Distance: 0.4696
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010012
-
-Short Description:
-Install antivirus
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Antivirus
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 36
-Distance: 0.5946
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000033
-
-Short Description:
-File Server is 80% full - Needs upgrade
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-2542.5558333333333
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 29
-Distance: 0.6402
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000058
-
-Short Description:
-Performance problems with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-48.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 13/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-Manager can't access SAP Controlling application
-
-Category:
-Software
-
-Subcategory:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Resolution Hours:
-48.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 6
-Distance: 0.2224
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0009004
-
-Short Description:
-Defect tracking tool is down.
-
-Category:
-Software
-
-Sub Category:
-Outlook
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-0.0897222222222222
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Met
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-60
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 12
-Distance: 0.4096
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000051
-
-Short Description:
-Manager can't access SAP Controlling application
-
-Category:
-Software
-
-Sub Category:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-48.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 36
-Distance: 0.4714
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000033
-
-Short Description:
-File Server is 80% full - Needs upgrade
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-1 - Critical
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-2542.5558333333333
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 54
-Distance: 0.5209
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0010012
-
-Short Description:
-Install antivirus
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Antivirus
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-24.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-2.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 29
-Distance: 0.5655
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000058
-
-Short Description:
-Performance problems with email
-
-Category:
-Inquiry / Help
-
-Sub Category:
-Outlook
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-48.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-25
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-1.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 14/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
-Query embedding shape: (1, 384)
-
-Query: ServiceNow Incident
-
-Short Description:
-My disk is still having issues. Can't delete a file
-
-Category:
-Inquiry / Help
-
-Subcategory:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Data
-
-Resolution Hours:
-2372.97
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Agent Performance:
-Poor
-
-Retrieved Incidents: 5
-
-----------------------------------------------------------------------
-Rank: 1
-FAISS Index: 22
-Distance: 0.208
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000037
-
-Short Description:
-Request for a new service
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-72.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 2
-FAISS Index: 33
-Distance: 0.6456
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000016
-
-Short Description:
-Rain is leaking on main DNS Server
-
-Category:
-Hardware
-
-Sub Category:
-Laptop
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Database
-
-Assigned To:
-Vamsi
-
-Resolution Hours:
-96.0
-
-MTTR:
-792.8040925925926
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-20
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-3
-
-Monthly Rank:
-3.0
-
-----------------------------------------------------------------------
-Rank: 3
-FAISS Index: 38
-Distance: 0.7184
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000040
-
-Short Description:
-JavaScript error on hiring page of corporate website
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-3 - Moderate
-
-Assignment Group:
-QA
-
-Assigned To:
-Ganesh
-
-Resolution Hours:
-120.0
-
-MTTR:
-779.5613333333332
-
-SLA Percentage:
-6.666666666666667
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--5
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-4
-
-Monthly Rank:
-5.0
-
-----------------------------------------------------------------------
-Rank: 4
-FAISS Index: 35
-Distance: 0.7433
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0007001
-
-Short Description:
-Employee payroll application server is down.
-
-Category:
-Hardware
-
-Sub Category:
-VPN
-
-Priority:
-1 - Critical
-
-Assignment Group:
-Network
-
-Assigned To:
-Venkat
-
-Resolution Hours:
-72.0
-
-MTTR:
-377.8850877192983
-
-SLA Percentage:
-26.31578947368421
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
-55
-
-Badges:
-0
-
-Achievement:
-Top Performer
-
-Level:
-1
-
-Leaderboard Rank:
-1
-
-Monthly Rank:
-1.0
-
-----------------------------------------------------------------------
-Rank: 5
-FAISS Index: 13
-Distance: 0.7588
-Incident:
-ServiceNow Incident
-
-Incident Number:
-INC0000028
-
-Short Description:
-My disk is still having issues. Can't delete a file
-
-Category:
-Inquiry / Help
-
-Sub Category:
-VPN
-
-Priority:
-5 - Planning
-
-Assignment Group:
-Data
-
-Assigned To:
-Raju
-
-Resolution Hours:
-2372.97
-
-MTTR:
-798.8381666666667
-
-SLA Percentage:
-0.0
-
-SLA Status:
-Breached
-
-Workload Level:
-Low
-
-Performance Prediction:
-Poor
-
-Performance Confidence:
-1.0
-
-Points:
--10
-
-Badges:
-0
-
-Achievement:
-No Achievement
-
-Level:
-1
-
-Leaderboard Rank:
-5
-
-Monthly Rank:
-6.0
-
-======================================================================
-Similar incidents: 5
-Prompt created successfully.
-Recommendation generated successfully.
-
-================================================================================
-AI RECOMMENDATIONS COMPLETED
-================================================================================
-
-Processing 15/63
-======================================================================
-SEARCHING RELEVANT INCIDENTS
-======================================================================
-
-Creating query embedding...
+Oracle connection closed
+Achievement results saved : Artifacts/DataGamification/AchievementResults.csv
+Achievement summary saved : Artifacts/DataGamification/AchievementSummary.csv
+##############################################################
+# Generate Monthly Ranking
+##############################################################
+Monthly Ranking saved : Artifacts/DataGamification/MonthlyRanking.csv
+Top Performers saved : Artifacts/DataGamification/TopMonthlyPerformers.csv
+Monthly Summary saved : Artifacts/DataGamification/MonthlySummary.csv

@@ -1,0 +1,98 @@
+[2026-08-16 22:37:38,685: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Started <<<<<<<]
+[2026-08-16 22:37:38,701: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:37:38,733: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:37:38,860: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:37:38,860: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:37:38,860: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:37:40,881: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<]
+[2026-08-16 22:37:40,881: INFO: main_metrics: >>>>>>> Stage : Data Pre Processing Started <<<<<<<]
+[2026-08-16 22:37:40,897: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:37:40,913: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:37:40,948: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:37:40,948: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:37:40,961: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:37:40,977: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:37:40,995: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:37:41,009: INFO: Common: YAML file loaded successfully : params.yaml]
+[2026-08-16 22:37:41,009: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:37:42,826: INFO: main_metrics: >>>>>>> Stage : Data Pre Processing Completed Successfully <<<<<<<]
+[2026-08-16 22:37:42,836: INFO: main_metrics: >>>>>>> Stage : Data Metrics Calculation Started <<<<<<<]
+[2026-08-16 22:37:42,842: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:37:42,874: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:37:42,908: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:37:42,908: INFO: Common: Created directory : Artifacts/MetricsCalculation]
+[2026-08-16 22:37:42,922: INFO: Common: YAML file loaded successfully : params.yaml]
+[2026-08-16 22:37:42,953: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:37:42,970: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:37:43,001: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:37:44,499: INFO: main_metrics: >>>>>>> Stage : Data Metrics Calculation Completed Successfully <<<<<<<]
+
+======================================================================
+JOB STARTED : 2026-08-16 22:37:36.031946
+PROJECT     : C:\Users\RSR\PYTHON\ServicenowGamification
+SCRIPT      : C:\Users\RSR\PYTHON\ServicenowGamification\main_metrics.py
+PYTHON      : C:\Users\rajum\anaconda3\envs\llmtracker\python.exe
+======================================================================
+
+STATUS      : SUCCESS
+END TIME    : 2026-08-16 22:37:44.720733
+DURATION    : 0:00:08.688787
+======================================================================
+[2026-08-16 22:47:40,952: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Started <<<<<<<]
+[2026-08-16 22:47:40,964: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:47:40,996: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:47:41,081: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:47:41,081: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:47:41,081: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:47:43,012: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<]
+[2026-08-16 22:47:43,012: INFO: main_metrics: >>>>>>> Stage : Data Pre Processing Started <<<<<<<]
+[2026-08-16 22:47:43,027: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:47:43,058: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:47:43,106: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:47:43,106: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:47:43,122: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:47:43,138: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:47:43,186: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:47:43,186: INFO: Common: YAML file loaded successfully : params.yaml]
+[2026-08-16 22:47:43,201: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:56:01,210: INFO: utils: NumExpr defaulting to 8 threads.]
+[2026-08-16 22:56:06,095: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Started <<<<<<<]
+[2026-08-16 22:56:06,132: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:56:06,184: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:56:06,349: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:56:06,350: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:56:06,351: INFO: Common: Created directory : Artifacts/DataIngestion]
+[2026-08-16 22:56:08,490: INFO: main_metrics: >>>>>>> Stage : Data Ingestion Completed Successfully <<<<<<<]
+[2026-08-16 22:56:08,493: INFO: main_metrics: >>>>>>> Stage : Data Pre Processing Started <<<<<<<]
+[2026-08-16 22:56:08,529: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:56:08,574: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:56:08,720: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:56:08,721: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:56:08,758: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:56:08,801: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:56:08,952: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:56:08,996: INFO: Common: YAML file loaded successfully : params.yaml]
+[2026-08-16 22:56:09,000: INFO: Common: Created directory : Artifacts/DataPreProcessing]
+[2026-08-16 22:56:09,562: INFO: main_metrics: >>>>>>> Stage : Data Pre Processing Completed Successfully <<<<<<<]
+[2026-08-16 22:56:09,564: INFO: main_metrics: >>>>>>> Stage : Data Metrics Calculation Started <<<<<<<]
+[2026-08-16 22:56:09,600: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:56:09,646: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:56:09,779: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:56:09,781: INFO: Common: Created directory : Artifacts/MetricsCalculation]
+[2026-08-16 22:56:09,819: INFO: Common: YAML file loaded successfully : params.yaml]
+[2026-08-16 22:56:09,854: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml]
+[2026-08-16 22:56:09,897: INFO: Common: YAML file loaded successfully : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml]
+[2026-08-16 22:56:10,043: INFO: Common: Created directory : Artifacts]
+[2026-08-16 22:56:11,871: INFO: main_metrics: >>>>>>> Stage : Data Metrics Calculation Completed Successfully <<<<<<<]
+
+======================================================================
+JOB STARTED : 2026-08-16 22:55:57.057648
+PROJECT     : C:\Users\RSR\PYTHON\ServicenowGamification
+SCRIPT      : C:\Users\RSR\PYTHON\ServicenowGamification\main_metrics.py
+PYTHON      : C:\Users\rajum\anaconda3\python.exe
+======================================================================
+
+STATUS      : SUCCESS
+END TIME    : 2026-08-16 22:56:12.469212
+DURATION    : 0:00:15.411564
+======================================================================

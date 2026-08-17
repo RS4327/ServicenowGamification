@@ -1209,7 +1209,17 @@ class MetricsCalculation:
         # =========================================================
         # RETURN
         # =========================================================
-
+        
+        mttr_save_path = os.path.join(
+                    self.config.root_dir,
+                    "mttr.csv"
+                )
+        
+        df.to_csv(
+                    mttr_save_path,
+                    index=False
+                )
+        
         return df, metrics
 
 

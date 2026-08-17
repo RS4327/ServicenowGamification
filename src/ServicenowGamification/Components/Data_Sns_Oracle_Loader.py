@@ -2536,7 +2536,2924 @@ class IncidentDataLoader:
 
             cursor.close()
 
-    
+    def insert_incident_gamification(self, connection, df):
+
+        import pandas as pd
+        import datetime
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 80)
+            print("        INSERTING INCIDENT_GAMIFICATION")
+            print("=" * 80)
+
+            print("Input shape:", df.shape)
+
+            # ============================================================
+            # 1. RENAME DATAFRAME COLUMNS
+            # ============================================================
+
+            column_mapping = {
+
+                "number":
+                    "NUMBER_ID",
+
+                "opened_at":
+                    "OPENED_AT",
+
+                "resolved_at":
+                    "RESOLVED_AT",
+
+                "closed_at":
+                    "CLOSED_AT",
+
+                "priority":
+                    "PRIORITY",
+
+                "state":
+                    "STATE",
+
+                "assigned_to":
+                    "ASSIGNED_TO",
+
+                "assignment_group":
+                    "ASSIGNMENT_GROUP",
+
+                "category":
+                    "CATEGORY",
+
+                "subcategory":
+                    "SUBCATEGORY",
+
+                "short_description":
+                    "SHORT_DESCRIPTION",
+
+                "description":
+                    "DESCRIPTION",
+
+                "sys_created_on":
+                    "SYS_CREATED_ON",
+
+                "sys_updated_on":
+                    "SYS_UPDATED_ON",
+
+                "reopen_count":
+                    "REOPEN_COUNT",
+
+                "reassignment_count":
+                    "REASSIGNMENT_COUNT",
+
+                "resolution_time":
+                    "RESOLUTION_TIME",
+
+                "resolution_hours":
+                    "RESOLUTION_HOURS",
+
+                "sla_status":
+                    "SLA_STATUS",
+
+                "fcr":
+                    "FCR",
+
+                "customer_rating":
+                    "CUSTOMER_RATING",
+
+                "incident_closed_points":
+                    "INCIDENT_CLOSED_POINTS",
+
+                "sla_points":
+                    "SLA_POINTS",
+
+                "fcr_points":
+                    "FCR_POINTS",
+
+                "priority_points":
+                    "PRIORITY_POINTS",
+
+                "customer_rating_points":
+                    "CUSTOMER_RATING_POINTS",
+
+                "reopen_penalty_points":
+                    "REOPEN_PENALTY_POINTS",
+
+                "reassignment_penalty_points":
+                    "REASSIGNMENT_PENALTY_POINTS",
+
+                "points":
+                    "POINTS"
+            }
+
+            df = df.rename(
+                columns=column_mapping
+            )
+
+            print("\nColumns after rename:")
+            print(df.columns.tolist())
+
+            # ============================================================
+            # 2. REQUIRED ORACLE COLUMNS
+            # ============================================================
+
+            columns = [
+
+                "NUMBER_ID",
+                "OPENED_AT",
+                "RESOLVED_AT",
+                "CLOSED_AT",
+
+                "PRIORITY",
+                "STATE",
+
+                "ASSIGNED_TO",
+                "ASSIGNMENT_GROUP",
+
+                "CATEGORY",
+                "SUBCATEGORY",
+
+                "SHORT_DESCRIPTION",
+                "DESCRIPTION",
+
+                "SYS_CREATED_ON",
+                "SYS_UPDATED_ON",
+
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+
+                "RESOLUTION_TIME",
+                "RESOLUTION_HOURS",
+
+                "SLA_STATUS",
+                "FCR",
+
+                "CUSTOMER_RATING",
+
+                "INCIDENT_CLOSED_POINTS",
+                "SLA_POINTS",
+                "FCR_POINTS",
+                "PRIORITY_POINTS",
+                "CUSTOMER_RATING_POINTS",
+                "REOPEN_PENALTY_POINTS",
+                "REASSIGNMENT_PENALTY_POINTS",
+
+                "POINTS"
+            ]
+
+            # ============================================================
+            # 3. CHECK MISSING COLUMNS
+            # ============================================================
+
+            missing_columns = [
+                col
+                for col in columns
+                if col not in df.columns
+            ]
+
+            if missing_columns:
+
+                raise ValueError(
+                    "Missing columns: "
+                    + str(missing_columns)
+                )
+
+            # ============================================================
+            # 4. SELECT ONLY REQUIRED COLUMNS
+            # ============================================================
+
+            df = df[columns].copy()
+
+            # ============================================================
+            # 5. TIMESTAMP CONVERSION
+            # ============================================================
+
+            timestamp_columns = [
+
+                "OPENED_AT",
+                "RESOLVED_AT",
+                "CLOSED_AT",
+                "SYS_CREATED_ON",
+                "SYS_UPDATED_ON"
+            ]
+
+            for col in timestamp_columns:
+
+                df[col] = pd.to_datetime(
+                    df[col],
+                    errors="coerce"
+                )
+
+                df[col] = df[col].apply(
+
+                    lambda x:
+                        x.to_pydatetime()
+                        if pd.notna(x)
+                        else None
+
+                )
+
+            # ============================================================
+            # 6. RESOLUTION TIME
+            # Oracle column is VARCHAR2
+            # ============================================================
+
+            df["RESOLUTION_TIME"] = df[
+                "RESOLUTION_TIME"
+            ].apply(
+
+                lambda x:
+                    str(x)
+                    if pd.notna(x)
+                    else None
+
+            )
+
+            # ============================================================
+            # 7. NUMERIC COLUMNS
+            # ============================================================
+
+            numeric_columns = [
+
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+
+                "RESOLUTION_HOURS",
+
+                "FCR",
+
+                "CUSTOMER_RATING",
+
+                "INCIDENT_CLOSED_POINTS",
+                "SLA_POINTS",
+                "FCR_POINTS",
+                "PRIORITY_POINTS",
+                "CUSTOMER_RATING_POINTS",
+                "REOPEN_PENALTY_POINTS",
+                "REASSIGNMENT_PENALTY_POINTS",
+
+                "POINTS"
+            ]
+
+            for col in numeric_columns:
+
+                df[col] = pd.to_numeric(
+                    df[col],
+                    errors="coerce"
+                )
+
+            # ============================================================
+            # 8. CONVERT NUMPY VALUES TO PYTHON VALUES
+            # ============================================================
+
+            for col in numeric_columns:
+
+                df[col] = df[col].apply(
+
+                    lambda x:
+                        None
+                        if pd.isna(x)
+                        else x.item()
+                        if hasattr(x, "item")
+                        else x
+
+                )
+
+            # ============================================================
+            # 9. STRING COLUMNS
+            # ============================================================
+
+            string_columns = [
+
+                "NUMBER_ID",
+                "PRIORITY",
+                "STATE",
+                "ASSIGNED_TO",
+                "ASSIGNMENT_GROUP",
+                "CATEGORY",
+                "SUBCATEGORY",
+                "SHORT_DESCRIPTION",
+                "DESCRIPTION",
+                "SLA_STATUS"
+            ]
+
+            for col in string_columns:
+
+                df[col] = df[col].apply(
+
+                    lambda x:
+                        str(x)
+                        if pd.notna(x)
+                        else None
+
+                )
+
+            # ============================================================
+            # 10. FINAL NaN / NaT -> None
+            # ============================================================
+
+            df = df.astype(object)
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ============================================================
+            # 11. DEBUG DATA TYPES
+            # ============================================================
+
+            print("\nFinal Data Types")
+            print("-" * 80)
+
+            for col in columns:
+
+                sample = df[col].dropna()
+
+                if len(sample) > 0:
+
+                    value = sample.iloc[0]
+
+                    print(
+                        f"{col:35} "
+                        f"{type(value).__name__:20} "
+                        f"{str(value)[:50]}"
+                    )
+
+                else:
+
+                    print(
+                        f"{col:35} EMPTY"
+                    )
+
+            # ============================================================
+            # 12. DELETE OLD DATA
+            # ============================================================
+
+            print("\nDeleting old INCIDENT_GAMIFICATION data...")
+
+            cursor.execute(
+                """
+                DELETE FROM INCIDENT_GAMIFICATION
+                """
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ============================================================
+            # 13. INSERT SQL
+            # ============================================================
+
+            sql = """
+
+                INSERT INTO INCIDENT_GAMIFICATION
+                (
+
+                    NUMBER_ID,
+                    OPENED_AT,
+                    RESOLVED_AT,
+                    CLOSED_AT,
+
+                    PRIORITY,
+                    STATE,
+
+                    ASSIGNED_TO,
+                    ASSIGNMENT_GROUP,
+
+                    CATEGORY,
+                    SUBCATEGORY,
+
+                    SHORT_DESCRIPTION,
+                    DESCRIPTION,
+
+                    SYS_CREATED_ON,
+                    SYS_UPDATED_ON,
+
+                    REOPEN_COUNT,
+                    REASSIGNMENT_COUNT,
+
+                    RESOLUTION_TIME,
+                    RESOLUTION_HOURS,
+
+                    SLA_STATUS,
+                    FCR,
+
+                    CUSTOMER_RATING,
+
+                    INCIDENT_CLOSED_POINTS,
+                    SLA_POINTS,
+                    FCR_POINTS,
+                    PRIORITY_POINTS,
+                    CUSTOMER_RATING_POINTS,
+                    REOPEN_PENALTY_POINTS,
+                    REASSIGNMENT_PENALTY_POINTS,
+
+                    POINTS
+
+                )
+
+                VALUES
+                (
+
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+
+                    :5,
+                    :6,
+
+                    :7,
+                    :8,
+
+                    :9,
+                    :10,
+
+                    :11,
+                    :12,
+
+                    :13,
+                    :14,
+
+                    :15,
+                    :16,
+
+                    :17,
+                    :18,
+
+                    :19,
+                    :20,
+
+                    :21,
+
+                    :22,
+                    :23,
+                    :24,
+                    :25,
+                    :26,
+                    :27,
+                    :28,
+
+                    :29
+
+                )
+
+            """
+
+            # ============================================================
+            # 14. CREATE RECORDS
+            # ============================================================
+
+            records = list(
+
+                df.itertuples(
+                    index=False,
+                    name=None
+                )
+
+            )
+
+            print(
+                "\nTotal records prepared:",
+                len(records)
+            )
+
+            # ============================================================
+            # 15. SHOW FIRST RECORD
+            # ============================================================
+
+            if records:
+
+                print("\nFirst record:")
+                print(records[0])
+
+                print(
+                    "\nFirst record length:",
+                    len(records[0])
+                )
+
+            # ============================================================
+            # 16. INSERT
+            # ============================================================
+
+            if records:
+
+                print(
+                    "\nExecuting Oracle executemany..."
+                )
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Oracle executemany completed"
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records found."
+                )
+
+            # ============================================================
+            # 17. COMMIT
+            # ============================================================
+
+            connection.commit()
+
+            print(
+                "\nOracle COMMIT completed"
+            )
+
+            # ============================================================
+            # 18. VERIFY
+            # ============================================================
+
+            cursor.execute(
+
+                """
+                SELECT COUNT(*)
+                FROM INCIDENT_GAMIFICATION
+                """
+
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            # ============================================================
+            # 19. SUCCESS
+            # ============================================================
+
+            print("=" * 80)
+            print(
+                "INCIDENT_GAMIFICATION INSERT SUCCESSFUL"
+            )
+            print("=" * 80)
+
+        except Exception as e:
+
+            # ============================================================
+            # ROLLBACK
+            # ============================================================
+
+            connection.rollback()
+
+            print("=" * 80)
+            print(
+                "INCIDENT_GAMIFICATION INSERT FAILED"
+            )
+            print("=" * 80)
+
+            print(
+                "Error Type:",
+                type(e).__name__
+            )
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+       
+
+    def insert_agent_group_ranking(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING AGENT GROUP RANKING")
+            print("=" * 70)
+
+            # ============================================================
+            # RENAME COLUMNS
+            # ============================================================
+
+            df = df.rename(columns={
+
+                "Assignment_Group":
+                    "ASSIGNMENT_GROUP",
+
+                "Agent":
+                    "AGENT",
+
+                "Total_Incidents":
+                    "TOTAL_INCIDENTS",
+
+                "Total_Points":
+                    "TOTAL_POINTS",
+
+                "Average_Points":
+                    "AVERAGE_POINTS",
+
+                "Closed_Incidents":
+                    "CLOSED_INCIDENTS",
+
+                "SLA_Met_Count":
+                    "SLA_MET_COUNT",
+
+                "FCR_Count":
+                    "FCR_COUNT",
+
+                "Reopen_Count":
+                    "REOPEN_COUNT",
+
+                "Reassignment_Count":
+                    "REASSIGNMENT_COUNT",
+
+                "Group_Rank":
+                    "GROUP_RANK"
+            })
+
+            # ============================================================
+            # REQUIRED COLUMNS
+            # ============================================================
+
+            columns = [
+
+                "ASSIGNMENT_GROUP",
+                "AGENT",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "CLOSED_INCIDENTS",
+                "SLA_MET_COUNT",
+                "FCR_COUNT",
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+                "GROUP_RANK"
+            ]
+
+            # ============================================================
+            # VALIDATE
+            # ============================================================
+
+            missing_columns = [
+                col
+                for col in columns
+                if col not in df.columns
+            ]
+
+            if missing_columns:
+
+                raise ValueError(
+                    f"Missing columns: {missing_columns}"
+                )
+
+            # ============================================================
+            # SELECT REQUIRED COLUMNS
+            # ============================================================
+
+            df = df[columns].copy()
+
+            # ============================================================
+            # NaN -> NULL
+            # ============================================================
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ============================================================
+            # DELETE OLD DATA
+            # ============================================================
+
+            cursor.execute(
+                "DELETE FROM AGENT_GROUP_RANKING"
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ============================================================
+            # INSERT SQL
+            # ============================================================
+
+            sql = """
+                INSERT INTO AGENT_GROUP_RANKING
+                (
+                    ASSIGNMENT_GROUP,
+                    AGENT,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    CLOSED_INCIDENTS,
+                    SLA_MET_COUNT,
+                    FCR_COUNT,
+                    REOPEN_COUNT,
+                    REASSIGNMENT_COUNT,
+                    GROUP_RANK
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10,
+                    :11
+                )
+            """
+
+            # ============================================================
+            # CREATE RECORDS
+            # ============================================================
+
+            records = list(
+                df.itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Records prepared:",
+                len(records)
+            )
+
+            # ============================================================
+            # INSERT
+            # ============================================================
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records to insert."
+                )
+
+            # ============================================================
+            # COMMIT
+            # ============================================================
+
+            connection.commit()
+
+            print(
+                "Oracle COMMIT completed"
+            )
+
+            # ============================================================
+            # VERIFY
+            # ============================================================
+
+            cursor.execute(
+                """
+                    SELECT COUNT(*)
+                    FROM AGENT_GROUP_RANKING
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print(
+                "AGENT GROUP RANKING INSERT SUCCESSFUL"
+            )
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print(
+                "AGENT GROUP RANKING INSERT FAILED"
+            )
+            print(
+                "Error type:",
+                type(e).__name__
+            )
+            print(
+                "Error:",
+                str(e)
+            )
+            print("=" * 70)
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_group_ranking(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING GROUP RANKING")
+            print("=" * 70)
+
+            # ============================================================
+            # RENAME COLUMNS
+            # ============================================================
+
+            df = df.rename(columns={
+
+                "Assignment_Group":
+                    "ASSIGNMENT_GROUP",
+
+                "Total_Incidents":
+                    "TOTAL_INCIDENTS",
+
+                "Total_Points":
+                    "TOTAL_POINTS",
+
+                "Average_Points":
+                    "AVERAGE_POINTS",
+
+                "Closed_Incidents":
+                    "CLOSED_INCIDENTS",
+
+                "SLA_Met_Count":
+                    "SLA_MET_COUNT",
+
+                "FCR_Count":
+                    "FCR_COUNT",
+
+                "Reopen_Count":
+                    "REOPEN_COUNT",
+
+                "Reassignment_Count":
+                    "REASSIGNMENT_COUNT",
+
+                "Group_Rank":
+                    "GROUP_RANK"
+            })
+
+            # ============================================================
+            # REQUIRED COLUMNS
+            # ============================================================
+
+            columns = [
+
+                "ASSIGNMENT_GROUP",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "CLOSED_INCIDENTS",
+                "SLA_MET_COUNT",
+                "FCR_COUNT",
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+                "GROUP_RANK"
+            ]
+
+            # ============================================================
+            # VALIDATE COLUMNS
+            # ============================================================
+
+            missing_columns = [
+                col
+                for col in columns
+                if col not in df.columns
+            ]
+
+            if missing_columns:
+
+                raise ValueError(
+                    f"Missing columns: {missing_columns}"
+                )
+
+            # ============================================================
+            # SELECT REQUIRED COLUMNS
+            # ============================================================
+
+            df = df[columns].copy()
+
+            # ============================================================
+            # NaN -> NULL
+            # ============================================================
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ============================================================
+            # DELETE OLD DATA
+            # ============================================================
+
+            cursor.execute(
+                "DELETE FROM GROUP_RANKING"
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ============================================================
+            # INSERT SQL
+            # ============================================================
+
+            sql = """
+                INSERT INTO GROUP_RANKING
+                (
+                    ASSIGNMENT_GROUP,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    CLOSED_INCIDENTS,
+                    SLA_MET_COUNT,
+                    FCR_COUNT,
+                    REOPEN_COUNT,
+                    REASSIGNMENT_COUNT,
+                    GROUP_RANK
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10
+                )
+            """
+
+            # ============================================================
+            # CREATE RECORDS
+            # ============================================================
+
+            records = list(
+                df.itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Records prepared:",
+                len(records)
+            )
+
+            # ============================================================
+            # INSERT
+            # ============================================================
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records to insert."
+                )
+
+            # ============================================================
+            # COMMIT
+            # ============================================================
+
+            connection.commit()
+
+            print(
+                "Oracle COMMIT completed"
+            )
+
+            # ============================================================
+            # VERIFY
+            # ============================================================
+
+            cursor.execute(
+                """
+                    SELECT COUNT(*)
+                    FROM GROUP_RANKING
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print(
+                "GROUP RANKING INSERT SUCCESSFUL"
+            )
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print(
+                "GROUP RANKING INSERT FAILED"
+            )
+            print(
+                "Error type:",
+                type(e).__name__
+            )
+            print(
+                "Error:",
+                str(e)
+            )
+            print("=" * 70)
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_agent_ranking(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+            print("=" * 70)
+            print("INSERTING AGENT RANKING")
+            print("=" * 70)
+            # ============================================================
+            # RENAME COLUMNS
+            # ============================================================
+            df = df.rename(columns={
+                "Agent":
+                    "AGENT",
+
+                "Total_Incidents":
+                    "TOTAL_INCIDENTS",
+
+                "Total_Points":
+                    "TOTAL_POINTS",
+
+                "Average_Points":
+                    "AVERAGE_POINTS",
+
+                "Closed_Incidents":
+                    "CLOSED_INCIDENTS",
+
+                "SLA_Met_Count":
+                    "SLA_MET_COUNT",
+
+                "FCR_Count":
+                    "FCR_COUNT",
+
+                "Reopen_Count":
+                    "REOPEN_COUNT",
+
+                "Reassignment_Count":
+                    "REASSIGNMENT_COUNT",
+
+                "Agent_Rank":
+                    "AGENT_RANK"
+            })
+
+            # ============================================================
+            # REQUIRED COLUMNS
+            # ============================================================
+
+            columns = [
+
+                "AGENT",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "CLOSED_INCIDENTS",
+                "SLA_MET_COUNT",
+                "FCR_COUNT",
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+                "AGENT_RANK"
+            ]
+
+            # ============================================================
+            # VALIDATE COLUMNS
+            # ============================================================
+
+            missing_columns = [
+                col
+                for col in columns
+                if col not in df.columns
+            ]
+
+            if missing_columns:
+
+                raise ValueError(
+                    f"Missing columns: {missing_columns}"
+                )
+
+            # ============================================================
+            # SELECT REQUIRED COLUMNS
+            # ============================================================
+
+            df = df[columns].copy()
+
+            # ============================================================
+            # NaN -> NULL
+            # ============================================================
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ============================================================
+            # DELETE OLD DATA
+            # ============================================================
+
+            cursor.execute(
+                "DELETE FROM AGENT_RANKING"
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ============================================================
+            # INSERT SQL
+            # ============================================================
+
+            sql = """
+                INSERT INTO AGENT_RANKING
+                (
+                    AGENT,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    CLOSED_INCIDENTS,
+                    SLA_MET_COUNT,
+                    FCR_COUNT,
+                    REOPEN_COUNT,
+                    REASSIGNMENT_COUNT,
+                    AGENT_RANK
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10
+                )
+            """
+
+            # ============================================================
+            # CREATE RECORDS
+            # ============================================================
+
+            records = list(
+                df.itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Records prepared:",
+                len(records)
+            )
+
+            # ============================================================
+            # INSERT
+            # ============================================================
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records to insert."
+                )
+
+            # ============================================================
+            # COMMIT
+            # ============================================================
+
+            connection.commit()
+
+            print(
+                "Oracle COMMIT completed"
+            )
+
+            # ============================================================
+            # VERIFY
+            # ============================================================
+
+            cursor.execute(
+                """
+                    SELECT COUNT(*)
+                    FROM AGENT_RANKING
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print(
+                "AGENT RANKING INSERT SUCCESSFUL"
+            )
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print(
+                "AGENT RANKING INSERT FAILED"
+            )
+            print(
+                "Error type:",
+                type(e).__name__
+            )
+            print(
+                "Error:",
+                str(e)
+            )
+            print("=" * 70)
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+
+    def insert_agent_performance_summary(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING AGENT PERFORMANCE SUMMARY")
+            print("=" * 70)
+
+            # ---------------------------------------------------------
+            # Rename columns
+            # ---------------------------------------------------------
+
+            df = df.rename(
+                columns={
+                    "assigned_to": "ASSIGNED_TO",
+                    "total_incidents": "TOTAL_INCIDENTS",
+                    "total_points": "TOTAL_POINTS",
+                    "sla_met": "SLA_MET",
+                    "average_resolution": "AVERAGE_RESOLUTION"
+                }
+            )
+
+            # ---------------------------------------------------------
+            # Validate columns
+            # ---------------------------------------------------------
+
+            required_columns = [
+                "ASSIGNED_TO",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "SLA_MET",
+                "AVERAGE_RESOLUTION"
+            ]
+
+            for column in required_columns:
+                if column not in df.columns:
+                    raise ValueError(f"Missing column: {column}")
+
+            # ---------------------------------------------------------
+            # Convert NaN -> None
+            # ---------------------------------------------------------
+
+            df = df.where(pd.notna(df), None)
+
+            # ---------------------------------------------------------
+            # Delete old data
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                "DELETE FROM AGENT_PERFORMANCE_SUMMARY"
+            )
+
+            print("Old rows deleted:", cursor.rowcount)
+
+            # ---------------------------------------------------------
+            # SQL
+            # ---------------------------------------------------------
+
+            sql = """
+                INSERT INTO AGENT_PERFORMANCE_SUMMARY
+                (
+                    ASSIGNED_TO,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    SLA_MET,
+                    AVERAGE_RESOLUTION
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5
+                )
+            """
+
+            # ---------------------------------------------------------
+            # Prepare records
+            # ---------------------------------------------------------
+
+            records = list(
+                df[
+                    [
+                        "ASSIGNED_TO",
+                        "TOTAL_INCIDENTS",
+                        "TOTAL_POINTS",
+                        "SLA_MET",
+                        "AVERAGE_RESOLUTION"
+                    ]
+                ].itertuples(index=False, name=None)
+            )
+
+            print("Total records:", len(records))
+
+            # ---------------------------------------------------------
+            # Insert
+            # ---------------------------------------------------------
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # ---------------------------------------------------------
+            # Commit
+            # ---------------------------------------------------------
+
+            connection.commit()
+
+            print("Commit successful")
+
+            # ---------------------------------------------------------
+            # Verify
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM AGENT_PERFORMANCE_SUMMARY
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print("AGENT PERFORMANCE SUMMARY INSERT SUCCESSFUL")
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print("AGENT PERFORMANCE SUMMARY INSERT FAILED")
+            print("=" * 70)
+
+            print("Error:", str(e))
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_group_badge_summary(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+            print("=" * 70)
+            print("INSERTING GROUP BADGE SUMMARY")
+            print("=" * 70)
+
+            # ---------------------------------------------------------
+            # Rename columns
+            # ---------------------------------------------------------
+
+            df = df.rename(
+                columns={
+                    "assignment_group": "ASSIGNMENT_GROUP",
+                    "total_incidents": "TOTAL_INCIDENTS",
+                    "total_points": "TOTAL_POINTS",
+                    "average_points": "AVERAGE_POINTS",
+                    "group_badge": "GROUP_BADGE"
+                }
+            )
+
+            # ---------------------------------------------------------
+            # Validate columns
+            # ---------------------------------------------------------
+
+            required_columns = [
+                "ASSIGNMENT_GROUP",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "GROUP_BADGE"
+            ]
+
+            for column in required_columns:
+
+                if column not in df.columns:
+
+                    raise ValueError(
+                        f"Missing column: {column}"
+                    )
+
+            # ---------------------------------------------------------
+            # Convert NaN -> None
+            # ---------------------------------------------------------
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ---------------------------------------------------------
+            # Delete old data
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                DELETE FROM GROUP_BADGE_SUMMARY
+                """
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ---------------------------------------------------------
+            # SQL
+            # ---------------------------------------------------------
+
+            sql = """
+                INSERT INTO GROUP_BADGE_SUMMARY
+                (
+                    ASSIGNMENT_GROUP,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    GROUP_BADGE
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5
+                )
+            """
+
+            # ---------------------------------------------------------
+            # Prepare records
+            # ---------------------------------------------------------
+
+            records = list(
+                df[
+                    [
+                        "ASSIGNMENT_GROUP",
+                        "TOTAL_INCIDENTS",
+                        "TOTAL_POINTS",
+                        "AVERAGE_POINTS",
+                        "GROUP_BADGE"
+                    ]
+                ].itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Total records:",
+                len(records)
+            )
+
+            # ---------------------------------------------------------
+            # Insert
+            # ---------------------------------------------------------
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # ---------------------------------------------------------
+            # Commit
+            # ---------------------------------------------------------
+
+            connection.commit()
+
+            print(
+                "Commit successful"
+            )
+
+            # ---------------------------------------------------------
+            # Verify
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM GROUP_BADGE_SUMMARY
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print("GROUP BADGE SUMMARY INSERT SUCCESSFUL")
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print("GROUP BADGE SUMMARY INSERT FAILED")
+            print("=" * 70)
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_agent_badge_summary(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING AGENT BADGE SUMMARY")
+            print("=" * 70)
+
+            # ---------------------------------------------------------
+            # Rename columns
+            # ---------------------------------------------------------
+
+            df = df.rename(
+                columns={
+                    "assigned_to": "ASSIGNED_TO",
+                    "total_incidents": "TOTAL_INCIDENTS",
+                    "total_points": "TOTAL_POINTS",
+                    "average_points": "AVERAGE_POINTS",
+                    "agent_badge": "AGENT_BADGE"
+                }
+            )
+
+            # ---------------------------------------------------------
+            # Validate columns
+            # ---------------------------------------------------------
+
+            required_columns = [
+                "ASSIGNED_TO",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "AGENT_BADGE"
+            ]
+
+            for column in required_columns:
+
+                if column not in df.columns:
+                    raise ValueError(
+                        f"Missing column: {column}"
+                    )
+
+            # ---------------------------------------------------------
+            # Convert NaN -> None
+            # ---------------------------------------------------------
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ---------------------------------------------------------
+            # Delete old data
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                DELETE FROM AGENT_BADGE_SUMMARY
+                """
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ---------------------------------------------------------
+            # SQL
+            # ---------------------------------------------------------
+
+            sql = """
+                INSERT INTO AGENT_BADGE_SUMMARY
+                (
+                    ASSIGNED_TO,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    AGENT_BADGE
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5
+                )
+            """
+
+            # ---------------------------------------------------------
+            # Prepare records
+            # ---------------------------------------------------------
+
+            records = list(
+                df[
+                    [
+                        "ASSIGNED_TO",
+                        "TOTAL_INCIDENTS",
+                        "TOTAL_POINTS",
+                        "AVERAGE_POINTS",
+                        "AGENT_BADGE"
+                    ]
+                ].itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Total records:",
+                len(records)
+            )
+
+            # ---------------------------------------------------------
+            # Insert
+            # ---------------------------------------------------------
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # ---------------------------------------------------------
+            # Commit
+            # ---------------------------------------------------------
+
+            connection.commit()
+
+            print(
+                "Commit successful"
+            )
+
+            # ---------------------------------------------------------
+            # Verify
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM AGENT_BADGE_SUMMARY
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print("AGENT BADGE SUMMARY INSERT SUCCESSFUL")
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print("AGENT BADGE SUMMARY INSERT FAILED")
+            print("=" * 70)
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_group_level_summary(self, connection, df):
+
+        cursor = connection.cursor()
+        try:
+            print("=" * 70)
+            print("INSERTING GROUP LEVEL SUMMARY")
+            print("=" * 70)
+
+            # ---------------------------------------------------------
+            # Rename columns
+            # ---------------------------------------------------------
+
+            df = df.rename(
+                columns={
+                    "assignment_group": "ASSIGNMENT_GROUP",
+                    "total_incidents": "TOTAL_INCIDENTS",
+                    "total_points": "TOTAL_POINTS",
+                    "average_points": "AVERAGE_POINTS",
+                    "level": "AGENT_LEVEL",
+                    "level_name": "AGNET_LEVEL_NAME",
+                    "points_to_next_level": "POINTS_TO_NEXT_LEVEL",
+                    "level_progress": "LEVEL_PROGRESS"
+                }
+            )
+
+            # ---------------------------------------------------------
+            # Required columns
+            # ---------------------------------------------------------
+
+            required_columns = [
+                "ASSIGNMENT_GROUP",
+                "TOTAL_INCIDENTS",
+                "TOTAL_POINTS",
+                "AVERAGE_POINTS",
+                "AGENT_LEVEL",
+                "AGNET_LEVEL_NAME",
+                "POINTS_TO_NEXT_LEVEL",
+                "LEVEL_PROGRESS"
+            ]
+
+            missing = [
+                col for col in required_columns
+                if col not in df.columns
+            ]
+
+            if missing:
+                raise ValueError(
+                    f"Missing columns: {missing}"
+                )
+
+            # ---------------------------------------------------------
+            # Convert NaN -> None
+            # ---------------------------------------------------------
+
+            df = df.where(pd.notna(df), None)
+
+            # ---------------------------------------------------------
+            # Delete old data
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                "DELETE FROM GROUP_LEVEL_SUMMARY"
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ---------------------------------------------------------
+            # SQL
+            # ---------------------------------------------------------
+
+            sql = """
+                INSERT INTO GROUP_LEVEL_SUMMARY
+                (
+                    ASSIGNMENT_GROUP,
+                    TOTAL_INCIDENTS,
+                    TOTAL_POINTS,
+                    AVERAGE_POINTS,
+                    AGENT_LEVEL,
+                    AGENT_LEVEL_NAME,
+                    POINTS_TO_NEXT_LEVEL,
+                    LEVEL_PROGRESS
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8
+                )
+            """
+
+            # ---------------------------------------------------------
+            # Prepare records
+            # ---------------------------------------------------------
+
+            records = list(
+                df[
+                    required_columns
+                ].itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Total records:",
+                len(records)
+            )
+
+            # ---------------------------------------------------------
+            # Insert
+            # ---------------------------------------------------------
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # ---------------------------------------------------------
+            # Commit
+            # ---------------------------------------------------------
+
+            connection.commit()
+
+            print("Commit successful")
+
+            # ---------------------------------------------------------
+            # Verify
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM GROUP_LEVEL_SUMMARY
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print("GROUP LEVEL SUMMARY INSERT SUCCESSFUL")
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print("GROUP LEVEL SUMMARY INSERT FAILED")
+            print("=" * 70)
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+    def insert_agent_level_summary(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING AGENT LEVEL SUMMARY")
+            print("=" * 70)
+
+            # ---------------------------------------------------------
+            # Rename DataFrame columns
+            # ---------------------------------------------------------
+            print('insert agent level summy ',df.columns)
+            df = df.rename(
+                columns={
+                    "Agent": "AGENT",
+                    "total_incidents": "TOTAL_INCIDENTS",
+                    "points": "POINTS",
+                    "average_points": "AVERAGE_POINTS",
+                    "level": "AGENT_LEVEL",
+                    "level_name": "AGENT_LEVEL_NAME",
+                    "points_to_next_level": "POINTS_TO_NEXT_LEVEL",
+                    "level_progress": "LEVEL_PROGRESS"
+                }
+            )
+
+            # ---------------------------------------------------------
+            # Required columns
+            # ---------------------------------------------------------
+
+            required_columns = [
+                "AGENT",
+                "TOTAL_INCIDENTS",
+                "POINTS",
+                "AVERAGE_POINTS",
+                "AGENT_LEVEL",
+                "AGENT_LEVEL_NAME",
+                "POINTS_TO_NEXT_LEVEL",
+                "LEVEL_PROGRESS"
+            ]
+
+            missing = [
+                col for col in required_columns
+                if col not in df.columns
+            ]
+
+            if missing:
+                raise ValueError(
+                    f"Missing columns: {missing}"
+                )
+
+            # ---------------------------------------------------------
+            # Convert NaN -> None
+            # ---------------------------------------------------------
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # ---------------------------------------------------------
+            # Delete old data
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                "DELETE FROM AGENT_LEVEL_SUMMARY"
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # ---------------------------------------------------------
+            # SQL
+            # ---------------------------------------------------------
+
+            sql = """
+                INSERT INTO AGENT_LEVEL_SUMMARY
+                (
+                    AGENT,
+                    TOTAL_INCIDENTS,
+                    POINTS,
+                    AVERAGE_POINTS,
+                    AGENT_LEVEL,
+                    AGENT_LEVEL_NAME,
+                    POINTS_TO_NEXT_LEVEL,
+                    LEVEL_PROGRESS
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8
+                )
+            """
+
+            # ---------------------------------------------------------
+            # Prepare records
+            # ---------------------------------------------------------
+
+            records = list(
+                df[
+                    required_columns
+                ].itertuples(
+                    index=False,
+                    name=None
+                )
+            )
+
+            print(
+                "Total records:",
+                len(records)
+            )
+
+            # ---------------------------------------------------------
+            # Insert
+            # ---------------------------------------------------------
+
+            if records:
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # ---------------------------------------------------------
+            # Commit
+            # ---------------------------------------------------------
+
+            connection.commit()
+
+            print("Commit successful")
+
+            # ---------------------------------------------------------
+            # Verify
+            # ---------------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM AGENT_LEVEL_SUMMARY
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+            print("AGENT LEVEL SUMMARY INSERT SUCCESSFUL")
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print("AGENT LEVEL SUMMARY INSERT FAILED")
+            print("=" * 70)
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+
+    def insert_incident_gamification_final(self, connection, df):
+
+        cursor = connection.cursor()
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING INCIDENT GAMIFICATION FINAL")
+            print("=" * 70)
+
+            # =========================================================
+            # RENAME COLUMNS
+            # =========================================================
+
+            df = df.rename(
+                columns={
+
+                    "number": "NUMBER_ID",
+
+                    "opened_at": "OPENED_AT",
+                    "resolved_at": "RESOLVED_AT",
+                    "closed_at": "CLOSED_AT",
+
+                    "priority": "INS_PRIORITY",
+                    "state": "INS_STATE",
+
+                    "assigned_to": "ASSIGNED_TO",
+                    "assignment_group": "ASSIGNMENT_GROUP",
+
+                    "category": "INS_CATEGORY",
+                    "subcategory": "SUBCATEGORY",
+
+                    "short_description": "SHORT_DESCRIPTION",
+                    "description": "INS_DESCRIPTION",
+
+                    "sys_created_on": "SYS_CREATED_ON",
+                    "sys_updated_on": "SYS_UPDATED_ON",
+
+                    "reopen_count": "REOPEN_COUNT",
+                    "reassignment_count": "REASSIGNMENT_COUNT",
+
+                    "resolution_time": "RESOLUTION_TIME",
+                    "resolution_hours": "RESOLUTION_HOURS",
+
+                    "sla_status": "SLA_STATUS",
+                    "fcr": "FCR",
+
+                    "total_incidents": "TOTAL_INCIDENTS",
+
+                    "customer_rating": "CUSTOMER_RATING",
+
+                    "incident_closed_points":
+                        "INCIDENT_CLOSED_POINTS",
+
+                    "sla_points":
+                        "SLA_POINTS",
+
+                    "fcr_points":
+                        "FCR_POINTS",
+
+                    "priority_points":
+                        "PRIORITY_POINTS",
+
+                    "customer_rating_points":
+                        "CUSTOMER_RATING_POINTS",
+
+                    "reopen_penalty_points":
+                        "REOPEN_PENALTY_POINTS",
+
+                    "reassignment_penalty_points":
+                        "REASSIGNMENT_PENALTY_POINTS",
+
+                    "points":
+                        "POINTS",
+
+                    "average_points":
+                        "AVERAGE_POINTS",
+
+                    "average_resolution":
+                        "AVERAGE_RESOLUTION",
+
+                    "badge":
+                        "BADGE",
+
+                    "agent_badge":
+                        "AGENT_BADGE",
+
+                    "group_badge":
+                        "GROUP_BADGE",
+
+                    "overall_badge":
+                        "OVERALL_BADGE",
+
+                    "level":
+                        "AGENT_LEVEL",
+
+                    "level_name":
+                        "AGENT_LEVEL_NAME",
+
+                    "points_to_next_level":
+                        "POINTS_TO_NEXT_LEVEL",
+
+                    "level_progress":
+                        "LEVEL_PROGRESS",
+
+                    "leaderboard_rank":
+                        "LEADERBOARD_RANK",
+
+                    "achievements":
+                        "ACHIEVEMENTS",
+
+                    "achievement_count":
+                        "ACHIEVEMENT_COUNT"
+                }
+            )
+
+            # =========================================================
+            # COLUMN ORDER
+            # =========================================================
+
+            columns = [
+
+                "NUMBER_ID",
+
+                "OPENED_AT",
+                "RESOLVED_AT",
+                "CLOSED_AT",
+
+                "INS_PRIORITY",
+                "INS_STATE",
+
+                "ASSIGNED_TO",
+                "ASSIGNMENT_GROUP",
+
+                "INS_CATEGORY",
+                "SUBCATEGORY",
+
+                "SHORT_DESCRIPTION",
+                "INS_DESCRIPTION",
+
+                "SYS_CREATED_ON",
+                "SYS_UPDATED_ON",
+
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+
+                "RESOLUTION_TIME",
+                "RESOLUTION_HOURS",
+
+                "SLA_STATUS",
+                "FCR",
+
+                "TOTAL_INCIDENTS",
+
+                "CUSTOMER_RATING",
+
+                "INCIDENT_CLOSED_POINTS",
+                "SLA_POINTS",
+                "FCR_POINTS",
+                "PRIORITY_POINTS",
+                "CUSTOMER_RATING_POINTS",
+                "REOPEN_PENALTY_POINTS",
+                "REASSIGNMENT_PENALTY_POINTS",
+
+                "POINTS",
+
+                "AVERAGE_POINTS",
+                "AVERAGE_RESOLUTION",
+
+                "BADGE",
+                "AGENT_BADGE",
+                "GROUP_BADGE",
+                "OVERALL_BADGE",
+
+                "AGENT_LEVEL",
+                "AGENT_LEVEL_NAME",
+
+                "POINTS_TO_NEXT_LEVEL",
+                "LEVEL_PROGRESS",
+
+                "LEADERBOARD_RANK",
+
+                "ACHIEVEMENTS",
+                "ACHIEVEMENT_COUNT"
+            ]
+
+            # =========================================================
+            # VALIDATE
+            # =========================================================
+
+            missing = [
+                col for col in columns
+                if col not in df.columns
+            ]
+
+            if missing:
+                raise ValueError(
+                    f"Missing columns: {missing}"
+                )
+
+            # =========================================================
+            # VARCHAR COLUMNS
+            # =========================================================
+
+            varchar_columns = {
+
+                "NUMBER_ID",
+                "INS_PRIORITY",
+                "INS_STATE",
+                "ASSIGNED_TO",
+                "ASSIGNMENT_GROUP",
+                "INS_CATEGORY",
+                "SUBCATEGORY",
+                "SHORT_DESCRIPTION",
+                "INS_DESCRIPTION",
+                "RESOLUTION_TIME",
+                "SLA_STATUS",
+                "BADGE",
+                "AGENT_BADGE",
+                "GROUP_BADGE",
+                "OVERALL_BADGE",
+                "AGENT_LEVEL_NAME",
+                "ACHIEVEMENTS"
+            }
+
+            # =========================================================
+            # NUMBER COLUMNS
+            # =========================================================
+
+            number_columns = {
+
+                "REOPEN_COUNT",
+                "REASSIGNMENT_COUNT",
+                "RESOLUTION_HOURS",
+                "FCR",
+                "TOTAL_INCIDENTS",
+                "CUSTOMER_RATING",
+                "INCIDENT_CLOSED_POINTS",
+                "SLA_POINTS",
+                "FCR_POINTS",
+                "PRIORITY_POINTS",
+                "CUSTOMER_RATING_POINTS",
+                "REOPEN_PENALTY_POINTS",
+                "REASSIGNMENT_PENALTY_POINTS",
+                "POINTS",
+                "AVERAGE_POINTS",
+                "AVERAGE_RESOLUTION",
+                "AGENT_LEVEL",
+                "POINTS_TO_NEXT_LEVEL",
+                "LEVEL_PROGRESS",
+                "LEADERBOARD_RANK",
+                "ACHIEVEMENT_COUNT"
+            }
+
+            # =========================================================
+            # CONVERT VARCHAR VALUES
+            # =========================================================
+
+            for col in varchar_columns:
+
+                df[col] = df[col].apply(
+                    lambda x:
+                        None
+                        if pd.isna(x)
+                        else str(x)
+                )
+
+            # =========================================================
+            # CONVERT NUMBER VALUES TO PYTHON FLOAT
+            # =========================================================
+
+            for col in number_columns:
+
+                df[col] = pd.to_numeric(
+                    df[col],
+                    errors="coerce"
+                )
+
+            # =========================================================
+            # CONVERT DATE COLUMNS
+            # =========================================================
+
+            date_columns = [
+
+                "OPENED_AT",
+                "RESOLVED_AT",
+                "CLOSED_AT",
+                "SYS_CREATED_ON",
+                "SYS_UPDATED_ON"
+            ]
+
+            for col in date_columns:
+
+                df[col] = pd.to_datetime(
+                    df[col],
+                    errors="coerce"
+                )
+
+            # =========================================================
+            # NaN -> None
+            # =========================================================
+
+            df = df.where(
+                pd.notna(df),
+                None
+            )
+
+            # =========================================================
+            # DELETE OLD DATA
+            # =========================================================
+
+            print(
+                "\nDeleting old INCIDENT_GAMIFICATION_FINAL data..."
+            )
+
+            cursor.execute(
+                """
+                DELETE FROM INCIDENT_GAMIFICATION_FINAL
+                """
+            )
+
+            print(
+                "Old rows deleted:",
+                cursor.rowcount
+            )
+
+            # =========================================================
+            # INSERT SQL
+            # =========================================================
+
+            sql = """
+
+            INSERT INTO INCIDENT_GAMIFICATION_FINAL
+            (
+                NUMBER_ID,
+
+                OPENED_AT,
+                RESOLVED_AT,
+                CLOSED_AT,
+
+                INS_PRIORITY,
+                INS_STATE,
+
+                ASSIGNED_TO,
+                ASSIGNMENT_GROUP,
+
+                INS_CATEGORY,
+                SUBCATEGORY,
+
+                SHORT_DESCRIPTION,
+                INS_DESCRIPTION,
+
+                SYS_CREATED_ON,
+                SYS_UPDATED_ON,
+
+                REOPEN_COUNT,
+                REASSIGNMENT_COUNT,
+
+                RESOLUTION_TIME,
+                RESOLUTION_HOURS,
+
+                SLA_STATUS,
+                FCR,
+
+                TOTAL_INCIDENTS,
+
+                CUSTOMER_RATING,
+
+                INCIDENT_CLOSED_POINTS,
+                SLA_POINTS,
+                FCR_POINTS,
+                PRIORITY_POINTS,
+                CUSTOMER_RATING_POINTS,
+                REOPEN_PENALTY_POINTS,
+                REASSIGNMENT_PENALTY_POINTS,
+
+                POINTS,
+
+                AVERAGE_POINTS,
+                AVERAGE_RESOLUTION,
+
+                BADGE,
+                AGENT_BADGE,
+                GROUP_BADGE,
+                OVERALL_BADGE,
+
+                AGENT_LEVEL,
+                AGENT_LEVEL_NAME,
+
+                POINTS_TO_NEXT_LEVEL,
+                LEVEL_PROGRESS,
+
+                LEADERBOARD_RANK,
+
+                ACHIEVEMENTS,
+                ACHIEVEMENT_COUNT
+            )
+
+            VALUES
+            (
+                :1,
+                :2,
+                :3,
+                :4,
+                :5,
+                :6,
+                :7,
+                :8,
+                :9,
+                :10,
+                :11,
+                :12,
+                :13,
+                :14,
+                :15,
+                :16,
+                :17,
+                :18,
+                :19,
+                :20,
+                :21,
+                :22,
+                :23,
+                :24,
+                :25,
+                :26,
+                :27,
+                :28,
+                :29,
+                :30,
+                :31,
+                :32,
+                :33,
+                :34,
+                :35,
+                :36,
+                :37,
+                :38,
+                :39,
+                :40,
+                :41,
+                :42,
+                :43 
+            )
+            """
+
+            # =========================================================
+            # PREPARE PYTHON NATIVE RECORDS
+            # =========================================================
+
+            records = []
+
+            for row_index, row in df.iterrows():
+
+                record = []
+
+                for col in columns:
+
+                    value = row[col]
+
+                    # -----------------------------------------------
+                    # NULL
+                    # -----------------------------------------------
+
+                    if value is None or pd.isna(value):
+
+                        value = None
+
+                    # -----------------------------------------------
+                    # VARCHAR
+                    # -----------------------------------------------
+
+                    elif col in varchar_columns:
+
+                        value = str(value)
+
+                    # -----------------------------------------------
+                    # NUMBER
+                    # -----------------------------------------------
+
+                    elif col in number_columns:
+
+                        value = float(value)
+
+                    # -----------------------------------------------
+                    # DATE
+                    # -----------------------------------------------
+
+                    elif col in date_columns:
+
+                        if isinstance(value, pd.Timestamp):
+
+                            value = value.to_pydatetime()
+
+                    record.append(value)
+
+                records.append(
+                    tuple(record)
+                )
+
+            print(
+                "\nTotal records prepared:",
+                len(records)
+            )
+
+            # =========================================================
+            # CHECK DATA TYPES BEFORE INSERT
+            # =========================================================
+
+            print("\nChecking Python data types...")
+
+            for row_number, record in enumerate(records):
+
+                for position, value in enumerate(record):
+
+                    column_name = columns[position]
+
+                    if (
+                        column_name in varchar_columns
+                        and value is not None
+                        and not isinstance(value, str)
+                    ):
+
+                        print(
+                            "ERROR FOUND"
+                        )
+
+                        print(
+                            "Row:",
+                            row_number
+                        )
+
+                        print(
+                            "Column:",
+                            column_name
+                        )
+
+                        print(
+                            "Value:",
+                            value
+                        )
+
+                        print(
+                            "Python type:",
+                            type(value)
+                        )
+
+                        raise TypeError(
+                            f"VARCHAR column {column_name} "
+                            f"contains {type(value)}"
+                        )
+
+            print(
+                "Data type validation successful."
+            )
+
+            # =========================================================
+            # IMPORTANT:
+            # EXPLICIT ORACLE BIND TYPES
+            # =========================================================
+
+            cursor.setinputsizes(
+
+                oracledb.DB_TYPE_VARCHAR,      # 1 NUMBER_ID
+
+                oracledb.DB_TYPE_TIMESTAMP,    # 2 OPENED_AT
+                oracledb.DB_TYPE_TIMESTAMP,    # 3 RESOLVED_AT
+                oracledb.DB_TYPE_TIMESTAMP,    # 4 CLOSED_AT
+
+                oracledb.DB_TYPE_VARCHAR,      # 5 INS_PRIORITY
+                oracledb.DB_TYPE_VARCHAR,      # 6 INS_STATE
+
+                oracledb.DB_TYPE_VARCHAR,      # 7 ASSIGNED_TO
+                oracledb.DB_TYPE_VARCHAR,      # 8 ASSIGNMENT_GROUP
+
+                oracledb.DB_TYPE_VARCHAR,      # 9 INS_CATEGORY
+                oracledb.DB_TYPE_VARCHAR,      # 10 SUBCATEGORY
+
+                oracledb.DB_TYPE_VARCHAR,      # 11 SHORT_DESCRIPTION
+                oracledb.DB_TYPE_VARCHAR,      # 12 INS_DESCRIPTION
+
+                oracledb.DB_TYPE_TIMESTAMP,    # 13 SYS_CREATED_ON
+                oracledb.DB_TYPE_TIMESTAMP,    # 14 SYS_UPDATED_ON
+
+                oracledb.DB_TYPE_NUMBER,       # 15 REOPEN_COUNT
+                oracledb.DB_TYPE_NUMBER,       # 16 REASSIGNMENT_COUNT
+
+                oracledb.DB_TYPE_VARCHAR,      # 17 RESOLUTION_TIME
+                oracledb.DB_TYPE_NUMBER,       # 18 RESOLUTION_HOURS
+
+                oracledb.DB_TYPE_VARCHAR,      # 19 SLA_STATUS
+                oracledb.DB_TYPE_NUMBER,       # 20 FCR
+
+                oracledb.DB_TYPE_NUMBER,       # 21 TOTAL_INCIDENTS
+
+                oracledb.DB_TYPE_NUMBER,       # 22 CUSTOMER_RATING
+
+                oracledb.DB_TYPE_NUMBER,       # 23 INCIDENT_CLOSED_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 24 SLA_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 25 FCR_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 26 PRIORITY_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 27 CUSTOMER_RATING_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 28 REOPEN_PENALTY_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 29 REASSIGNMENT_PENALTY_POINTS
+
+                oracledb.DB_TYPE_NUMBER,       # 30 POINTS
+
+                oracledb.DB_TYPE_NUMBER,       # 31 AVERAGE_POINTS
+                oracledb.DB_TYPE_NUMBER,       # 32 AVERAGE_RESOLUTION
+
+                oracledb.DB_TYPE_VARCHAR,      # 33 BADGE
+                oracledb.DB_TYPE_VARCHAR,      # 34 AGENT_BADGE
+                oracledb.DB_TYPE_VARCHAR,      # 35 GROUP_BADGE
+                oracledb.DB_TYPE_VARCHAR,      # 36 OVERALL_BADGE
+
+                oracledb.DB_TYPE_NUMBER,       # 37 AGENT_LEVEL
+                oracledb.DB_TYPE_VARCHAR,      # 38 AGENT_LEVEL_NAME
+
+                oracledb.DB_TYPE_NUMBER,       # 39 POINTS_TO_NEXT_LEVEL
+                oracledb.DB_TYPE_NUMBER,       # 40 LEVEL_PROGRESS
+
+                oracledb.DB_TYPE_NUMBER,       # 41 LEADERBOARD_RANK
+
+                oracledb.DB_TYPE_VARCHAR,      # 42 ACHIEVEMENTS
+                oracledb.DB_TYPE_NUMBER        # 43 ACHIEVEMENT_COUNT
+            )
+
+            # =========================================================
+            # INSERT
+            # =========================================================
+
+            if records:
+
+                print(
+                    "\nExecuting Oracle INSERT..."
+                )
+
+                cursor.executemany(
+                    sql,
+                    records
+                )
+
+                print(
+                    "Rows inserted:",
+                    cursor.rowcount
+                )
+
+            # =========================================================
+            # COMMIT
+            # =========================================================
+
+            connection.commit()
+
+            print(
+                "\nOracle COMMIT successful."
+            )
+
+            # =========================================================
+            # VERIFY
+            # =========================================================
+
+            cursor.execute(
+                """
+                SELECT COUNT(*)
+                FROM INCIDENT_GAMIFICATION_FINAL
+                """
+            )
+
+            count = cursor.fetchone()[0]
+
+            print(
+                "Rows currently in Oracle:",
+                count
+            )
+
+            print("=" * 70)
+
+            print(
+                "INCIDENT GAMIFICATION FINAL INSERT SUCCESSFUL"
+            )
+
+            print("=" * 70)
+
+        except Exception as e:
+
+            connection.rollback()
+
+            print("=" * 70)
+            print(
+                "INCIDENT GAMIFICATION FINAL INSERT FAILED"
+            )
+            print("=" * 70)
+
+            print(
+                "Error type:",
+                type(e).__name__
+            )
+
+            print(
+                "Error:",
+                str(e)
+            )
+
+            raise
+
+        finally:
+
+            cursor.close()
+
+
+
+
 
     # ================================================================
     # STEP 5 - MAIN RUN METHOD
@@ -2598,7 +5515,29 @@ class IncidentDataLoader:
                 self.insert_overall_performance_metrics(connection,df)
             elif stage == 'AgentMTCS':
                 self.insert_agent_performance_metrics(connection,df)
-            
+            # Gamification 
+            elif stage == 'InsGMF':
+                self.insert_incident_gamification(connection,df)
+            elif stage == 'AgentGpRNK':
+                self.insert_agent_group_ranking(connection,df)            
+            elif stage == 'GPRNK':
+                self.insert_group_ranking(connection,df)
+            elif stage == 'AgentRNK':
+                self.insert_agent_ranking(connection,df)
+            elif stage == 'AgentPerSMRY':
+                self.insert_agent_performance_summary(connection,df)
+            elif stage == 'GPBdgeSMRY':
+                self.insert_group_badge_summary(connection,df)
+            elif stage == 'AgentBdgeSMRY':
+                self.insert_agent_badge_summary(connection,df)
+            elif stage == 'GPLvlSMRY':
+                self.insert_group_level_summary(connection,df)
+            elif stage == 'AgentLvlSMRY':
+                self.insert_agent_level_summary(connection,df)
+            elif stage == 'GMFNL':
+                self.insert_incident_gamification_final(connection,df)
+
+
 
             return df
 
