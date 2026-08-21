@@ -9,6 +9,7 @@ Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
 ================================================================================
               GAMIFICATION POINT CALCULATION
 ================================================================================
@@ -273,11 +274,11 @@ BADGE ASSIGNMENT
 1. INCIDENT LEVEL
 
 2. AGENT LEVEL
-Received DataFrame - AgentBdgeSMRY: (15, 5)
+Received DataFrame - AgentBdgeSMRY: (15, 20)
 ======================================================================
 ORACLE DATA LOAD STARTED
 ======================================================================
-Received DataFrame: (15, 5)
+Received DataFrame: (15, 20)
 ======================================================================
 CONNECTING TO ORACLE
 ======================================================================
@@ -290,6 +291,9 @@ INSERTING AGENT BADGE SUMMARY
 ======================================================================
 Old rows deleted: 15
 Total records: 15
+First record: ('ITIL User', 12, 255.0, 21.25, 0, 4, 1, 11, 4, 12, 8.33, 0.0, 12, 0.0, 'Bronze', "['SLA Watcher']", 1, 'SLA Watcher', 'Focus on SLA improvement', 'Bronze')
+Performance badges: ['SLA Watcher'] <class 'str'>
+Badges: SLA Watcher <class 'str'>
 Rows inserted: 15
 Commit successful
 Rows currently in Oracle: 15
@@ -297,13 +301,14 @@ Rows currently in Oracle: 15
 AGENT BADGE SUMMARY INSERT SUCCESSFUL
 ======================================================================
 Oracle connection closed
+Agent CSV saved: Artifacts/DataGamification\agent_badge_summary.csv
 
 3. GROUP LEVEL
-Received DataFrame - GPBdgeSMRY: (13, 5)
+Received DataFrame - GPBdgeSMRY: (13, 19)
 ======================================================================
 ORACLE DATA LOAD STARTED
 ======================================================================
-Received DataFrame: (13, 5)
+Received DataFrame: (13, 19)
 ======================================================================
 CONNECTING TO ORACLE
 ======================================================================
@@ -312,21 +317,70 @@ Host: localhost
 Service: FREEPDB1
 Stage : GPBdgeSMRY
 ======================================================================
-INSERTING GROUP BADGE SUMMARY
+INSERTING AGENT GROUP BADGE SUMMARY
 ======================================================================
 Old rows deleted: 13
 Total records: 13
+First record: ('Database', 10, 295.0, 29.5, 0, 4, 2, 8, 4, 10, 20.0, 0.0, 10, 0.0, 'Bronze', "['SLA Watcher']", 1, 'SLA Watcher', 'Bronze')
+Performance badges: ['SLA Watcher'] <class 'str'>
+Badges: SLA Watcher <class 'str'>
 Rows inserted: 13
 Commit successful
 Rows currently in Oracle: 13
 ======================================================================
-GROUP BADGE SUMMARY INSERT SUCCESSFUL
+AGENT GROUP BADGE SUMMARY INSERT SUCCESSFUL
 ======================================================================
 Oracle connection closed
 Group CSV saved: Artifacts/DataGamification\group_badge_summary.csv
 
 4. OVERALL LEVEL
 Overall CSV saved: Artifacts/DataGamification\overall_badge_summary.csv
+
+======================================================================
+BADGE SUMMARY
+======================================================================
+
+AGENT BADGES
+                        assigned_to  total_incidents  resolved_count  closed_count  sla_percentage  fcr_percentage  total_points  level       badges
+                          ITIL User               12               0             4            8.33             0.0         255.0 Bronze  SLA Watcher
+                          David Loo                9               0             6            0.00             0.0         250.0 Bronze  SLA Watcher
+                        Beth Anglin                7               0             1            0.00             0.0         235.0 Bronze  SLA Watcher
+                         Fred Luddy                5               0             1           20.00             0.0         155.0 Bronze  SLA Watcher
+                      Don Goodliffe                8               0             4            0.00             0.0         125.0 Bronze  SLA Watcher
+                        Bud Richman                4               0             3            0.00             0.0         100.0 Bronze  SLA Watcher
+       ATF Service Level Management                1               0             0            0.00             0.0          55.0 Rookie  SLA Watcher
+                     Howard Johnson                3               0             1            0.00             0.0          50.0 Rookie  SLA Watcher
+                 Guillermo Frohlich                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+ATF_TestItilUser2 ATF_TestItilUser2                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+               Charlie Whitherspoon                1               0             1            0.00             0.0          35.0 Rookie  SLA Watcher
+                             Venkat                2               0             1            0.00             0.0          30.0 Rookie  SLA Watcher
+ATF_TestItilUser1 ATF_TestItilUser1                1               0             0            0.00             0.0          25.0 Rookie  SLA Watcher
+                              Vamsi                1               0             0            0.00             0.0          25.0 Rookie  SLA Watcher
+                        Luke Wilson                3               0             3            0.00             0.0          10.0 Rookie  SLA Watcher
+
+GROUP BADGES
+                   assignment_group  total_incidents  resolved_count  closed_count  sla_percentage  fcr_percentage  total_points  level       badges
+                           Database               10               0             4            20.0             0.0         295.0 Bronze  SLA Watcher
+                           Software                9               0             3             0.0             0.0         265.0 Bronze  SLA Watcher
+                            Network                9               0             5             0.0             0.0         210.0 Bronze  SLA Watcher
+                           Hardware                9               0             6             0.0             0.0         210.0 Bronze  SLA Watcher
+                       Service Desk               10               0             7             0.0             0.0         150.0 Bronze  SLA Watcher
+                              Cloud                2               0             0             0.0             0.0          80.0 Rookie  SLA Watcher
+                              NY DB                2               0             0             0.0             0.0          80.0 Rookie  SLA Watcher
+ATF Service Level Management  Group                1               0             0             0.0             0.0          55.0 Rookie  SLA Watcher
+              ATF_TestGroup_Network                1               0             0           100.0             0.0          45.0 Rookie SLA Champion
+            Application Development                1               0             0           100.0             0.0          45.0 Rookie SLA Champion
+          ATF_TestGroup_ServiceDesk                1               0             0             0.0             0.0          25.0 Rookie  SLA Watcher
+                               Data                2               0             0             0.0             0.0         -10.0 Rookie  SLA Watcher
+                                 QA                2               0             0             0.0             0.0         -10.0 Rookie  SLA Watcher
+
+OVERALL
+ total_incidents  resolved_count  closed_count  total_points  average_points  sla_percentage  fcr_percentage  level overall_badge      badges  badge_count
+              59               0            25        1440.0           24.41            6.78             0.0 Legend        Legend SLA Watcher            1
+
+======================================================================
+BADGE ASSIGNMENT COMPLETED
+======================================================================
 Badge results saved to : Artifacts/DataGamification/BadgeResults.csv
 Badge summary saved to : Artifacts/DataGamification/BadgeSummary.csv
 ================================================================================
@@ -340,8 +394,10 @@ calculate_level columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count'],
       dtype='object')
 
 Configured Levels:
@@ -361,10 +417,13 @@ agent_df Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', '
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
       dtype='object')
+Oracle agent level 
 Received DataFrame - AgentLvlSMRY: (59, 8)
 ======================================================================
 ORACLE DATA LOAD STARTED
@@ -429,9 +488,11 @@ l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', '
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
       dtype='object')
 Level results saved to : Artifacts/DataGamification/LevelResults.csv
 Level summary saved to : Artifacts/DataGamification/LevelSummary.csv
@@ -443,9 +504,11 @@ l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', '
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
       dtype='object')
 l df_lead  c: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
        'assigned_to', 'assignment_group', 'category', 'subcategory',
@@ -455,9 +518,11 @@ l df_lead  c: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priorit
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
       dtype='object')
 Type of df: <class 'pandas.core.frame.DataFrame'>
 ##############################################################
@@ -474,9 +539,11 @@ df_lead columns before Index(['number', 'opened_at', 'resolved_at', 'closed_at',
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
       dtype='object')
 df_lead columns Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
        'assigned_to', 'assignment_group', 'category', 'subcategory',
@@ -486,17 +553,19 @@ df_lead columns Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'prior
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress', 'leaderboard_rank'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
       dtype='object')
 Type of df: <class 'pandas.core.frame.DataFrame'>
 Type of df: <class 'pandas.core.frame.DataFrame'>
-lead_board_file        number            opened_at          resolved_at  ... points_to_next_level level_progress leaderboard_rank
-0  INC0010020  2026-08-09 07:22:36  2026-08-10 07:22:36  ...                 55.0           45.0               10
-1  INC0010019  2026-08-09 07:07:35  2026-08-11 07:07:35  ...                 75.0           25.0                2
+lead_board_file        number            opened_at  ... level_progress leaderboard_rank
+0  INC0010020  2026-08-09 07:22:36  ...           45.0               10
+1  INC0010019  2026-08-09 07:07:35  ...           25.0                2
 
-[2 rows x 41 columns]
+[2 rows x 50 columns]
 lead_board_file columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
        'assigned_to', 'assignment_group', 'category', 'subcategory',
        'short_description', 'description', 'sys_created_on', 'sys_updated_on',
@@ -505,15 +574,17 @@ lead_board_file columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress', 'leaderboard_rank'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
       dtype='object')
-team_summary        number            opened_at          resolved_at  ... points_to_next_level level_progress leaderboard_rank
-0  INC0010020  2026-08-09 07:22:36  2026-08-10 07:22:36  ...                 55.0           45.0               10
-1  INC0010019  2026-08-09 07:07:35  2026-08-11 07:07:35  ...                 75.0           25.0                2
+team_summary        number            opened_at  ... level_progress leaderboard_rank
+0  INC0010020  2026-08-09 07:22:36  ...           45.0               10
+1  INC0010019  2026-08-09 07:07:35  ...           25.0                2
 
-[2 rows x 41 columns]
+[2 rows x 50 columns]
 team_summary columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
        'assigned_to', 'assignment_group', 'category', 'subcategory',
        'short_description', 'description', 'sys_created_on', 'sys_updated_on',
@@ -522,13 +593,15 @@ team_summary columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress', 'leaderboard_rank'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
       dtype='object')
 
 Generating Assignment Group Leaderboard...
-Input shape: (59, 41)
+Input shape: (59, 50)
 
 Assignment Group Leaderboard:
                        assignment_group  total_incidents  total_points  group_rank
@@ -558,18 +631,20 @@ calculate_achievements: Index(['number', 'opened_at', 'resolved_at', 'closed_at'
        'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
        'priority_points', 'customer_rating_points', 'reopen_penalty_points',
        'reassignment_penalty_points', 'points', 'average_points',
-       'average_resolution', 'badge', 'agent_badge', 'group_badge',
-       'overall_badge', 'level', 'level_name', 'points_to_next_level',
-       'level_progress', 'leaderboard_rank'],
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
       dtype='object')
 ##############################################################
 # Achievement Calculation
 ##############################################################
-Received DataFrame - GMFNL: (59, 43)
+Received DataFrame - GMFNL: (59, 52)
 ======================================================================
 ORACLE DATA LOAD STARTED
 ======================================================================
-Received DataFrame: (59, 43)
+Received DataFrame: (59, 52)
 ======================================================================
 CONNECTING TO ORACLE
 ======================================================================
@@ -582,7 +657,7 @@ INSERTING INCIDENT GAMIFICATION FINAL
 ======================================================================
 
 Deleting old INCIDENT_GAMIFICATION_FINAL data...
-Old rows deleted: 0
+Old rows deleted: 59
 
 Total records prepared: 59
 

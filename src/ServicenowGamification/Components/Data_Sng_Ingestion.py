@@ -7,6 +7,8 @@ import requests
 from ServicenowGamification.Config.ConfigurationManager import *
 from ServicenowGamification.Utils.Common import *
 from ServicenowGamification.Entity.Config_Entity import *
+from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
+from ServicenowGamification.Components.Data_Sns_Oracle_Loader import IncidentDataLoader
 
 
 class DataIngestion:
@@ -17,6 +19,9 @@ class DataIngestion:
 
         # Create artifact directory
         create_directories( [self.config.root_dir])
+        self.params = Read_Yaml(PARAMS_FILE_PATH)
+        config_manager=ConfigurationManager()
+        self.loader = IncidentDataLoader(config_manager.get_oracle_connect_config() )
 
     # ================================================================
     # LOAD ALL INCIDENTS FROM SERVICENOW
@@ -447,14 +452,15 @@ class DataIngestion:
             # SAVE CSV
             # ========================================================
 
-            local_path = (
-                self.config.local_data_file
-            )
+            local_path = (self.config.local_data_file)
 
-            df.to_csv(
-                local_path,
-                index=False
-            )
+            self.loader.check_connection()
+
+            if self.params.Oracle["Loader"] is None: 
+                df.to_csv(local_path,index=False)
+            else : 
+                df.to_csv(local_path, index=False)
+                #self.loader.run(df,'SAIncidents')
 
             print("\n")
             print("=" * 80)

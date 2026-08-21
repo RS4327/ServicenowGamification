@@ -1,0 +1,755 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #10213a;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* =========================================================
+   TOP BLUE TITLE
+   ========================================================= */
+
+.main-title {
+  height: 65px;
+  background: linear-gradient(90deg, #063c72, #0a4f8f);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+.blueprint {
+  padding: 15px 18px 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  background: #fff;
+}
+
+/* =========================================================
+   SCREEN FRAME
+   ========================================================= */
+
+.screen {
+  min-width: 0;
+  border: 1px solid #c9d5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 42, 80, .08);
+}
+
+.screen-title {
+  height: 35px;
+  background: linear-gradient(90deg, #07539b, #0a4d91);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-page {
+  height: 408px;
+  display: grid;
+  grid-template-columns: 52% 48%;
+  background: white;
+}
+
+.login-left {
+  background: linear-gradient(145deg, #034883, #00396f);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-left .trophy {
+  font-size: 60px;
+  filter: grayscale(1) brightness(4);
+  margin-bottom: 4px;
+}
+
+.login-left h2 {
+  margin: 1px 0;
+  font-size: 16px;
+}
+
+.login-left p {
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+.login-right {
+  padding: 65px 20px;
+  text-align: center;
+}
+
+.login-right h1 {
+  font-size: 17px;
+  margin: 0 0 7px;
+}
+
+.login-right > p {
+  font-size: 11px;
+  margin: 0 0 27px;
+  color: #26364d;
+}
+
+.input {
+  width: 92%;
+  height: 29px;
+  border: 1px solid #d4dce6;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin: 8px auto;
+  padding: 0 8px;
+  color: #26384e;
+}
+
+.input span {
+  font-size: 12px;
+  margin-right: 7px;
+}
+
+.input input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 10px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  width: 92%;
+  margin: 10px auto;
+  font-size: 9px;
+  text-align: left;
+}
+
+.remember input {
+  margin-right: 5px;
+}
+
+.login-button {
+  border: 0;
+  border-radius: 4px;
+  width: 92%;
+  height: 28px;
+  color: white;
+  background: linear-gradient(90deg, #0864bd, #0755a1);
+  font-size: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.login-right a {
+  display: block;
+  margin-top: 13px;
+  color: #0864bd;
+  text-decoration: none;
+  font-size: 9px;
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  min-height: 408px;
+  display: flex;
+  background: #fff;
+}
+
+.sidebar {
+  width: 86px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #003f79, #002d59);
+  color: white;
+  padding-top: 12px;
+}
+
+.side-logo {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 12px;
+  padding: 0 9px 13px;
+}
+
+.side-item {
+  min-height: 28px;
+  padding: 7px 8px;
+  font-size: 8px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.side-item span {
+  width: 11px;
+  text-align: center;
+}
+
+.side-item.selected {
+  background: #0871d3;
+  border-radius: 4px;
+  margin: 0 3px;
+  padding-left: 5px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 9px 9px;
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  margin: 1px 3px 18px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.metric {
+  border: 1px solid #d8e0e8;
+  border-radius: 5px;
+  min-height: 62px;
+  padding: 10px 9px;
+  background: linear-gradient(#fff, #fbfdff);
+}
+
+.metric div {
+  font-size: 7px;
+  color: #526071;
+  margin-bottom: 5px;
+}
+
+.metric strong {
+  display: block;
+  font-size: 16px;
+  color: #10213a;
+}
+
+.metric small {
+  font-size: 7px;
+  display: block;
+  margin-top: 3px;
+}
+
+.green {
+  color: #0ba458;
+}
+
+.red {
+  color: #e23737;
+}
+
+.chart-grid {
+  margin-top: 9px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.chart-card {
+  border: 1px solid #dce3eb;
+  border-radius: 5px;
+  min-width: 0;
+  background: #fff;
+  padding: 9px;
+}
+
+.chart-card h3 {
+  margin: 0 0 8px;
+  font-size: 8px;
+  color: #1a2a3e;
+}
+
+.chart {
+  width: 100%;
+  height: 100px;
+  overflow: visible;
+}
+
+.axis {
+  stroke: #dce2e8;
+  stroke-width: 1;
+}
+
+.line {
+  fill: none;
+  stroke: #0873d4;
+  stroke-width: 2;
+}
+
+.point {
+  fill: #0873d4;
+}
+
+.chart text {
+  fill: #677486;
+  font-size: 6px;
+}
+
+/* =========================================================
+   DONUT
+   ========================================================= */
+
+.donut-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 105px;
+}
+
+.donut {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #0874d1 0deg 212deg,
+      #23a974 212deg 302deg,
+      #f39a28 302deg 360deg
+    );
+  position: relative;
+}
+
+.donut::after {
+  content: "";
+  width: 46px;
+  height: 46px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 17px;
+  top: 17px;
+}
+
+.donut-center {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center b {
+  font-size: 16px;
+}
+
+.donut-center span {
+  font-size: 7px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 7px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+}
+
+.legend i {
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.blue {
+  background: #0874d1 !important;
+}
+
+.green-bg {
+  background: #23a974 !important;
+}
+
+.orange {
+  background: #f39a28 !important;
+}
+
+/* =========================================================
+   BAR CHART
+   ========================================================= */
+
+.bars {
+  padding-top: 3px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 83px 1fr;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+
+.bar-row > span {
+  font-size: 6.5px;
+  text-align: right;
+}
+
+.bar-row > div {
+  height: 9px;
+  background: #eef2f6;
+}
+
+.bar-row i {
+  display: block;
+  height: 100%;
+  background: #0874d1;
+}
+
+/* =========================================================
+   MINI TABLE
+   ========================================================= */
+
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6px;
+}
+
+.mini-table th,
+.mini-table td {
+  padding: 5px 3px;
+  border-bottom: 1px solid #e6ebf0;
+  text-align: left;
+}
+
+.mini-table th {
+  color: #34465d;
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge > span {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef5fb;
+  border-radius: 50%;
+  font-size: 13px;
+}
+
+.badge b,
+.badge small {
+  display: block;
+}
+
+.badge b {
+  font-size: 7px;
+}
+
+.badge small {
+  font-size: 6px;
+  color: #687487;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   LEADERBOARD
+   ========================================================= */
+
+.page-heading {
+  font-size: 13px;
+  margin: 4px 0 18px;
+}
+
+.filters {
+  display: flex;
+  align-items: end;
+  gap: 7px;
+  margin-bottom: 13px;
+}
+
+.filters label {
+  font-size: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filters select,
+.chart-header select {
+  border: 1px solid #d5dce5;
+  border-radius: 4px;
+  background: white;
+  height: 25px;
+  min-width: 105px;
+  font-size: 8px;
+  padding: 0 7px;
+}
+
+.filters button {
+  height: 25px;
+  background: #0870cf;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  font-size: 8px;
+  padding: 0 10px;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7px;
+}
+
+.leaderboard-table th {
+  background: #f0f4f8;
+  color: #2c4057;
+  font-weight: 700;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 6px 4px;
+  border: 1px solid #dce3e9;
+  text-align: left;
+}
+
+.leaderboard-table td:not(:nth-child(2)),
+.leaderboard-table th:not(:nth-child(2)) {
+  text-align: center;
+}
+
+/* =========================================================
+   AI INSIGHTS
+   ========================================================= */
+
+.insight {
+  min-height: 57px;
+  border: 1px solid #dce3eb;
+  border-radius: 5px;
+  margin-bottom: 7px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.insight-icon {
+  font-size: 18px;
+  width: 25px;
+  text-align: center;
+}
+
+.insight-body {
+  flex: 1;
+}
+
+.insight-body b {
+  display: block;
+  font-size: 8px;
+}
+
+.insight-body p {
+  margin: 4px 0 0;
+  font-size: 7px;
+  color: #536276;
+  line-height: 1.3;
+}
+
+.impact {
+  font-size: 6px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 3px 5px;
+  white-space: nowrap;
+}
+
+.insight-icon.red,
+.impact.red {
+  color: #ef4242;
+}
+
+.insight-icon.orange,
+.impact.orange {
+  color: #ed8a1b;
+}
+
+.insight-icon.green-text,
+.impact.green-text {
+  color: #18a466;
+}
+
+.recommendations {
+  border: 1px solid #dce3eb;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.recommendations h3 {
+  font-size: 8px;
+  margin: 0 0 6px;
+}
+
+.recommendations ul {
+  margin: 0;
+  padding-left: 14px;
+}
+
+.recommendations li {
+  font-size: 7px;
+  margin: 4px 0;
+}
+
+/* =========================================================
+   PERFORMANCE CHARTS
+   ========================================================= */
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-header .page-heading {
+  margin-bottom: 8px;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.performance-grid .chart-card {
+  min-height: 160px;
+}
+
+.performance-grid .chart {
+  height: 120px;
+}
+
+/* =========================================================
+   STACKED CHART
+   ========================================================= */
+
+.stacked {
+  height: 120px;
+  border-bottom: 1px solid #d8e0e8;
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.stack {
+  width: 14px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.stack i {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .blueprint {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 700px) {
+  .blueprint {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .main-title {
+    height: 55px;
+    font-size: 20px;
+  }
+
+  .login-page {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .login-left {
+    min-height: 220px;
+  }
+
+  .dashboard {
+    min-height: 500px;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -61,12 +61,12 @@ class MetricsCalculation:
 
         mttr_df = df[ df["assigned_to"].notna()& df["opened_at"].notna()& df["resolved_at"].notna()].copy()
 
-
         # ============================================================
         # AGENT LEVEL METRICS
         # ============================================================
 
-        agent_mttr = ( mttr_df
+        agent_mttr = (
+            mttr_df
             .groupby("assigned_to")
             .agg(
                 MTTR_hours=(
@@ -75,13 +75,13 @@ class MetricsCalculation:
                 ),
 
                 Resolved_Incident_Count=(
-                    "resolved_at",
-                    "count"
+                    "state",
+                    lambda x: (x.astype(str).str.upper() == "RESOLVED").sum()
                 ),
 
                 Closed_Incident_Count=(
-                    "closed_at",
-                    "count"
+                    "state",
+                    lambda x: (x.astype(str).str.upper() == "CLOSED").sum()
                 )
             )
             .reset_index()
@@ -90,12 +90,17 @@ class MetricsCalculation:
 
         # ============================================================
         # TOTAL COMPLETED INCIDENTS
+        # Resolved + Closed
         # ============================================================
 
-        agent_mttr["Resolved_or_Closed_Count"] = (
+        agent_mttr["Total"] = (
             agent_mttr["Resolved_Incident_Count"]
             + agent_mttr["Closed_Incident_Count"]
         )
+
+
+
+
 
         agent_mttr.rename(columns={"assigned_to": "Agent"},inplace=True)
         agent_mttr.rename(columns={"Resolved_or_Closed_Count": "Total"},inplace=True)
@@ -110,28 +115,14 @@ class MetricsCalculation:
         if self.params.Oracle['Loader'] is None:
          
             
-            agent_mttr.to_csv(
-                        save_path,
-                        index=False
-                    )
+            agent_mttr.to_csv(save_path,index=False)
             
         elif self.params.Oracle['Loader']=='Oracle':
             print('InSide oracle ')
-            agent_mttr.to_csv(
-                save_path,
-                index=False
-                )
+            agent_mttr.to_csv(save_path,index=False)
             self.loader.run(agent_mttr,'MTTR')
 
-            agent_mttr.to_csv(
-                save_path,
-                index=False
-            )
-
-        print(
-            "Agent Level MTTR saved to:",
-            save_path
-        )
+        #print("Agent Level MTTR saved to:",save_path)
 
         print(agent_mttr)
         return df
@@ -344,14 +335,15 @@ class MetricsCalculation:
 
         })
 
+      
         # =========================================================
         # AGENT LEVEL SLA
         # =========================================================
 
-        # Only incidents with an assigned agent
         agent_df = resolved_df[
             resolved_df["assigned_to"].notna()
-            & (
+            &
+            (
                 resolved_df["assigned_to"]
                 .astype(str)
                 .str.strip()
@@ -359,48 +351,106 @@ class MetricsCalculation:
             )
         ].copy()
 
+
+        # =========================================================
+        # CLEAN VALUES
+        # =========================================================
+
+        agent_df["assigned_to"] = (
+            agent_df["assigned_to"]
+            .astype(str)
+            .str.strip()
+        )
+
+        agent_df["state"] = (
+            agent_df["state"]
+            .astype(str)
+            .str.strip()
+            .str.upper()
+        )
+
+        agent_df["sla_status"] = (
+            agent_df["sla_status"]
+            .astype(str)
+            .str.strip()
+            .str.upper()
+        )
+
+
+        # =========================================================
+        # ONLY COMPLETED INCIDENTS
+        # CLOSED + RESOLVED
+        # =========================================================
+
+        agent_df = agent_df[
+            agent_df["state"].isin([
+                "CLOSED",
+                "RESOLVED"
+            ])
+        ].copy()
+
+
+        # =========================================================
+        # AGENT SLA COUNTS
+        # =========================================================
+
         agent_sla = (
             agent_df
             .groupby("assigned_to")
             .agg(
 
                 Total_Resolved_Incidents=(
-                    "resolved_at",
+                    "state",
                     "count"
                 ),
 
                 SLA_Met=(
                     "sla_status",
-                    lambda x: (x == "Met").sum()
+                    lambda x: (x == "MET").sum()
                 ),
 
                 SLA_Breached=(
                     "sla_status",
-                    lambda x: (x == "Breached").sum()
+                    lambda x: (x == "BREACHED").sum()
                 )
 
             )
             .reset_index()
         )
 
+
         # =========================================================
-        # AGENT SLA PERCENTAGES
+        # SLA PERCENTAGES
         # =========================================================
 
         agent_sla["SLA_Met_Percentage"] = (
-            (
-                agent_sla["SLA_Met"]/agent_sla["Total_Resolved_Incidents"]
-            ) * 100
+            agent_sla["SLA_Met"]
+            .div(agent_sla["Total_Resolved_Incidents"])
+            .mul(100)
+            .fillna(0)
+            .round(2)
+        )
 
-        ).round(2)
 
         agent_sla["SLA_Breached_Percentage"] = (
-            (
-                agent_sla["SLA_Breached"]/agent_sla["Total_Resolved_Incidents"]) * 100
-        ).round(2)
+            agent_sla["SLA_Breached"]
+            .div(agent_sla["Total_Resolved_Incidents"])
+            .mul(100)
+            .fillna(0)
+            .round(2)
+        )
 
-        # SLA compliance = SLA Met %
-        agent_sla["SLA_Compliance"] = (agent_sla["SLA_Met_Percentage"])
+
+        # =========================================================
+        # SLA COMPLIANCE
+        # =========================================================
+
+        agent_sla["SLA_Compliance"] = (
+            agent_sla["SLA_Met_Percentage"]
+        )
+
+
+
 
         # =========================================================
         # RENAME AGENT
@@ -422,10 +472,7 @@ class MetricsCalculation:
                         )
 
         if self.params.Oracle['Loader'] is None:
-            overall_sla.to_csv(
-                        overall_path,
-                        index=False
-                    )
+            overall_sla.to_csv(overall_path,index=False)
             
         elif self.params.Oracle['Loader']=='Oracle':
             overall_sla.to_csv(overall_path,index=False)
@@ -441,9 +488,7 @@ class MetricsCalculation:
         
         if self.params.Oracle['Loader'] is None:
             
-            agent_sla.to_csv(
-                agent_path,
-                index=False)
+            agent_sla.to_csv(agent_path,index=False)
 
             
         elif self.params.Oracle['Loader']=='Oracle':
@@ -886,15 +931,9 @@ class MetricsCalculation:
             "OverallPerformanceMetrics.csv"
         )
 
-        overall_metrics_df.to_csv(
-            overall_save_path,
-            index=False
-        )
+        overall_metrics_df.to_csv(overall_save_path,index=False)
 
-        print(
-            "\nOverall metrics saved to:",
-            overall_save_path
-        )
+        print("\nOverall metrics saved to:",overall_save_path)
 
         # =========================================================
         # ORACLE - OVERALL
@@ -902,10 +941,7 @@ class MetricsCalculation:
 
         if self.params.Oracle["Loader"] == "Oracle":
 
-            self.loader.run(
-                overall_metrics_df,
-                "OverallMTCS"
-            )
+            self.loader.run(overall_metrics_df,"OverallMTCS" )
 
         # =========================================================
         # AGENT DATA
@@ -1180,20 +1216,11 @@ class MetricsCalculation:
         # SAVE AGENT CSV
         # =========================================================
 
-        agent_save_path = os.path.join(
-            self.config.root_dir,
-            "AgentPerformanceMetrics.csv"
-        )
+        agent_save_path = os.path.join( self.config.root_dir,"AgentPerformanceMetrics.csv")
 
-        agent_metrics.to_csv(
-            agent_save_path,
-            index=False
-        )
+        agent_metrics.to_csv(agent_save_path, index=False)
 
-        print(
-            "\nAgent metrics saved to:",
-            agent_save_path
-        )
+        print("\nAgent metrics saved to:",agent_save_path )
 
         # =========================================================
         # ORACLE - AGENT
@@ -1210,15 +1237,9 @@ class MetricsCalculation:
         # RETURN
         # =========================================================
         
-        mttr_save_path = os.path.join(
-                    self.config.root_dir,
-                    "mttr.csv"
-                )
+        mttr_save_path = os.path.join(self.config.root_dir,"mttr.csv")
         
-        df.to_csv(
-                    mttr_save_path,
-                    index=False
-                )
+        df.to_csv(mttr_save_path,index=False)
         
         return df, metrics
 

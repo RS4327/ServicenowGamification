@@ -4,6 +4,8 @@ from ServicenowGamification.Entity.Config_Entity import *
 import oracledb
 import numpy as np
 import pandas as pd
+import yaml
+import os
 
 
 import pandas as pd
@@ -16,10 +18,10 @@ class IncidentDataLoader:
     # INITIALIZATION
     # ================================================================
 
-    def __init__(self, config):
+    def __init__(self, config:OracleConnectConfig):
 
         self.config = config
-
+        self.params = Read_Yaml(PARAMS_FILE_PATH)
     # ================================================================
     # STEP 1 - CONNECT TO ORACLE
     # ================================================================
@@ -46,34 +48,99 @@ class IncidentDataLoader:
 
             )
 
-            print(
-                "Oracle connection successful"
-            )
+            print("Oracle connection successful")
 
-            print(
-                "Host:",
-                self.config.host
-            )
+            print("Host:",self.config.host)
 
-            print(
-                "Service:",
-                self.config.service_name
-            )
+            print("Service:",self.config.service_name)
 
             return connection
 
+        except oracledb.DatabaseError as e:
+
+            print(f"Oracle connection failed: {e}")
+
+            return None
+
         except Exception as e:
 
-            print(
-                "Oracle connection failed"
-            )
+            print(f"Unexpected Oracle connection error: {e}")
+
+            return None
+
+
+       
+
+
+    def update_loader_in_params(self, loader_value):
+
+        params_file = "params.yaml"
+
+        try:
+
+            # Read params.yaml
+            with open(params_file, "r") as file:
+                params = yaml.safe_load(file)
+
+            # Update Oracle -> Loader
+            params["Oracle"]["Loader"] = loader_value
+
+            # Write back to params.yaml
+            with open(params_file, "w") as file:
+                yaml.safe_dump(
+                    params,
+                    file,
+                    sort_keys=False
+                )
+
+            print("=" * 70)
+            print("PARAMS.YAML UPDATED SUCCESSFULLY")
+            print("=" * 70)
 
             print(
-                "Error:",
-                e
+                "Oracle : Loader :",
+                loader_value
             )
+
+        except Exception as e:
+
+            print("Failed to update params.yaml")
+            print("Error:", e)
 
             raise
+
+    def configure_loader(self):
+
+        print("=" * 70)
+        print("CHECKING ORACLE CONNECTIVITY")
+        print("=" * 70)
+
+        connection = self.connect_oracle()
+
+        if connection is not None:
+
+            print("Oracle connection is available")
+
+            # Update Params.yaml
+            self.update_loader_in_params("Oracle")
+
+            print("Loader configuration: Oracle")
+
+            connection.close()
+
+            return "Oracle"
+
+        else:
+
+            print("Oracle connection is unavailable")
+
+            # Update Params.yaml
+            self.update_loader_in_params(None)
+
+            print("Loader configuration: None")
+
+            return None
+
 
     # ================================================================
     # STEP 2 - PREPARE DATA
@@ -569,6 +636,241 @@ class IncidentDataLoader:
         finally:
 
             cursor.close()
+
+
+    def insert_servicenow_incidents(self, connection, df):
+
+        cursor = None
+
+        try:
+
+            print("=" * 70)
+            print("INSERTING SERVICENOW INCIDENTS INTO ORACLE")
+            print("=" * 70)
+
+            print("Total records:", len(df))
+
+            print("DataFrame columns:")
+            print(df.columns.tolist())
+
+            # ============================================================
+            # CLEAN NUMBER COLUMNS
+            # ============================================================
+
+            def clean_number(value):
+
+                if value is None:
+                    return None
+
+                if pd.isna(value):
+                    return None
+
+                try:
+
+                    value = str(value).strip()
+
+                    if value == "":
+                        return None
+
+                    if value.lower() in [
+                        "none",
+                        "null",
+                        "nan",
+                        "n/a",
+                        "na"
+                    ]:
+                        return None
+
+                    return int(float(value))
+
+                except (ValueError, TypeError):
+
+                    print(
+                        f"Invalid NUMBER value found: {value}"
+                    )
+
+                    return None
+
+            # ============================================================
+            # CLEAN REOPEN_COUNT
+            # ============================================================
+
+            df["reopen_count"] = df["reopen_count"].apply(
+                clean_number
+            )
+
+            # ============================================================
+            # CLEAN REASSIGNMENT_COUNT
+            # ============================================================
+
+            df["reassignment_count"] = df[
+                "reassignment_count"
+            ].apply(
+                clean_number
+            )
+
+            # ============================================================
+            # CONVERT NaN / NaT TO None
+            # ============================================================
+
+            df = df.where(
+                pd.notnull(df),
+                None
+            )
+
+            # ============================================================
+            # ORACLE INSERT SQL
+            # ============================================================
+
+            insert_sql = """
+                INSERT INTO SERVICENOW_INCIDENTS
+                (
+                    SHORT_DESCRIPTION,
+                    CLOSED_AT,
+                    INS_DESCRIPTION,
+                    SYS_UPDATED_ON,
+                    REOPEN_COUNT,
+                    INS_PRIORITY,
+                    SYS_ID,
+                    INS_NUMBER,
+                    OPENED_AT,
+                    RESOLVED_AT,
+                    SYS_CREATED_ON,
+                    INS_STATE,
+                    REASSIGNMENT_COUNT,
+                    INS_CATEGORY,
+                    SUBCATEGORY,
+                    ASSIGNMENT_GROUP_LINK,
+                    ASSIGNED_TO_LINK,
+                    ASSIGNMENT_GROUP,
+                    ASSIGNED_TO
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10,
+                    :11,
+                    :12,
+                    :13,
+                    :14,
+                    :15,
+                    :16,
+                    :17,
+                    :18,
+                    :19
+                )
+            """
+
+            # ============================================================
+            # PREPARE RECORDS
+            # ============================================================
+
+            records = []
+
+            for _, row in df.iterrows():
+
+                record = (
+
+                    row.get("short_description"),
+
+                    row.get("closed_at"),
+
+                    row.get("description"),
+
+                    row.get("sys_updated_on"),
+
+                    row.get("reopen_count"),
+
+                    row.get("priority"),
+
+                    row.get("sys_id"),
+
+                    row.get("number"),
+
+                    row.get("opened_at"),
+
+                    row.get("resolved_at"),
+
+                    row.get("sys_created_on"),
+
+                    row.get("state"),
+
+                    row.get("reassignment_count"),
+
+                    row.get("category"),
+
+                    row.get("subcategory"),
+
+                    row.get("assignment_group.link"),
+
+                    row.get("assigned_to.link"),
+
+                    row.get("assignment_group"),
+
+                    row.get("assigned_to")
+                )
+
+                records.append(record)
+
+            print(
+                "Records prepared:",
+                len(records)
+            )
+
+            # ============================================================
+            # INSERT
+            # ============================================================
+
+            cursor = connection.cursor()
+
+            if records:
+
+                cursor.executemany(
+                    insert_sql,
+                    records
+                )
+
+                connection.commit()
+
+                print("=" * 70)
+                print(
+                    "SUCCESSFULLY INSERTED:",
+                    len(records),
+                    "RECORDS"
+                )
+                print("=" * 70)
+
+            else:
+
+                print("No records to insert.")
+
+        except Exception as e:
+
+            print("=" * 70)
+            print("ORACLE INSERT FAILED")
+            print("=" * 70)
+
+            print("Error:", e)
+
+            connection.rollback()
+
+            raise
+
+        finally:
+
+            if cursor is not None:
+                cursor.close()
+    
+
+
 
     def insert_agent_mttr_data(self,connection,df):
 
@@ -4017,8 +4319,9 @@ class IncidentDataLoader:
         cursor = connection.cursor()
 
         try:
+
             print("=" * 70)
-            print("INSERTING GROUP BADGE SUMMARY")
+            print("INSERTING AGENT GROUP BADGE SUMMARY")
             print("=" * 70)
 
             # ---------------------------------------------------------
@@ -4031,6 +4334,20 @@ class IncidentDataLoader:
                     "total_incidents": "TOTAL_INCIDENTS",
                     "total_points": "TOTAL_POINTS",
                     "average_points": "AVERAGE_POINTS",
+                    "resolved_count": "RESOLVED_COUNT",
+                    "closed_count": "CLOSED_COUNT",
+                    "sla_met": "SLA_MET",
+                    "sla_breached": "SLA_BREACHED",
+                    "completed_count": "COMPLETED_COUNT",
+                    "sla_total": "SLA_TOTAL",
+                    "sla_percentage": "SLA_PERCENTAGE",
+                    "fcr_count": "FCR_COUNT",
+                    "fcr_total": "FCR_TOTAL",
+                    "fcr_percentage": "FCR_PERCENTAGE",
+                    "level": "AGENT_LEVEL",
+                    "performance_badges": "PERFORMANCE_BADGES",
+                    "badge_count": "BADGE_COUNT",
+                    "badges": "BADGES",
                     "group_badge": "GROUP_BADGE"
                 }
             )
@@ -4044,6 +4361,20 @@ class IncidentDataLoader:
                 "TOTAL_INCIDENTS",
                 "TOTAL_POINTS",
                 "AVERAGE_POINTS",
+                "RESOLVED_COUNT",
+                "CLOSED_COUNT",
+                "SLA_MET",
+                "SLA_BREACHED",
+                "COMPLETED_COUNT",
+                "SLA_TOTAL",
+                "SLA_PERCENTAGE",
+                "FCR_COUNT",
+                "FCR_TOTAL",
+                "FCR_PERCENTAGE",
+                "AGENT_LEVEL",
+                "PERFORMANCE_BADGES",
+                "BADGE_COUNT",
+                "BADGES",
                 "GROUP_BADGE"
             ]
 
@@ -4062,6 +4393,33 @@ class IncidentDataLoader:
             df = df.where(
                 pd.notna(df),
                 None
+            )
+
+            # ---------------------------------------------------------
+            # Convert Python list/array -> string
+            # Oracle columns are VARCHAR2
+            # ---------------------------------------------------------
+
+            def convert_to_string(value):
+
+                if value is None:
+                    return None
+
+                if isinstance(value, (list, tuple, set)):
+                    return str(list(value))
+
+                return str(value)
+
+            df["PERFORMANCE_BADGES"] = df[
+                "PERFORMANCE_BADGES"
+            ].apply(
+                convert_to_string
+            )
+
+            df["BADGES"] = df[
+                "BADGES"
+            ].apply(
+                convert_to_string
             )
 
             # ---------------------------------------------------------
@@ -4090,6 +4448,20 @@ class IncidentDataLoader:
                     TOTAL_INCIDENTS,
                     TOTAL_POINTS,
                     AVERAGE_POINTS,
+                    RESOLVED_COUNT,
+                    CLOSED_COUNT,
+                    SLA_MET,
+                    SLA_BREACHED,
+                    COMPLETED_COUNT,
+                    SLA_TOTAL,
+                    SLA_PERCENTAGE,
+                    FCR_COUNT,
+                    FCR_TOTAL,
+                    FCR_PERCENTAGE,
+                    AGENT_LEVEL,
+                    PERFORMANCE_BADGES,
+                    BADGE_COUNT,
+                    BADGES,
                     GROUP_BADGE
                 )
                 VALUES
@@ -4098,7 +4470,21 @@ class IncidentDataLoader:
                     :2,
                     :3,
                     :4,
-                    :5
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10,
+                    :11,
+                    :12,
+                    :13,
+                    :14,
+                    :15,
+                    :16,
+                    :17,
+                    :18,
+                    :19
                 )
             """
 
@@ -4113,6 +4499,20 @@ class IncidentDataLoader:
                         "TOTAL_INCIDENTS",
                         "TOTAL_POINTS",
                         "AVERAGE_POINTS",
+                        "RESOLVED_COUNT",
+                        "CLOSED_COUNT",
+                        "SLA_MET",
+                        "SLA_BREACHED",
+                        "COMPLETED_COUNT",
+                        "SLA_TOTAL",
+                        "SLA_PERCENTAGE",
+                        "FCR_COUNT",
+                        "FCR_TOTAL",
+                        "FCR_PERCENTAGE",
+                        "AGENT_LEVEL",
+                        "PERFORMANCE_BADGES",
+                        "BADGE_COUNT",
+                        "BADGES",
                         "GROUP_BADGE"
                     ]
                 ].itertuples(
@@ -4125,6 +4525,29 @@ class IncidentDataLoader:
                 "Total records:",
                 len(records)
             )
+
+            # ---------------------------------------------------------
+            # Debug - show first record
+            # ---------------------------------------------------------
+
+            if records:
+
+                print(
+                    "First record:",
+                    records[0]
+                )
+
+                print(
+                    "Performance badges:",
+                    records[0][15],
+                    type(records[0][15])
+                )
+
+                print(
+                    "Badges:",
+                    records[0][17],
+                    type(records[0][17])
+                )
 
             # ---------------------------------------------------------
             # Insert
@@ -4140,6 +4563,12 @@ class IncidentDataLoader:
                 print(
                     "Rows inserted:",
                     cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records to insert."
                 )
 
             # ---------------------------------------------------------
@@ -4171,7 +4600,7 @@ class IncidentDataLoader:
             )
 
             print("=" * 70)
-            print("GROUP BADGE SUMMARY INSERT SUCCESSFUL")
+            print("AGENT GROUP BADGE SUMMARY INSERT SUCCESSFUL")
             print("=" * 70)
 
         except Exception as e:
@@ -4179,7 +4608,7 @@ class IncidentDataLoader:
             connection.rollback()
 
             print("=" * 70)
-            print("GROUP BADGE SUMMARY INSERT FAILED")
+            print("AGENT GROUP BADGE SUMMARY INSERT FAILED")
             print("=" * 70)
 
             print(
@@ -4192,7 +4621,7 @@ class IncidentDataLoader:
         finally:
 
             cursor.close()
-
+            
     def insert_agent_badge_summary(self, connection, df):
 
         cursor = connection.cursor()
@@ -4213,6 +4642,21 @@ class IncidentDataLoader:
                     "total_incidents": "TOTAL_INCIDENTS",
                     "total_points": "TOTAL_POINTS",
                     "average_points": "AVERAGE_POINTS",
+                    "resolved_count": "RESOLVED_COUNT",
+                    "closed_count": "CLOSED_COUNT",
+                    "sla_met": "SLA_MET",
+                    "sla_breached": "SLA_BREACHED",
+                    "completed_count": "COMPLETED_COUNT",
+                    "sla_total": "SLA_TOTAL",
+                    "sla_percentage": "SLA_PERCENTAGE",
+                    "fcr_count": "FCR_COUNT",
+                    "fcr_total": "FCR_TOTAL",
+                    "fcr_percentage": "FCR_PERCENTAGE",
+                    "level": "AGENT_LEVEL",
+                    "performance_badges": "PERFORMANCE_BADGES",
+                    "badge_count": "BADGE_COUNT",
+                    "badges": "BADGES",
+                    "badge_descriptions": "BADGE_DESCRIPTIONS",
                     "agent_badge": "AGENT_BADGE"
                 }
             )
@@ -4226,12 +4670,28 @@ class IncidentDataLoader:
                 "TOTAL_INCIDENTS",
                 "TOTAL_POINTS",
                 "AVERAGE_POINTS",
+                "RESOLVED_COUNT",
+                "CLOSED_COUNT",
+                "SLA_MET",
+                "SLA_BREACHED",
+                "COMPLETED_COUNT",
+                "SLA_TOTAL",
+                "SLA_PERCENTAGE",
+                "FCR_COUNT",
+                "FCR_TOTAL",
+                "FCR_PERCENTAGE",
+                "AGENT_LEVEL",
+                "PERFORMANCE_BADGES",
+                "BADGE_COUNT",
+                "BADGES",
+                "BADGE_DESCRIPTIONS",
                 "AGENT_BADGE"
             ]
 
             for column in required_columns:
 
                 if column not in df.columns:
+
                     raise ValueError(
                         f"Missing column: {column}"
                     )
@@ -4243,6 +4703,32 @@ class IncidentDataLoader:
             df = df.where(
                 pd.notna(df),
                 None
+            )
+
+            # ---------------------------------------------------------
+            # Convert Python list/array -> string
+            # ---------------------------------------------------------
+
+            def convert_to_string(value):
+
+                if value is None:
+                    return None
+
+                if isinstance(value, (list, tuple, set)):
+                    return str(list(value))
+
+                return str(value)
+
+            df["PERFORMANCE_BADGES"] = df[
+                "PERFORMANCE_BADGES"
+            ].apply(
+                convert_to_string
+            )
+
+            df["BADGES"] = df[
+                "BADGES"
+            ].apply(
+                convert_to_string
             )
 
             # ---------------------------------------------------------
@@ -4271,6 +4757,21 @@ class IncidentDataLoader:
                     TOTAL_INCIDENTS,
                     TOTAL_POINTS,
                     AVERAGE_POINTS,
+                    RESOLVED_COUNT,
+                    CLOSED_COUNT,
+                    SLA_MET,
+                    SLA_BREACHED,
+                    COMPLETED_COUNT,
+                    SLA_TOTAL,
+                    SLA_PERCENTAGE,
+                    FCR_COUNT,
+                    FCR_TOTAL,
+                    FCR_PERCENTAGE,
+                    AGENT_LEVEL,
+                    PERFORMANCE_BADGES,
+                    BADGE_COUNT,
+                    BADGES,
+                    BADGE_DESCRIPTIONS,
                     AGENT_BADGE
                 )
                 VALUES
@@ -4279,7 +4780,22 @@ class IncidentDataLoader:
                     :2,
                     :3,
                     :4,
-                    :5
+                    :5,
+                    :6,
+                    :7,
+                    :8,
+                    :9,
+                    :10,
+                    :11,
+                    :12,
+                    :13,
+                    :14,
+                    :15,
+                    :16,
+                    :17,
+                    :18,
+                    :19,
+                    :20
                 )
             """
 
@@ -4294,6 +4810,21 @@ class IncidentDataLoader:
                         "TOTAL_INCIDENTS",
                         "TOTAL_POINTS",
                         "AVERAGE_POINTS",
+                        "RESOLVED_COUNT",
+                        "CLOSED_COUNT",
+                        "SLA_MET",
+                        "SLA_BREACHED",
+                        "COMPLETED_COUNT",
+                        "SLA_TOTAL",
+                        "SLA_PERCENTAGE",
+                        "FCR_COUNT",
+                        "FCR_TOTAL",
+                        "FCR_PERCENTAGE",
+                        "AGENT_LEVEL",
+                        "PERFORMANCE_BADGES",
+                        "BADGE_COUNT",
+                        "BADGES",
+                        "BADGE_DESCRIPTIONS",
                         "AGENT_BADGE"
                     ]
                 ].itertuples(
@@ -4306,6 +4837,29 @@ class IncidentDataLoader:
                 "Total records:",
                 len(records)
             )
+
+            # ---------------------------------------------------------
+            # Debug first record
+            # ---------------------------------------------------------
+
+            if records:
+
+                print(
+                    "First record:",
+                    records[0]
+                )
+
+                print(
+                    "Performance badges:",
+                    records[0][15],
+                    type(records[0][15])
+                )
+
+                print(
+                    "Badges:",
+                    records[0][17],
+                    type(records[0][17])
+                )
 
             # ---------------------------------------------------------
             # Insert
@@ -4321,6 +4875,12 @@ class IncidentDataLoader:
                 print(
                     "Rows inserted:",
                     cursor.rowcount
+                )
+
+            else:
+
+                print(
+                    "No records to insert."
                 )
 
             # ---------------------------------------------------------
@@ -4373,6 +4933,8 @@ class IncidentDataLoader:
         finally:
 
             cursor.close()
+
+
 
     def insert_group_level_summary(self, connection, df):
 
@@ -5453,8 +6015,28 @@ class IncidentDataLoader:
 
 
 
+    def check_connection(self):
 
+        print("Starting process...")
 
+        oracle_available = self.configure_loader()
+
+        if oracle_available:
+
+            print("Oracle available")
+            #print("Loader:", self.config.loader)
+
+           # loder='Oracle'
+
+        else:
+
+            print("Oracle unavailable")
+            #print("Loader:", self.config.loader)
+
+            print("Skipping Oracle load.")
+            #loder=None
+
+        
     # ================================================================
     # STEP 5 - MAIN RUN METHOD
     # ================================================================
@@ -5477,8 +6059,12 @@ class IncidentDataLoader:
             print("Received DataFrame:",df.shape)
             
             connection = self.connect_oracle()
+
             print('Stage :',stage)
-            if stage =='Incidents':
+            if stage =='SAIncidents':
+                self.insert_servicenow_incidents(connection,df)
+
+            elif stage =='Incidents':
                 print('Incidents')
                 df = self.prepare_data(df)
                 

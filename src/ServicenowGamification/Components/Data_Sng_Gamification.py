@@ -358,6 +358,7 @@ class Gamification:
         if self.params.Oracle['Loader'] is None:
             agent_points.to_csv(agent_path,index=False)
         elif self.params.Oracle['Loader']=='Oracle':
+            agent_points.to_csv(agent_path,index=False)
             self.loader.run(agent_points,'AgentRNK')  
 
        
@@ -930,9 +931,10 @@ class Gamification:
 
 
         ##################################################################
-    # Badge Assignment - Incident + Agent + Group + Overall
-    ##################################################################
-
+        # Badge Assignment - Incident + Agent + Group + Overall
+        ##################################################################
+    
+    
     def assign_badges(self, df):
 
         import os
@@ -942,9 +944,9 @@ class Gamification:
         print("BADGE ASSIGNMENT")
         print("=" * 70)
 
-        # ==============================================================
+        # ============================================================
         # OUTPUT DIRECTORY
-        # ==============================================================
+        # ============================================================
 
         output_dir = "Artifacts/DataGamification"
 
@@ -953,11 +955,57 @@ class Gamification:
             exist_ok=True
         )
 
-        # ==============================================================
-        # BADGE FUNCTION
-        # ==============================================================
+        # ============================================================
+        # COPY DATA
+        # ============================================================
 
-        def get_badge(points):
+        df = df.copy()
+
+        # ============================================================
+        # CLEAN DATA
+        # ============================================================
+
+        df["assigned_to"] = (
+            df["assigned_to"]
+            .fillna("")
+            .astype(str)
+            .str.strip()
+        )
+
+        df["assignment_group"] = (
+            df["assignment_group"]
+            .fillna("")
+            .astype(str)
+            .str.strip()
+        )
+
+        df["state"] = (
+            df["state"]
+            .fillna("")
+            .astype(str)
+            .str.strip()
+            .str.upper()
+        )
+
+        df["sla_status"] = (
+            df["sla_status"]
+            .fillna("")
+            .astype(str)
+            .str.strip()
+            .str.upper()
+        )
+
+        # Make sure points are numeric
+        df["points"] = pd.to_numeric(
+            df["points"],
+            errors="coerce"
+        ).fillna(0)
+
+        # ============================================================
+        # POINT LEVEL
+        # ============================================================
+
+        def get_level(points):
 
             if pd.isna(points):
                 points = 0
@@ -982,147 +1030,1095 @@ class Gamification:
             else:
                 return "Rookie"
 
-        # ==============================================================
+        # ============================================================
+        # PERFORMANCE BADGE FUNCTION
+        # ============================================================
+
+        def get_performance_badges(
+            resolved_count,
+            closed_count,
+            sla_percentage,
+            fcr_percentage
+        ):
+
+            badges = []
+
+            # --------------------------------------------------------
+            # QUICK RESOLVER
+            # --------------------------------------------------------
+            # Resolved 5+ incidents
+            # --------------------------------------------------------
+
+            if resolved_count >= 5:
+
+                badges.append(
+                    "Quick Resolver"
+                )
+
+            # --------------------------------------------------------
+            # FCR ACHIEVER
+            # --------------------------------------------------------
+            # FCR >= 50%
+            # --------------------------------------------------------
+
+            if fcr_percentage >= 50:
+
+                badges.append(
+                    "FCR Achiever"
+                )
+
+            # --------------------------------------------------------
+            # SLA CHAMPION
+            # --------------------------------------------------------
+            # SLA >= 90%
+            # --------------------------------------------------------
+
+            if sla_percentage >= 90:
+
+                badges.append(
+                    "SLA Champion"
+                )
+
+            # --------------------------------------------------------
+            # SLA WATCHER
+            # --------------------------------------------------------
+            # SLA below 50%
+            # --------------------------------------------------------
+
+            elif sla_percentage < 50:
+
+                badges.append(
+                    "SLA Watcher"
+                )
+
+            # --------------------------------------------------------
+            # HIGH PERFORMER
+            # --------------------------------------------------------
+
+            if (
+                resolved_count >= 5
+                and sla_percentage >= 90
+                and fcr_percentage >= 50
+            ):
+
+                badges.append(
+                    "High Performer"
+                )
+
+            return badges
+
+        # ============================================================
+        # BADGE DESCRIPTION
+        # ============================================================
+
+        badge_descriptions = {
+
+            "Quick Resolver":
+                "Resolved 5+ incidents",
+
+            "FCR Achiever":
+                "Achieved 50%+ FCR",
+
+            "SLA Champion":
+                "Maintained 90%+ SLA",
+
+            "SLA Watcher":
+                "Focus on SLA improvement",
+
+            "High Performer":
+                "Excellent overall performance"
+        }
+
+        # ============================================================
         # 1. INCIDENT LEVEL
-        # ==============================================================
+        # ============================================================
 
         print("\n1. INCIDENT LEVEL")
 
-        df["badge"] = (df["points"].apply(get_badge) )
+        df["badge"] = (
+            df["points"]
+            .apply(get_level)
+        )
 
-        incident_file = os.path.join(output_dir,"incident_gamification.csv")
+        incident_file = os.path.join(
+            output_dir,
+            "incident_gamification.csv"
+        )
 
-        df.to_csv(incident_file,index=False)
-
-
-        # ==============================================================
+        # ============================================================
         # 2. AGENT LEVEL
-        # ==============================================================
+        # ============================================================
 
         print("\n2. AGENT LEVEL")
 
-        agent_summary = (df.groupby("assigned_to")
+        # ------------------------------------------------------------
+        # Only assigned agents
+        # ------------------------------------------------------------
+
+        agent_df = df[
+            df["assigned_to"] != ""
+        ].copy()
+
+        # ------------------------------------------------------------
+        # Basic agent summary
+        # ------------------------------------------------------------
+
+        agent_summary = (
+            agent_df
+            .groupby("assigned_to")
             .agg(
-                total_incidents=("number", "count"),
-                total_points=("points", "sum"),
-                average_points=("points", "mean")
+
+                total_incidents=(
+                    "number",
+                    "count"
+                ),
+
+                total_points=(
+                    "points",
+                    "sum"
+                ),
+
+                average_points=(
+                    "points",
+                    "mean"
+                )
+
             )
             .reset_index()
         )
 
+        # ============================================================
+        # RESOLVED COUNT
+        # ============================================================
+
+        resolved_count = (
+            agent_df[
+                agent_df["state"] == "RESOLVED"
+            ]
+            .groupby("assigned_to")
+            .size()
+            .rename("resolved_count")
+        )
+
+        # ============================================================
+        # CLOSED COUNT
+        # ============================================================
+
+        closed_count = (
+            agent_df[
+                agent_df["state"] == "CLOSED"
+            ]
+            .groupby("assigned_to")
+            .size()
+            .rename("closed_count")
+        )
+
+        # ============================================================
+        # SLA MET
+        # ============================================================
+
+        sla_met = (
+            agent_df[
+                agent_df["sla_status"] == "MET"
+            ]
+            .groupby("assigned_to")
+            .size()
+            .rename("sla_met")
+        )
+
+        # ============================================================
+        # SLA BREACHED
+        # ============================================================
+
+        sla_breached = (
+            agent_df[
+                agent_df["sla_status"] == "BREACHED"
+            ]
+            .groupby("assigned_to")
+            .size()
+            .rename("sla_breached")
+        )
+
+        # ============================================================
+        # MERGE AGENT METRICS
+        # ============================================================
+
+        agent_summary = (
+            agent_summary
+            .set_index("assigned_to")
+
+            .join(
+                resolved_count,
+                how="left"
+            )
+
+            .join(
+                closed_count,
+                how="left"
+            )
+
+            .join(
+                sla_met,
+                how="left"
+            )
+
+            .join(
+                sla_breached,
+                how="left"
+            )
+
+            .fillna(0)
+
+            .reset_index()
+        )
+
+        # ============================================================
+        # INTEGER COUNTS
+        # ============================================================
+
+        count_columns = [
+            "total_incidents",
+            "resolved_count",
+            "closed_count",
+            "sla_met",
+            "sla_breached"
+        ]
+
+        for column in count_columns:
+
+            agent_summary[column] = (
+                agent_summary[column]
+                .astype(int)
+            )
+
+        # ============================================================
+        # COMPLETED
+        # ============================================================
+
+        # IMPORTANT:
+        # Resolved and Closed are kept separately.
+        #
+        # This prevents the previous problem where an agent with
+        # 12 incidents was incorrectly shown as having 12 resolved.
+        # ============================================================
+
+        agent_summary["completed_count"] = (
+            agent_summary["resolved_count"]
+            +
+            agent_summary["closed_count"]
+        )
+
+        # ============================================================
+        # SLA %
+        # ============================================================
+
+        agent_summary["sla_total"] = (
+            agent_summary["sla_met"]
+            +
+            agent_summary["sla_breached"]
+        )
+
+        agent_summary["sla_percentage"] = (
+
+            agent_summary["sla_met"]
+            .div(
+                agent_summary["sla_total"]
+                .replace(0, pd.NA)
+            )
+            .mul(100)
+            .fillna(0)
+            .round(2)
+
+        )
+
+        # ============================================================
+        # FCR
+        # ============================================================
+
+        if "fcr" in agent_df.columns:
+
+            fcr_df = agent_df.copy()
+
+            # --------------------------------------------------------
+            # Convert FCR to boolean
+            # --------------------------------------------------------
+
+            fcr_df["fcr_flag"] = (
+                fcr_df["fcr"]
+                .fillna("")
+                .astype(str)
+                .str.strip()
+                .str.upper()
+                .isin([
+                    "1",
+                    "TRUE",
+                    "YES",
+                    "Y",
+                    "MET"
+                ])
+            )
+
+            # --------------------------------------------------------
+            # FCR count
+            # --------------------------------------------------------
+
+            fcr_count = (
+                fcr_df[
+                    fcr_df["fcr_flag"]
+                ]
+                .groupby("assigned_to")
+                .size()
+                .rename("fcr_count")
+            )
+
+            # --------------------------------------------------------
+            # FCR total
+            # --------------------------------------------------------
+
+            fcr_total = (
+                fcr_df
+                .groupby("assigned_to")
+                .size()
+                .rename("fcr_total")
+            )
+
+            # --------------------------------------------------------
+            # Merge
+            # --------------------------------------------------------
+
+            agent_summary = (
+                agent_summary
+                .set_index("assigned_to")
+
+                .join(
+                    fcr_count,
+                    how="left"
+                )
+
+                .join(
+                    fcr_total,
+                    how="left"
+                )
+
+                .fillna(0)
+
+                .reset_index()
+            )
+
+            # --------------------------------------------------------
+            # FCR %
+            # --------------------------------------------------------
+
+            agent_summary["fcr_percentage"] = (
+
+                agent_summary["fcr_count"]
+                .div(
+                    agent_summary["fcr_total"]
+                    .replace(0, pd.NA)
+                )
+                .mul(100)
+                .fillna(0)
+                .round(2)
+
+            )
+
+        else:
+
+            agent_summary["fcr_count"] = 0
+
+            agent_summary["fcr_total"] = 0
+
+            agent_summary["fcr_percentage"] = 0
+
+        # ============================================================
+        # ROUND POINTS
+        # ============================================================
+
         agent_summary["total_points"] = (
-            agent_summary["total_points"].round(2)
+            agent_summary["total_points"]
+            .round(2)
         )
 
         agent_summary["average_points"] = (
-            agent_summary["average_points"].round(2)
+            agent_summary["average_points"]
+            .round(2)
         )
+
+        # ============================================================
+        # AGENT LEVEL
+        # ============================================================
+
+        agent_summary["level"] = (
+            agent_summary["total_points"]
+            .apply(get_level)
+        )
+
+        # ============================================================
+        # AGENT PERFORMANCE BADGES
+        # ============================================================
+
+        agent_summary["performance_badges"] = (
+
+            agent_summary.apply(
+
+                lambda row:
+                    get_performance_badges(
+                        resolved_count=row["resolved_count"],
+                        closed_count=row["closed_count"],
+                        sla_percentage=row["sla_percentage"],
+                        fcr_percentage=row["fcr_percentage"]
+                    ),
+                axis=1
+            )
+        )
+
+        # ============================================================
+        # BADGE COUNT
+        # ============================================================
+
+        agent_summary["badge_count"] = (
+
+            agent_summary[
+                "performance_badges"
+            ]
+            .apply(len)
+
+        )
+
+        # ============================================================
+        # BADGE NAMES FOR CSV
+        # ============================================================
+
+        agent_summary["badges"] = (
+
+            agent_summary[
+                "performance_badges"
+            ]
+            .apply(
+                lambda x:
+                    "; ".join(x)
+            )
+
+        )
+
+        # ============================================================
+        # BADGE DESCRIPTIONS
+        # ============================================================
+
+        agent_summary["badge_descriptions"] = (
+
+            agent_summary[
+                "performance_badges"
+            ]
+            .apply(
+
+                lambda badges:
+
+                    "; ".join(
+                        badge_descriptions.get(
+                            badge,
+                            ""
+                        )
+                        for badge in badges
+                    )
+
+            )
+
+        )
+
+        # ============================================================
+        # COMPATIBILITY COLUMN
+        # ============================================================
+        # Keep this because existing code may expect agent_badge.
+        # It represents the POINT LEVEL, not performance badges.
+        # ============================================================
 
         agent_summary["agent_badge"] = (
-            agent_summary["total_points"]
-            .apply(get_badge)
+            agent_summary["level"]
         )
 
-        agent_summary = agent_summary.sort_values(
-            by="total_points",
-            ascending=False
+        # ============================================================
+        # SORT
+        # ============================================================
+
+        agent_summary = (
+            agent_summary
+            .sort_values(
+                by="total_points",
+                ascending=False
+            )
+            .reset_index(drop=True)
         )
+
+        # ============================================================
+        # SAVE AGENT SUMMARY
+        # ============================================================
 
         agent_file = os.path.join(
             output_dir,
             "agent_badge_summary.csv"
         )
 
-        if self.params.Oracle['Loader'] is None:
+        if self.params.Oracle["Loader"] is None:
+
+            agent_summary.to_csv(
+                agent_file,
+                index=False
+            )
+
+        elif self.params.Oracle["Loader"] == "Oracle":
+
             agent_summary.to_csv(agent_file,index=False)
-        elif self.params.Oracle['Loader']=='Oracle':
-            self.loader.run(agent_summary,'AgentBdgeSMRY') 
 
-        # agent_summary.to_csv(
-        #     agent_file,
-        #     index=False
-        # )
+            self.loader.run(agent_summary,"AgentBdgeSMRY")
 
+        print(
+            "Agent CSV saved:",
+            agent_file
+        )
 
-        # ==============================================================
+        # ============================================================
         # 3. GROUP LEVEL
-        # ==============================================================
+        # ============================================================
 
         print("\n3. GROUP LEVEL")
 
+        group_df = df[
+            df["assignment_group"] != ""
+        ].copy()
+
+        # ------------------------------------------------------------
+        # Basic group summary
+        # ------------------------------------------------------------
+
         group_summary = (
-            df
+            group_df
             .groupby("assignment_group")
             .agg(
-                total_incidents=("number", "count"),
-                total_points=("points", "sum"),
-                average_points=("points", "mean")
+
+                total_incidents=(
+                    "number",
+                    "count"
+                ),
+
+                total_points=(
+                    "points",
+                    "sum"
+                ),
+
+                average_points=(
+                    "points",
+                    "mean"
+                )
+
             )
             .reset_index()
         )
 
+        # ============================================================
+        # GROUP RESOLVED
+        # ============================================================
+
+        group_resolved = (
+            group_df[
+                group_df["state"] == "RESOLVED"
+            ]
+            .groupby("assignment_group")
+            .size()
+            .rename("resolved_count")
+        )
+
+        # ============================================================
+        # GROUP CLOSED
+        # ============================================================
+
+        group_closed = (
+            group_df[
+                group_df["state"] == "CLOSED"
+            ]
+            .groupby("assignment_group")
+            .size()
+            .rename("closed_count")
+        )
+
+        # ============================================================
+        # GROUP SLA MET
+        # ============================================================
+
+        group_sla_met = (
+            group_df[
+                group_df["sla_status"] == "MET"
+            ]
+            .groupby("assignment_group")
+            .size()
+            .rename("sla_met")
+        )
+
+        # ============================================================
+        # GROUP SLA BREACHED
+        # ============================================================
+
+        group_sla_breached = (
+            group_df[
+                group_df["sla_status"] == "BREACHED"
+            ]
+            .groupby("assignment_group")
+            .size()
+            .rename("sla_breached")
+        )
+
+        # ============================================================
+        # MERGE GROUP METRICS
+        # ============================================================
+
+        group_summary = (
+            group_summary
+            .set_index("assignment_group")
+
+            .join(
+                group_resolved,
+                how="left"
+            )
+
+            .join(
+                group_closed,
+                how="left"
+            )
+
+            .join(
+                group_sla_met,
+                how="left"
+            )
+
+            .join(
+                group_sla_breached,
+                how="left"
+            )
+
+            .fillna(0)
+
+            .reset_index()
+        )
+
+        # ============================================================
+        # INTEGER COUNTS
+        # ============================================================
+
+        for column in [
+            "total_incidents",
+            "resolved_count",
+            "closed_count",
+            "sla_met",
+            "sla_breached"
+        ]:
+
+            group_summary[column] = (
+                group_summary[column]
+                .astype(int)
+            )
+
+        # ============================================================
+        # COMPLETED
+        # ============================================================
+
+        group_summary["completed_count"] = (
+            group_summary["resolved_count"]
+            +
+            group_summary["closed_count"]
+        )
+
+        # ============================================================
+        # GROUP SLA %
+        # ============================================================
+
+        group_summary["sla_total"] = (
+            group_summary["sla_met"]
+            +
+            group_summary["sla_breached"]
+        )
+
+        group_summary["sla_percentage"] = (
+
+            group_summary["sla_met"]
+            .div(
+                group_summary["sla_total"]
+                .replace(0, pd.NA)
+            )
+            .mul(100)
+            .fillna(0)
+            .round(2)
+
+        )
+
+        # ============================================================
+        # GROUP FCR
+        # ============================================================
+
+        if "fcr" in group_df.columns:
+
+            group_fcr = group_df.copy()
+
+            group_fcr["fcr_flag"] = (
+                group_fcr["fcr"]
+                .fillna("")
+                .astype(str)
+                .str.strip()
+                .str.upper()
+                .isin([
+                    "1",
+                    "TRUE",
+                    "YES",
+                    "Y",
+                    "MET"
+                ])
+            )
+
+            group_fcr_count = (
+                group_fcr[
+                    group_fcr["fcr_flag"]
+                ]
+                .groupby("assignment_group")
+                .size()
+                .rename("fcr_count")
+            )
+
+            group_fcr_total = (
+                group_fcr
+                .groupby("assignment_group")
+                .size()
+                .rename("fcr_total")
+            )
+
+            group_summary = (
+                group_summary
+                .set_index("assignment_group")
+
+                .join(
+                    group_fcr_count,
+                    how="left"
+                )
+
+                .join(
+                    group_fcr_total,
+                    how="left"
+                )
+
+                .fillna(0)
+
+                .reset_index()
+            )
+
+            group_summary["fcr_percentage"] = (
+
+                group_summary["fcr_count"]
+                .div(
+                    group_summary["fcr_total"]
+                    .replace(0, pd.NA)
+                )
+                .mul(100)
+                .fillna(0)
+                .round(2)
+
+            )
+
+        else:
+
+            group_summary["fcr_count"] = 0
+
+            group_summary["fcr_total"] = 0
+
+            group_summary["fcr_percentage"] = 0
+
+        # ============================================================
+        # GROUP POINTS
+        # ============================================================
+
         group_summary["total_points"] = (
-            group_summary["total_points"].round(2)
+            group_summary["total_points"]
+            .round(2)
         )
 
         group_summary["average_points"] = (
-            group_summary["average_points"].round(2)
+            group_summary["average_points"]
+            .round(2)
+        )
+
+        # ============================================================
+        # GROUP LEVEL
+        # ============================================================
+
+        group_summary["level"] = (
+            group_summary["total_points"]
+            .apply(get_level)
+        )
+
+        # ============================================================
+        # GROUP PERFORMANCE BADGES
+        # ============================================================
+
+        group_summary["performance_badges"] = (
+
+            group_summary.apply(
+
+                lambda row:
+
+                    get_performance_badges(
+
+                        resolved_count=row["resolved_count"],
+
+                        closed_count=row["closed_count"],
+
+                        sla_percentage=row["sla_percentage"],
+
+                        fcr_percentage=row["fcr_percentage"]
+
+                    ),
+
+                axis=1
+
+            )
+
+        )
+
+        group_summary["badge_count"] = (
+            group_summary[
+                "performance_badges"
+            ].apply(len)
+        )
+
+        group_summary["badges"] = (
+            group_summary[
+                "performance_badges"
+            ]
+            .apply(
+                lambda x:
+                    "; ".join(x)
+            )
         )
 
         group_summary["group_badge"] = (
-            group_summary["total_points"]
-            .apply(get_badge)
+            group_summary["level"]
         )
 
-        group_summary = group_summary.sort_values(
-            by="total_points",
-            ascending=False
+        # ============================================================
+        # GROUP SORT
+        # ============================================================
+
+        group_summary = (
+            group_summary
+            .sort_values(
+                by="total_points",
+                ascending=False
+            )
+            .reset_index(drop=True)
         )
+
+        # ============================================================
+        # SAVE GROUP SUMMARY
+        # ============================================================
 
         group_file = os.path.join(
             output_dir,
             "group_badge_summary.csv"
         )
 
-        if self.params.Oracle['Loader'] is None:
-            group_summary.to_csv(group_file,index=False)
-        elif self.params.Oracle['Loader']=='Oracle':
-            self.loader.run(group_summary,'GPBdgeSMRY') 
+        if self.params.Oracle["Loader"] is None:
 
+            group_summary.to_csv(
+                group_file,
+                index=False
+            )
 
-        # group_summary.to_csv(
-        #     group_file,
-        #     index=False
-        # )
+        elif self.params.Oracle["Loader"] == "Oracle":
+
+            group_summary.to_csv(
+                group_file,
+                index=False
+            )
+
+            self.loader.run(
+                group_summary,
+                "GPBdgeSMRY"
+            )
 
         print(
             "Group CSV saved:",
             group_file
         )
 
-        # ==============================================================
+        # ============================================================
         # 4. OVERALL LEVEL
-        # ==============================================================
+        # ============================================================
 
         print("\n4. OVERALL LEVEL")
 
-        overall_points = df["points"].sum()
+        overall_points = (
+            df["points"].sum()
+        )
 
-        overall_incidents = df["number"].count()
+        overall_incidents = (
+            df["number"].count()
+        )
 
         overall_average_points = (
             df["points"].mean()
         )
 
-        overall_badge = get_badge(
+        # ============================================================
+        # OVERALL RESOLVED
+        # ============================================================
+
+        overall_resolved = (
+            (
+                df["state"] == "RESOLVED"
+            )
+            .sum()
+        )
+
+        # ============================================================
+        # OVERALL CLOSED
+        # ============================================================
+
+        overall_closed = (
+            (
+                df["state"] == "CLOSED"
+            )
+            .sum()
+        )
+
+        # ============================================================
+        # OVERALL SLA
+        # ============================================================
+
+        overall_sla_met = (
+            (
+                df["sla_status"] == "MET"
+            )
+            .sum()
+        )
+
+        overall_sla_breached = (
+            (
+                df["sla_status"] == "BREACHED"
+            )
+            .sum()
+        )
+
+        overall_sla_total = (
+            overall_sla_met
+            +
+            overall_sla_breached
+        )
+
+        if overall_sla_total > 0:
+
+            overall_sla_percentage = round(
+                (
+                    overall_sla_met
+                    /
+                    overall_sla_total
+                )
+                * 100,
+                2
+            )
+
+        else:
+
+            overall_sla_percentage = 0
+
+        # ============================================================
+        # OVERALL FCR
+        # ============================================================
+
+        if "fcr" in df.columns:
+
+            overall_fcr_flag = (
+                df["fcr"]
+                .fillna("")
+                .astype(str)
+                .str.strip()
+                .str.upper()
+                .isin([
+                    "1",
+                    "TRUE",
+                    "YES",
+                    "Y",
+                    "MET"
+                ])
+            )
+
+            overall_fcr_count = (
+                overall_fcr_flag.sum()
+            )
+
+            overall_fcr_total = (
+                len(df)
+            )
+
+            if overall_fcr_total > 0:
+
+                overall_fcr_percentage = round(
+                    (
+                        overall_fcr_count
+                        /
+                        overall_fcr_total
+                    )
+                    * 100,
+                    2
+                )
+
+            else:
+
+                overall_fcr_percentage = 0
+
+        else:
+
+            overall_fcr_count = 0
+
+            overall_fcr_total = 0
+
+            overall_fcr_percentage = 0
+
+        # ============================================================
+        # OVERALL LEVEL
+        # ============================================================
+
+        overall_level = get_level(
             overall_points
         )
+
+        # ============================================================
+        # OVERALL PERFORMANCE BADGES
+        # ============================================================
+
+        overall_badges = get_performance_badges(
+
+            resolved_count=overall_resolved,
+
+            closed_count=overall_closed,
+
+            sla_percentage=overall_sla_percentage,
+
+            fcr_percentage=overall_fcr_percentage
+
+        )
+
+        # ============================================================
+        # OVERALL SUMMARY
+        # ============================================================
 
         overall_summary = pd.DataFrame(
             [
                 {
+
                     "total_incidents":
                         overall_incidents,
+
+                    "resolved_count":
+                        overall_resolved,
+
+                    "closed_count":
+                        overall_closed,
 
                     "total_points":
                         round(
@@ -1136,11 +2132,35 @@ class Gamification:
                             2
                         ),
 
+                    "sla_percentage":
+                        overall_sla_percentage,
+
+                    "fcr_percentage":
+                        overall_fcr_percentage,
+
+                    "level":
+                        overall_level,
+
                     "overall_badge":
-                        overall_badge
+                        overall_level,
+
+                    "badges":
+                        "; ".join(
+                            overall_badges
+                        ),
+
+                    "badge_count":
+                        len(
+                            overall_badges
+                        )
+
                 }
             ]
         )
+
+        # ============================================================
+        # SAVE OVERALL
+        # ============================================================
 
         overall_file = os.path.join(
             output_dir,
@@ -1157,57 +2177,464 @@ class Gamification:
             overall_file
         )
 
-        # ==============================================================
-        # 5. ADD AGENT BADGE TO INCIDENT DATA
-        # ==============================================================
+        # ============================================================
+        # 5. ADD AGENT BADGES TO INCIDENT DATA
+        # ============================================================
+
+        agent_badge_columns = [
+
+            "assigned_to",
+
+            "level",
+
+            "agent_badge",
+
+            "badges",
+
+            "badge_count"
+
+        ]
+
+        agent_badge_data = (
+            agent_summary[
+                agent_badge_columns
+            ]
+            .rename(
+                columns={
+                    "level":
+                        "agent_level",
+
+                    "badges":
+                        "agent_badges",
+
+                    "badge_count":
+                        "agent_badge_count"
+                }
+            )
+        )
+
+        # ------------------------------------------------------------
+        # Remove old columns if they already exist
+        # ------------------------------------------------------------
+
+        for column in [
+            "agent_level",
+            "agent_badge",
+            "agent_badges",
+            "agent_badge_count"
+        ]:
+
+            if column in df.columns:
+
+                df.drop(
+                    columns=[column],
+                    inplace=True
+                )
+
+        # ------------------------------------------------------------
+        # Merge
+        # ------------------------------------------------------------
 
         df = df.merge(
 
-            agent_summary[
-                [
-                    "assigned_to",
-                    "agent_badge"
-                ]
-            ],
+            agent_badge_data,
 
             on="assigned_to",
 
             how="left"
+
         )
 
-        # ==============================================================
-        # 6. ADD GROUP BADGE TO INCIDENT DATA
-        # ==============================================================
+        # ============================================================
+        # 6. ADD GROUP BADGES
+        # ============================================================
+
+        group_badge_columns = [
+
+            "assignment_group",
+
+            "level",
+
+            "group_badge",
+
+            "badges",
+
+            "badge_count"
+
+        ]
+
+        group_badge_data = (
+            group_summary[
+                group_badge_columns
+            ]
+            .rename(
+                columns={
+                    "level":
+                        "group_level",
+
+                    "badges":
+                        "group_badges",
+
+                    "badge_count":
+                        "group_badge_count"
+                }
+            )
+        )
+
+        # ------------------------------------------------------------
+        # Remove old columns
+        # ------------------------------------------------------------
+
+        for column in [
+            "group_level",
+            "group_badge",
+            "group_badges",
+            "group_badge_count"
+        ]:
+
+            if column in df.columns:
+
+                df.drop(
+                    columns=[column],
+                    inplace=True
+                )
+
+        # ------------------------------------------------------------
+        # Merge
+        # ------------------------------------------------------------
 
         df = df.merge(
 
-            group_summary[
-                [
-                    "assignment_group",
-                    "group_badge"
-                ]
-            ],
+            group_badge_data,
 
             on="assignment_group",
 
             how="left"
+
         )
 
-        # ==============================================================
-        # 7. ADD OVERALL BADGE
-        # ==============================================================
+        # ============================================================
+        # 7. ADD OVERALL BADGES
+        # ============================================================
 
-        df["overall_badge"] = overall_badge
+        df["overall_level"] = (
+            overall_level
+        )
 
-        # ==============================================================
-        # 8. SAVE FINAL INCIDENT DATA AGAIN
-        # ==============================================================
+        df["overall_badge"] = (
+            overall_level
+        )
+
+        df["overall_badges"] = (
+            "; ".join(
+                overall_badges
+            )
+        )
+
+        df["overall_badge_count"] = (
+            len(
+                overall_badges
+            )
+        )
+
+        # ============================================================
+        # 8. SAVE FINAL INCIDENT DATA
+        # ============================================================
 
         df.to_csv(
             incident_file,
             index=False
         )
-        return df 
+
+        # ============================================================
+        # 9. PRINT BADGE SUMMARY
+        # ============================================================
+
+        print("\n" + "=" * 70)
+        print("BADGE SUMMARY")
+        print("=" * 70)
+
+        print("\nAGENT BADGES")
+
+        print(
+            agent_summary[
+                [
+                    "assigned_to",
+                    "total_incidents",
+                    "resolved_count",
+                    "closed_count",
+                    "sla_percentage",
+                    "fcr_percentage",
+                    "total_points",
+                    "level",
+                    "badges"
+                ]
+            ]
+            .to_string(index=False)
+        )
+
+        print("\nGROUP BADGES")
+
+        print(
+            group_summary[
+                [
+                    "assignment_group",
+                    "total_incidents",
+                    "resolved_count",
+                    "closed_count",
+                    "sla_percentage",
+                    "fcr_percentage",
+                    "total_points",
+                    "level",
+                    "badges"
+                ]
+            ]
+            .to_string(index=False)
+        )
+
+        print("\nOVERALL")
+
+        print(
+            overall_summary.to_string(
+                index=False
+            )
+        )
+
+        print("\n" + "=" * 70)
+        print("BADGE ASSIGNMENT COMPLETED")
+        print("=" * 70)
+
+        def calculate_goals( agent_summary):
+
+            goals = self.params.gamification.goals
+
+
+            sla_target = goals.sla_compliance.target
+            fcr_target = goals.fcr.target
+            resolved_target = goals.resolved_incidents.target
+
+    
+            goals_config = self.params.gamification.goals
+            goals = []
+
+            # ============================================================
+            # SLA GOAL
+            # ============================================================
+
+            sla_config = goals_config.sla_compliance
+            sla_target = float(
+                sla_config.target
+            )
+
+            current_sla = float(
+                agent_summary["sla_percentage"].mean()
+            )
+
+            sla_progress = (
+                current_sla / sla_target
+            ) * 100
+
+            sla_progress = min(
+                sla_progress,
+                100
+            )
+
+            sla_threshold = float(
+                sla_config.on_track_threshold
+            )
+
+            sla_status = (
+                "On Track"
+                if current_sla >= sla_threshold
+                else "At Risk"
+            )
+
+            goals.append({
+
+                "goal": sla_config.name,
+
+                "current": round(
+                    current_sla,
+                    2
+                ),
+
+                "target": sla_target,
+
+                "progress": round(
+                    sla_progress,
+                    2
+                ),
+
+                "remaining": round(
+                    max(
+                        sla_target - current_sla,
+                        0
+                    ),
+                    2
+                ),
+
+                "unit": sla_config.unit,
+
+                "due_date": sla_config.due_date,
+
+                "status": sla_status
+
+            })
+
+            # ============================================================
+            # FCR GOAL
+            # ============================================================
+
+            fcr_config = goals_config.fcr
+
+            fcr_target = float(
+                fcr_config.target
+            )
+
+            current_fcr = float(
+                agent_summary["fcr_percentage"].mean()
+            )
+
+            fcr_progress = (
+                current_fcr / fcr_target
+            ) * 100
+
+            fcr_progress = min(
+                fcr_progress,
+                100
+            )
+
+            fcr_threshold = float(
+                fcr_config.on_track_threshold
+            )
+
+            fcr_status = (
+                "On Track"
+                if current_fcr >= fcr_threshold
+                else "At Risk"
+            )
+
+            goals.append({
+
+                "goal": fcr_config.name,
+
+                "current": round(
+                    current_fcr,
+                    2
+                ),
+
+                "target": fcr_target,
+
+                "progress": round(
+                    fcr_progress,
+                    2
+                ),
+
+                "remaining": round(
+                    max(
+                        fcr_target - current_fcr,
+                        0
+                    ),
+                    2
+                ),
+
+                "unit": fcr_config.unit,
+
+                "due_date": fcr_config.due_date,
+
+                "status": fcr_status
+
+            })
+
+            # ============================================================
+            # RESOLVED INCIDENT GOAL
+            # ============================================================
+
+            resolved_config = (
+                goals_config.resolved_incidents
+            )
+
+            resolved_target = int(
+                resolved_config.target
+            )
+
+            current_resolved = int(
+                agent_summary["completed_count"].sum()
+            )
+
+            resolved_progress = (
+                current_resolved /
+                resolved_target
+            ) * 100
+
+            resolved_progress = min(
+                resolved_progress,
+                100
+            )
+
+            resolved_threshold = float(
+                resolved_config.on_track_threshold
+            )
+
+            resolved_status = (
+                "On Track"
+                if resolved_progress >= resolved_threshold
+                else "At Risk"
+            )
+
+            goals.append({
+
+                "goal": resolved_config.name,
+
+                "current": current_resolved,
+
+                "target": resolved_target,
+
+                "progress": round(
+                    resolved_progress,
+                    2
+                ),
+
+                "remaining": max(
+                    resolved_target - current_resolved,
+                    0
+                ),
+
+                "unit": resolved_config.unit,
+
+                "due_date": resolved_config.due_date,
+
+                "status": resolved_status
+
+            })
+
+            return pd.DataFrame(goals)
+
+        goals_df = calculate_goals(agent_summary)
+        path_save =os.path.join(self.config.root_dir,'AgentLevelGoalsCalculate.csv')
+
+        if self.params.Oracle["Loader"] is None:
+        
+            goals_df.to_csv(
+            path_save,
+            index=False)
+        
+        elif self.params.Oracle["Loader"] == "Oracle":
+        
+            goals_df.to_csv(
+                path_save,
+                index=False)
+        
+                    # self.loader.run(
+                    #     goals_df,
+                    #     "GPBdgeSMRY"
+                    # )
+        
+
+
+
+        return df
+
 
     ##################################################################
     # Badge Summary
@@ -1259,6 +2686,7 @@ class Gamification:
 
         print(f"Badge results saved to : {badge_file}")
         print(f"Badge summary saved to : {summary_file}")
+
 
         return df
 
@@ -1386,6 +2814,8 @@ class Gamification:
         if self.params.Oracle['Loader'] is None:
             agent_df.to_csv(agent_output,index=False)
         elif self.params.Oracle['Loader']=='Oracle':
+            print('Oracle agent level ')
+            agent_df.to_csv(agent_output,index=False)
             self.loader.run(agent_df,'AgentLvlSMRY')  
 
 

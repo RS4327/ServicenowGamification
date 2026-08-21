@@ -3,6 +3,13 @@ Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
 Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
 
 
 ================================================================================
@@ -54,6 +61,23 @@ INC0000052 2026-05-21 13:48:40 In Progress 1 - Critical                         
 
 Assigned incidents: 60
 Assignment group populated: 51
+Starting process...
+======================================================================
+CHECKING ORACLE CONNECTIVITY
+======================================================================
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Oracle connection is available
+======================================================================
+PARAMS.YAML UPDATED SUCCESSFULLY
+======================================================================
+Oracle : Loader : Oracle
+Loader configuration: Oracle
+Oracle available
 
 
 ================================================================================
