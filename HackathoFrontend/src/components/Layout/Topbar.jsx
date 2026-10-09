@@ -1,0 +1,378 @@
+import React, { useState, useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
+import { themes } from '../../context/ThemeContext.jsx'
+import { useDataSource } from '../../hooks/useDataSource.js'
+import { SOURCE_META } from '../../config/dataSource.js'
+
+const routeTitles = {
+  dashboard: 'Dashboard',
+  agents: 'Agents',
+  leaderboard: 'Leaderboard',
+  'ai-insights': 'AI Insights',
+  'performance-charts': 'Performance Charts',
+  reports: 'Reports',
+  settings: 'Settings',
+  'my-performance': 'My Performance',
+  badges: 'Badges',
+  goals: 'Goals',
+}
+
+export default function Topbar({ sidebarWidth = 240 }) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
+  const { theme, themeId, setThemeId } = useTheme()
+
+  const [themeOpen, setThemeOpen] = useState(false)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
+
+  const dataSource = useDataSource()
+  const sourceMeta = SOURCE_META[dataSource] || SOURCE_META.snapshot
+
+  const themeRef = useRef(null)
+  const notifRef = useRef(null)
+  const profileRef = useRef(null)
+
+  const segments = location.pathname.split('/').filter(Boolean)
+  const pageKey = segments[segments.length - 1] || 'dashboard'
+  const pageTitle = routeTitles[pageKey] || 'Dashboard'
+  const role = segments[0] || ''
+
+  const isLight = themeId === 'light'
+
+  function toggleLightDark() {
+    if (isLight) {
+      const prev = localStorage.getItem('gd-prev-theme') || 'cyber'
+      setThemeId(prev)
+    } else {
+      localStorage.setItem('gd-prev-theme', themeId)
+      setThemeId('light')
+    }
+  }
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (themeRef.current && !themeRef.current.contains(e.target)) setThemeOpen(false)
+      if (notifRef.current && !notifRef.current.contains(e.target)) setNotifOpen(false)
+      if (profileRef.current && !profileRef.current.contains(e.target)) setProfileOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  function handleLogout() {
+    setProfileOpen(false)
+    logout()
+    navigate('/')
+  }
+
+  const notifications = [
+    { id: 1, text: 'SLA breach detected on INC0010002', time: '2m ago', color: theme.danger },
+    { id: 2, text: 'New top performer: Guillermo Fröhlich', time: '15m ago', color: theme.success },
+    { id: 3, text: 'Weekly leaderboard updated', time: '1h ago', color: theme.accent },
+  ]
+
+  const iconBtn = (active) => ({
+    width: '38px', height: '38px', borderRadius: '10px',
+    border: `1px solid ${theme.cardBorder}`,
+    background: active ? theme.navActiveBg : theme.cardBg,
+    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    color: active ? theme.accent : theme.textMuted, transition: 'all 0.2s',
+    position: 'relative',
+  })
+
+  const dropdown = {
+    position: 'absolute', top: '46px', right: 0,
+    background: theme.sidebarBg, border: `1px solid ${theme.cardBorder}`,
+    borderRadius: '14px', padding: '8px', zIndex: 300,
+    boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
+    animation: 'fadeInUp 0.2s ease',
+  }
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: sidebarWidth,
+      right: 0,
+      height: '64px',
+      background: theme.topbarBg,
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+      borderBottom: `1px solid ${theme.topbarBorder}`,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 24px',
+      zIndex: 100,
+      transition: 'left 0.3s cubic-bezier(0.4,0,0.2,1)',
+    }}>
+
+      {/* Left */}
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ fontSize: '12px', color: theme.textMuted, textTransform: 'capitalize' }}>{role}</span>
+          <span style={{ fontSize: '12px', color: theme.textMuted }}>/</span>
+          <span style={{ fontSize: '12px', color: theme.accent, fontWeight: 600 }}>{pageTitle}</span>
+        </div>
+        <h2 style={{ fontSize: '18px', fontWeight: 700, color: theme.textPrimary, lineHeight: 1.2 }}>{pageTitle}</h2>
+      </div>
+
+      {/* Center search */}
+      <div style={{ flex: 1, maxWidth: '340px', margin: '0 24px' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '10px',
+          background: theme.inputBg, border: `1px solid ${theme.inputBorder}`,
+          borderRadius: '10px', padding: '8px 14px',
+        }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={theme.textMuted} strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span style={{ fontSize: '13px', color: theme.textMuted }}>Search incidents, agents...</span>
+          <span style={{ marginLeft: 'auto', fontSize: '11px', color: theme.textMuted, background: theme.cardBg, border: `1px solid ${theme.cardBorder}`, borderRadius: '5px', padding: '2px 6px' }}>⌘K</span>
+        </div>
+      </div>
+
+      {/* Right actions */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+
+        {/* Data Source Badge */}
+        <div
+          title={sourceMeta.description}
+          style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            padding: '4px 10px', borderRadius: '20px',
+            background: `${sourceMeta.color}15`,
+            border: `1px solid ${sourceMeta.color}35`,
+            marginRight: '4px', cursor: 'default',
+          }}
+        >
+          <div style={{
+            width: '7px', height: '7px', borderRadius: '50%',
+            background: sourceMeta.color,
+            boxShadow: `0 0 6px ${sourceMeta.color}`,
+            animation: dataSource === 'connecting' ? 'live-pulse 1s ease infinite' : 'none',
+          }} />
+          <span style={{ fontSize: '11px', fontWeight: 700, color: sourceMeta.color, letterSpacing: '0.3px' }}>
+            {sourceMeta.label}
+          </span>
+        </div>
+
+        {/* Live indicator */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '6px' }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: theme.success, animation: 'live-pulse 2s ease infinite', boxShadow: `0 0 8px ${theme.success}` }} />
+          <span style={{ fontSize: '11px', color: theme.textMuted, fontWeight: 600 }}>LIVE</span>
+        </div>
+
+        {/* Light / Dark quick toggle */}
+        <button
+          onClick={toggleLightDark}
+          title={isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+          style={iconBtn(false)}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = theme.cardBorder; e.currentTarget.style.color = theme.textMuted }}
+        >
+          {isLight ? (
+            /* Moon icon */
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          ) : (
+            /* Sun icon */
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          )}
+        </button>
+
+        {/* Theme palette picker */}
+        <div ref={themeRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setThemeOpen(v => !v); setNotifOpen(false); setProfileOpen(false) }}
+            style={iconBtn(themeOpen)}
+            title="Choose Theme"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </button>
+
+          {themeOpen && (
+            <div style={{ ...dropdown, width: '220px' }}>
+              <div style={{ fontSize: '10px', fontWeight: 700, color: theme.textMuted, letterSpacing: '1px', padding: '4px 8px 8px', textTransform: 'uppercase' }}>Choose Theme</div>
+              {Object.values(themes).map(t => (
+                <button key={t.id} onClick={() => { setThemeId(t.id); setThemeOpen(false) }} style={{
+                  width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '9px 10px', borderRadius: '10px',
+                  border: themeId === t.id ? `1px solid ${t.accent}` : '1px solid transparent',
+                  background: themeId === t.id ? `${t.accent}15` : 'transparent',
+                  cursor: 'pointer', transition: 'all 0.15s',
+                }}>
+                  <span style={{ fontSize: '17px' }}>{t.icon}</span>
+                  <span style={{ fontSize: '13px', fontWeight: 600, color: themeId === t.id ? t.accent : theme.textSecondary }}>{t.name}</span>
+                  <div style={{ marginLeft: 'auto', display: 'flex', gap: '3px' }}>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: t.accent }} />
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: t.accentSecondary }} />
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Notification bell */}
+        <div ref={notifRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setNotifOpen(v => !v); setThemeOpen(false); setProfileOpen(false) }}
+            style={iconBtn(notifOpen)}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <div style={{ position: 'absolute', top: '7px', right: '7px', width: '8px', height: '8px', borderRadius: '50%', background: theme.danger, border: `2px solid ${theme.sidebarBg}` }} />
+          </button>
+
+          {notifOpen && (
+            <div style={{ ...dropdown, width: '300px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 8px 10px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: theme.textPrimary }}>Notifications</span>
+                <span style={{ fontSize: '11px', color: theme.accent, fontWeight: 600, cursor: 'pointer' }}>Mark all read</span>
+              </div>
+              {notifications.map(n => (
+                <div key={n.id} style={{
+                  display: 'flex', gap: '10px', padding: '10px', borderRadius: '10px',
+                  marginBottom: '4px', background: theme.navHoverBg, cursor: 'pointer',
+                  transition: 'background 0.15s',
+                }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: n.color, marginTop: '4px', flexShrink: 0, boxShadow: `0 0 6px ${n.color}` }} />
+                  <div>
+                    <div style={{ fontSize: '12px', color: theme.textSecondary, lineHeight: 1.4 }}>{n.text}</div>
+                    <div style={{ fontSize: '11px', color: theme.textMuted, marginTop: '2px' }}>{n.time}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Divider */}
+        <div style={{ width: '1px', height: '28px', background: theme.cardBorder, margin: '0 4px' }} />
+
+        {/* Profile — click to open dropdown with Sign Out */}
+        <div ref={profileRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setProfileOpen(v => !v); setThemeOpen(false); setNotifOpen(false) }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '10px',
+              background: profileOpen ? theme.navActiveBg : 'transparent',
+              border: `1px solid ${profileOpen ? theme.accent : 'transparent'}`,
+              borderRadius: '12px', padding: '6px 10px 6px 6px',
+              cursor: 'pointer', transition: 'all 0.2s',
+            }}
+          >
+            <div style={{
+              width: '36px', height: '36px', borderRadius: '10px',
+              background: theme.accentGrad,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '12px', fontWeight: 700, color: '#fff',
+              boxShadow: `0 0 12px ${theme.accent}40`,
+            }}>
+              {user?.avatar || 'U'}
+            </div>
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: theme.textPrimary, lineHeight: 1.2, whiteSpace: 'nowrap' }}>{user?.name || 'User'}</div>
+              <div style={{ fontSize: '11px', fontWeight: 600, color: theme.accent }}>{user?.role === 'manager' ? 'Manager' : 'Agent'}</div>
+            </div>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={theme.textMuted} strokeWidth="2.5"
+              style={{ transform: profileOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', marginLeft: '2px' }}>
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          {profileOpen && (
+            <div style={{ ...dropdown, right: 0, width: '220px' }}>
+              {/* User info header */}
+              <div style={{ padding: '10px 12px 12px', borderBottom: `1px solid ${theme.cardBorder}`, marginBottom: '6px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{
+                    width: '40px', height: '40px', borderRadius: '12px',
+                    background: theme.accentGrad,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '13px', fontWeight: 700, color: '#fff',
+                    boxShadow: `0 0 12px ${theme.accent}40`,
+                  }}>
+                    {user?.avatar || 'U'}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '14px', fontWeight: 700, color: theme.textPrimary }}>{user?.name || 'User'}</div>
+                    <div style={{ fontSize: '11px', padding: '1px 7px', borderRadius: '20px', display: 'inline-block', marginTop: '2px', background: `${theme.accent}18`, color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 }}>
+                      {user?.role === 'manager' ? 'Manager' : 'Agent'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Menu items */}
+              {[
+                {
+                  label: 'Profile Settings',
+                  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+                  onClick: () => { setProfileOpen(false); navigate(`/${user?.role}/settings`) },
+                  color: theme.textSecondary,
+                },
+                {
+                  label: 'Leaderboard',
+                  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>,
+                  onClick: () => { setProfileOpen(false); navigate(`/${user?.role}/leaderboard`) },
+                  color: theme.textSecondary,
+                },
+              ].map((item, i) => (
+                <button key={i} onClick={item.onClick} style={{
+                  width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '9px 12px', borderRadius: '10px', border: 'none',
+                  background: 'transparent', color: item.color, fontSize: '13px',
+                  fontWeight: 500, cursor: 'pointer', transition: 'all 0.15s', textAlign: 'left',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = theme.navHoverBg}
+                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                  {item.icon}
+                  {item.label}
+                </button>
+              ))}
+
+              {/* Divider */}
+              <div style={{ height: '1px', background: theme.cardBorder, margin: '6px 0' }} />
+
+              {/* Sign Out */}
+              <button
+                onClick={handleLogout}
+                style={{
+                  width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '9px 12px', borderRadius: '10px', border: 'none',
+                  background: `${theme.danger}10`, color: theme.danger,
+                  fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = `${theme.danger}20`}
+                onMouseLeave={e => e.currentTarget.style.background = `${theme.danger}10`}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16 17 21 12 16 7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Sign Out
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}

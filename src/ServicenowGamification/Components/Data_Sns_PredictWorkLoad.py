@@ -106,7 +106,7 @@ class PredictWorkLoad:
         if {"reassignment_count","reopen_count"}.issubset(df.columns):
 
             df["complexity"] = (df["reassignment_count"]+df["reopen_count"])
-        #print(df.columns)
+        print('work load columns feature_engineering ',df.columns)
         return df
     
 
@@ -151,21 +151,23 @@ class PredictWorkLoad:
         return df_l
 
     def encodings(self,df):
-        
+        print('Encoding start ',df.columns)    
         df_clean=self.encoding.clean_data(df)
+
+
 
         def select_features(df_clean):
                 df=df_clean
-                
+                df=self.feature_engineering(df_clean)
                 columns = self.params.predict_workload["feature_columns"]
                 #print(f"selct features {columns}")
         
                 target = self.params.predict_workload["target_column"]
                 #print(f"target feature {target}")
                 columns = columns + [target]
-        
+                print('inside encode ',df.columns )
                 df = df[columns]
-                #print(df.head(2))
+                
                 return df
         df=select_features(df_clean)
         df_enc=self.encoding.encode_features(df)

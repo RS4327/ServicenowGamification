@@ -1,0 +1,1276 @@
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+Reading YAML : params.yaml
+Reading YAML : params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+Reading YAML : params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\Params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\dvc.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Found YAML: C:\Users\RSR\PYTHON\ServicenowGamification\Config\Config.yaml
+Reading YAML : params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Reading YAML : C:\Users\RSR\PYTHON\ServicenowGamification\params.yaml
+Dashboard directory : C:\Users\RSR\PYTHON\ServicenowGamification\Artifacts\AgentDashBorad
+Reading YAML : params.yaml
+Inside Agent Performance
+Achievement columns after merge: ['achievement_count', 'achievements']
+MTTR: 794.0208203125001
+InSide oracle 
+Received DataFrame - MTTR: (15, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : MTTR
+MTTR
+======================================================================
+INSERTING AGENT LEVEL MTTR DATA INTO ORACLE
+======================================================================
+Total records prepared: 15
+======================================================================
+AGENT LEVEL MTTR DATA INSERTED SUCCESSFULLY
+======================================================================
+Records inserted: 15
+Oracle connection closed
+                                  Agent   MTTR_hours  ...  Closed_Incident_Count  Total
+0          ATF Service Level Management    48.000000  ...                      0      0
+1   ATF_TestItilUser1 ATF_TestItilUser1    72.000000  ...                      0      0
+2   ATF_TestItilUser2 ATF_TestItilUser2    24.000000  ...                      0      0
+3                           Beth Anglin   359.438532  ...                      1      1
+4                           Bud Richman  1727.795556  ...                      3      3
+5                  Charlie Whitherspoon  2204.772500  ...                      1      1
+6                             David Loo  1504.540710  ...                      6      6
+7                         Don Goodliffe  1237.699861  ...                      4      4
+8                            Fred Luddy    68.055694  ...                      2      2
+9                    Guillermo Frohlich    24.000000  ...                      0      0
+10                       Howard Johnson   758.933981  ...                      1      1
+11                            ITIL User   442.537556  ...                      5      6
+12                          Luke Wilson  2011.362870  ...                      3      3
+13                                Vamsi    72.000000  ...                      0      0
+14                               Venkat    36.777361  ...                      1      2
+
+[15 rows x 5 columns]
+Art calculation
+(64, 19)
+Inside oracle art group
+Received DataFrame - AgentGroupART: (13, 3)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 3)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentGroupART
+AgentGroupART
+======================================================================
+INSERTING ASSIGNMENT GROUP ART DATA
+======================================================================
+Input shape: (13, 3)
+Input columns:
+['Assignment_Group', 'Average_Resolution_Time', 'Resolved_Incident_Count']
+
+Columns after rename:
+['ASSIGNMENT_GROUP', 'AVERAGE_RESOLUTION_TIME', 'RESOLVED_INCIDENT_COUNT']
+
+Deleting old ASSIGNMENT_GROUP_ART data...
+Old rows deleted: 13
+
+Total records prepared: 13
+First record: ('ATF Service Level Management  Group', 48.0, 1)
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 13
+Oracle COMMIT completed
+Rows currently in Oracle: 13
+======================================================================
+ASSIGNMENT GROUP ART INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+Agent Level ART
+Inside oracle art agent
+Received DataFrame - AgentART: (41, 4)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (41, 4)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentART
+AgentART
+======================================================================
+INSERTING AGENT LEVEL ART DATA INTO ORACLE
+======================================================================
+DataFrame columns:
+['Assignment_Group', 'Agent', 'Average_Resolution_Time', 'Resolved_Incident_Count']
+
+DataFrame shape:
+(41, 4)
+Total records prepared: 41
+
+First record:
+('ATF Service Level Management  Group', 'ATF Service Level Management', 48.0, 1)
+======================================================================
+AGENT LEVEL ART DATA INSERTED SUCCESSFULLY
+======================================================================
+Records inserted: 41
+Oracle connection closed
+Received DataFrame - OverallSLA: (1, 6)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (1, 6)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : OverallSLA
+======================================================================
+INSERTING OVERALL SLA DATA
+======================================================================
+Input shape: (1, 6)
+Input columns:
+['SLA_Met_Count', 'SLA_Breached_Count', 'Total_Resolved', 'SLA_Met_Percentage', 'SLA_Breached_Percentage', 'SLA_Compliance']
+
+Columns after rename:
+['SLA_MET_COUNT', 'SLA_BREACHED_COUNT', 'TOTAL_RESOLVED', 'SLA_MET_PERCENTAGE', 'SLA_BREACHED_PERCENTAGE', 'SLA_COMPLIANCE']
+
+Deleting old OVERALL_SLA data...
+Old rows deleted: 1
+
+Total records prepared: 1
+First record: (np.float64(8.0), np.float64(56.0), np.float64(64.0), np.float64(12.5), np.float64(87.5), np.float64(12.5))
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 1
+Oracle COMMIT completed
+Rows currently in Oracle: 1
+======================================================================
+OVERALL SLA INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Received DataFrame - AgentSLA: (10, 7)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (10, 7)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentSLA
+======================================================================
+INSERTING AGENT LEVEL SLA DATA
+======================================================================
+Input shape: (10, 7)
+Input columns:
+['Agent', 'Total_Resolved_Incidents', 'SLA_Met', 'SLA_Breached', 'SLA_Met_Percentage', 'SLA_Breached_Percentage', 'SLA_Compliance']
+
+Columns after rename:
+['AGENT', 'TOTAL_RESOLVED_INCIDENTS', 'SLA_MET', 'SLA_BREACHED', 'SLA_MET_PERCENTAGE', 'SLA_BREACHED_PERCENTAGE', 'SLA_COMPLIANCE']
+
+Deleting old AGENT_LEVEL_SLA data...
+Old rows deleted: 10
+
+Total records prepared: 10
+First record: ('Beth Anglin', 1, 0, 1, 0.0, 100.0, 0.0)
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 10
+Oracle COMMIT completed
+Rows currently in Oracle: 10
+======================================================================
+AGENT LEVEL SLA INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Received DataFrame - OverallFCR: (1, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (1, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : OverallFCR
+======================================================================
+INSERTING OVERALL FCR DATA
+======================================================================
+Input shape: (1, 5)
+Input columns:
+['Total_Incidents', 'FCR_Count', 'Non_FCR_Count', 'FCR_Percentage', 'Non_FCR_Percentage']
+
+Columns after rename:
+['TOTAL_INCIDENTS', 'FCR_COUNT', 'NON_FCR_COUNT', 'FCR_PERCENTAGE', 'NON_FCR_PERCENTAGE']
+
+Deleting old OVERALL_FCR data...
+Old rows deleted: 1
+ sl script 
+                INSERT INTO OVERALL_FCR
+                (
+                    TOTAL_INCIDENTS,
+                    FCR_COUNT,
+                    NON_FCR_COUNT,
+                    FCR_PERCENTAGE,
+                    NON_FCR_PERCENTAGE
+                )
+                VALUES
+                (
+                    :1,
+                    :2,
+                    :3,
+                    :4,
+                    :5
+                )
+            
+
+Total records prepared: 1
+First record: (np.float64(64.0), np.float64(26.0), np.float64(38.0), np.float64(40.62), np.float64(59.38))
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 1
+Oracle COMMIT completed
+Rows currently in Oracle: 1
+======================================================================
+OVERALL FCR INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Received DataFrame - AgentFCR: (15, 6)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 6)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentFCR
+======================================================================
+INSERTING AGENT LEVEL FCR DATA
+======================================================================
+Input shape: (15, 6)
+Input columns:
+['Agent', 'Total_Incidents', 'FCR_Count', 'Non_FCR_Count', 'FCR_Percentage', 'Non_FCR_Percentage']
+
+Columns after rename:
+['AGENT', 'TOTAL_INCIDENTS', 'FCR_COUNT', 'NON_FCR_COUNT', 'FCR_PERCENTAGE', 'NON_FCR_PERCENTAGE']
+
+Deleting old AGENT_FCR data...
+Old rows deleted: 15
+
+Total records prepared: 15
+First record: ('ATF Service Level Management', 1, 1, 0, 100.0, 0.0)
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 15
+Oracle COMMIT completed
+Rows currently in Oracle: 15
+======================================================================
+AGENT LEVEL FCR INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+
+================================================================================
+OVERALL PERFORMANCE METRICS
+================================================================================
+ Total Incidents  Resolved Incidents  Closed Incidents  Open Incidents  MTTR(Hours)  SLA_Met_Count  SLA_Breached_Count  SLA Compliance(%)  FCR_Count  FCR(%)
+              64                  64                27              35       794.02              8                  56               12.5         26   40.62
+
+Overall metrics saved to: Artifacts/MetricsCalculation\OverallPerformanceMetrics.csv
+Received DataFrame - OverallMTCS: (1, 10)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (1, 10)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : OverallMTCS
+======================================================================
+INSERTING OVERALL PERFORMANCE METRICS
+======================================================================
+Input shape: (1, 10)
+Input columns:
+['Total Incidents', 'Resolved Incidents', 'Closed Incidents', 'Open Incidents', 'MTTR(Hours)', 'SLA_Met_Count', 'SLA_Breached_Count', 'SLA Compliance(%)', 'FCR_Count', 'FCR(%)']
+
+Columns after rename:
+['TOTAL_INCIDENTS', 'RESOLVED_INCIDENTS', 'CLOSED_INCIDENTS', 'OPEN_INCIDENTS', 'MTTR_HOURS', 'SLA_MET_COUNT', 'SLA_BREACHED_COUNT', 'SLA_COMPLIANCE', 'FCR_COUNT', 'FCR']
+
+Deleting old OVERALL_PERFORMANCE_METRICS data...
+Old rows deleted: 1
+
+Total records prepared: 1
+First record: (np.float64(64.0), np.float64(64.0), np.float64(27.0), np.float64(35.0), np.float64(794.02), np.float64(8.0), np.float64(56.0), np.float64(12.5), np.float64(26.0), np.float64(40.62))
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 1
+Oracle COMMIT completed
+Rows currently in Oracle: 1
+======================================================================
+OVERALL PERFORMANCE METRICS INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+
+================================================================================
+AGENT PERFORMANCE METRICS
+================================================================================
+                              Agent  Total_Incidents  Resolved_Incidents  Closed_Incidents  Open_Incidents  MTTR_Hours  SLA_Met_Count  SLA_Breached_Count  SLA_Compliance  FCR_Count    FCR
+       ATF Service Level Management                1                   1                 0               1       48.00              0                   1            0.00          1 100.00
+ATF_TestItilUser1 ATF_TestItilUser1                1                   1                 0               1       72.00              0                   1            0.00          1 100.00
+ATF_TestItilUser2 ATF_TestItilUser2                1                   1                 0               1       24.00              1                   0          100.00          1 100.00
+                        Beth Anglin                7                   7                 1               6      359.44              0                   7            0.00          4  57.14
+                        Bud Richman                4                   4                 3               1     1727.80              0                   4            0.00          0   0.00
+               Charlie Whitherspoon                1                   1                 1               0     2204.77              0                   1            0.00          0   0.00
+                          David Loo                9                   9                 6               3     1504.54              0                   9            0.00          3  33.33
+                      Don Goodliffe                8                   8                 4               4     1237.70              0                   8            0.00          2  25.00
+                         Fred Luddy                6                   6                 2               4       68.06              2                   4           33.33          5  83.33
+                 Guillermo Frohlich                1                   1                 0               1       24.00              1                   0          100.00          1 100.00
+                     Howard Johnson                3                   3                 1               2      758.93              0                   3            0.00          0   0.00
+                          ITIL User               15                  15                 5               9      442.54              3                  12           20.00          5  33.33
+                        Luke Wilson                3                   3                 3               0     2011.36              0                   3            0.00          0   0.00
+                              Vamsi                2                   2                 0               2       72.00              0                   2            0.00          1  50.00
+                             Venkat                2                   2                 1               0       36.78              1                   1           50.00          2 100.00
+
+Agent metrics saved to: Artifacts/MetricsCalculation\AgentPerformanceMetrics.csv
+Received DataFrame - AgentMTCS: (15, 11)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 11)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentMTCS
+======================================================================
+INSERTING AGENT PERFORMANCE METRICS
+======================================================================
+Input shape: (15, 11)
+Input columns:
+['Agent', 'Total_Incidents', 'Resolved_Incidents', 'Closed_Incidents', 'Open_Incidents', 'MTTR_Hours', 'SLA_Met_Count', 'SLA_Breached_Count', 'SLA_Compliance', 'FCR_Count', 'FCR']
+
+Columns after rename:
+['AGENT', 'TOTAL_INCIDENTS', 'RESOLVED_INCIDENTS', 'CLOSED_INCIDENTS', 'OPEN_INCIDENTS', 'MTTR_HOURS', 'SLA_MET_COUNT', 'SLA_BREACHED_COUNT', 'SLA_COMPLIANCE', 'FCR_COUNT', 'FCR']
+
+Deleting old AGENT_PERFORMANCE_METRICS data...
+Old rows deleted: 15
+
+Total records prepared: 15
+First record: ('ATF Service Level Management', 1, 1, 0, 1, 48.0, 0, 1, 0.0, 1, 100.0)
+
+Executing INSERT...
+Oracle executemany completed
+Rows inserted: 15
+Oracle COMMIT completed
+Rows currently in Oracle: 15
+======================================================================
+AGENT PERFORMANCE METRICS INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+================================================================================
+              GAMIFICATION POINT CALCULATION
+================================================================================
+customer_rating column not found. Defaulting to 0.
+reopen_penalty :  -10.0
+
+================================================================================
+INCIDENT LEVEL POINTS
+================================================================================
+    number                         assigned_to                    assignment_group  points
+INC0010026                          Fred Luddy                            Database    85.0
+INC0010025                           ITIL User                            Database   -10.0
+INC0010024                           ITIL User                            Database    85.0
+INC0010023                           ITIL User                            Database    75.0
+INC0010021                              Venkat                             Network    45.0
+INC0010020 ATF_TestItilUser2 ATF_TestItilUser2               ATF_TestGroup_Network    45.0
+INC0010019                           David Loo                               NY DB    25.0
+INC0010018                           David Loo                               NY DB    55.0
+INC0010017                          Fred Luddy                            Database    25.0
+INC0010014                         Beth Anglin                            Database    55.0
+INC0010013                  Guillermo Frohlich             Application Development    45.0
+INC0010012        ATF Service Level Management ATF Service Level Management  Group    55.0
+INC0010011 ATF_TestItilUser1 ATF_TestItilUser1           ATF_TestGroup_ServiceDesk    25.0
+INC0010010                           ITIL User                            Database    55.0
+INC0010009                          Fred Luddy                            Database    25.0
+INC0010008                          Fred Luddy                            Database    55.0
+INC0010007                           ITIL User                            Database    85.0
+INC0000601                              Venkat                             Network    35.0
+INC0000055                         Beth Anglin                        Service Desk    55.0
+INC0000046                               Vamsi                            Software    -5.0
+INC0000050                         Beth Anglin                            Hardware    55.0
+INC0000049                       Don Goodliffe                            Hardware    25.0
+INC0000047                         Beth Anglin                            Software   -10.0
+INC0000053                         Beth Anglin                            Software    55.0
+INC0000052                          Fred Luddy                            Software    55.0
+INC0000051                       Don Goodliffe                            Software    55.0
+INC0000024                           ITIL User                        Service Desk     0.0
+INC0000013                           David Loo                            Software    30.0
+INC0000035                         Luke Wilson                        Service Desk     0.0
+INC0000030                           David Loo                             Network     5.0
+INC0000008                           ITIL User                            Hardware    35.0
+INC0000011                           ITIL User                            Hardware     0.0
+INC0000038                         Luke Wilson                        Service Desk     5.0
+INC0000036                         Luke Wilson                             Network     5.0
+INC0000021                         Beth Anglin                            Database     5.0
+INC0000009                           David Loo                        Service Desk    35.0
+INC0000004                         Bud Richman                        Service Desk    35.0
+INC0000044                          Fred Luddy                            Database    -5.0
+INC0000041                           ITIL User                                Data    -5.0
+INC0000040                           ITIL User                                Data    -5.0
+INC0000039                               Vamsi                             Network    25.0
+INC0000037                      Howard Johnson                        Service Desk    -5.0
+INC0000003                         Beth Anglin                             Network    20.0
+INC0000010                       Don Goodliffe                            Database     0.0
+INC0000029                       Don Goodliffe                        Service Desk   -10.0
+INC0000001                Charlie Whitherspoon                        Service Desk    35.0
+INC0000006                      Howard Johnson                            Software    30.0
+INC0000020                           ITIL User                                  QA    -5.0
+INC0000027                           ITIL User                                  QA    -5.0
+INC0000005                         Bud Richman                            Hardware    35.0
+INC0000002                      Howard Johnson                             Network    25.0
+INC0000028                       Don Goodliffe                        Service Desk     0.0
+INC0000032                           David Loo                            Hardware     5.0
+INC0000019                         Bud Richman                               Cloud    -5.0
+INC0000018                           ITIL User                               Cloud    25.0
+INC0000015                       Don Goodliffe                            Software    20.0
+INC0000033                       Don Goodliffe                            Hardware    35.0
+INC0000012                           David Loo                            Database     5.0
+INC0000026                       Don Goodliffe                            Hardware     0.0
+INC0000034                           David Loo                            Software    35.0
+INC0000016                           ITIL User                            Hardware    20.0
+INC0000025                           ITIL User                             Network    55.0
+INC0000014                         Bud Richman                             Network    35.0
+INC0000031                           David Loo                            Database    55.0
+Received DataFrame - InsGMF: (64, 32)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (64, 32)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : InsGMF
+================================================================================
+        INSERTING INCIDENT_GAMIFICATION
+================================================================================
+Input shape: (64, 32)
+
+Columns after rename:
+['NUMBER_ID', 'OPENED_AT', 'RESOLVED_AT', 'CLOSED_AT', 'PRIORITY', 'STATE', 'ASSIGNED_TO', 'ASSIGNMENT_GROUP', 'CATEGORY', 'SUBCATEGORY', 'SHORT_DESCRIPTION', 'DESCRIPTION', 'SYS_CREATED_ON', 'SYS_UPDATED_ON', 'REOPEN_COUNT', 'REASSIGNMENT_COUNT', 'RESOLUTION_TIME', 'RESOLUTION_HOURS', 'mttr', 'SLA_STATUS', 'FCR', 'total_incidents', 'CUSTOMER_RATING', 'INCIDENT_CLOSED_POINTS', 'SLA_POINTS', 'FCR_POINTS', 'PRIORITY_POINTS', 'CUSTOMER_RATING_POINTS', 'REOPEN_PENALTY_POINTS', 'REASSIGNMENT_PENALTY_POINTS', 'POINTS', 'average_points']
+
+Final Data Types
+--------------------------------------------------------------------------------
+NUMBER_ID                           str                  INC0010026
+OPENED_AT                           Timestamp            2026-08-26 08:17:38
+RESOLVED_AT                         Timestamp            2026-08-26 08:27:26
+CLOSED_AT                           Timestamp            2026-08-26 08:37:36
+PRIORITY                            str                  1 - Critical
+STATE                               str                  Closed
+ASSIGNED_TO                         str                  Fred Luddy
+ASSIGNMENT_GROUP                    str                  Database
+CATEGORY                            str                  Database
+SUBCATEGORY                         str                  Oracle
+SHORT_DESCRIPTION                   str                  Ora-0010
+DESCRIPTION                         str                  Duplicate records found 
+SYS_CREATED_ON                      Timestamp            2026-08-26 08:19:23
+SYS_UPDATED_ON                      Timestamp            2026-08-26 08:37:36
+REOPEN_COUNT                        float                0.0
+REASSIGNMENT_COUNT                  float                0.0
+RESOLUTION_TIME                     str                  0 days 00:09:48
+RESOLUTION_HOURS                    float                0.1633333333333333
+SLA_STATUS                          str                  Met
+FCR                                 float                1.0
+CUSTOMER_RATING                     int                  0
+INCIDENT_CLOSED_POINTS              int                  10
+SLA_POINTS                          int                  20
+FCR_POINTS                          int                  25
+PRIORITY_POINTS                     int                  30
+CUSTOMER_RATING_POINTS              int                  0
+REOPEN_PENALTY_POINTS               float                0.0
+REASSIGNMENT_PENALTY_POINTS         float                0.0
+POINTS                              float                85.0
+
+Deleting old INCIDENT_GAMIFICATION data...
+Old rows deleted: 64
+
+Total records prepared: 64
+
+First record:
+('INC0010026', Timestamp('2026-08-26 08:17:38'), Timestamp('2026-08-26 08:27:26'), Timestamp('2026-08-26 08:37:36'), '1 - Critical', 'Closed', 'Fred Luddy', 'Database', 'Database', 'Oracle', 'Ora-0010', 'Duplicate records found ', Timestamp('2026-08-26 08:19:23'), Timestamp('2026-08-26 08:37:36'), 0.0, 0.0, '0 days 00:09:48', 0.1633333333333333, 'Met', 1.0, 0, 10, 20, 25, 30, 0, 0.0, 0.0, 85.0)
+
+First record length: 29
+
+Executing Oracle executemany...
+Oracle executemany completed
+Rows inserted: 64
+
+Oracle COMMIT completed
+Rows currently in Oracle: 64
+================================================================================
+INCIDENT_GAMIFICATION INSERT SUCCESSFUL
+================================================================================
+Oracle connection closed
+Received DataFrame - AgentRNK: (15, 10)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 10)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentRNK
+======================================================================
+INSERTING AGENT RANKING
+======================================================================
+Old rows deleted: 15
+Records prepared: 15
+Rows inserted: 15
+Oracle COMMIT completed
+Rows currently in Oracle: 15
+======================================================================
+AGENT RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Agent Points saved: Artifacts/DataGamification\AgentPoints.csv
+Received DataFrame - GPRNK: (13, 10)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 10)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPRNK
+======================================================================
+INSERTING GROUP RANKING
+======================================================================
+Old rows deleted: 13
+Records prepared: 13
+Rows inserted: 13
+Oracle COMMIT completed
+Rows currently in Oracle: 13
+======================================================================
+GROUP RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Group Points saved: Artifacts/DataGamification\GroupPoints.csv
+
+================================================================================
+OVERALL GAMIFICATION POINTS
+================================================================================
+ Total_Incidents  Total_Points  Average_Points_Per_Incident  Closed_Incidents  SLA_Met_Count  FCR_Count  Reopen_Count  Reassignment_Count
+              64        1720.0                        26.88                27              8         26           1.0                50.0
+
+Overall Points saved: Artifacts/DataGamification\OverallGamificationPoints.csv
+
+================================================================================
+GAMIFICATION CALCULATION COMPLETED
+================================================================================
+Incident File : Artifacts/DataGamification\IncidentPoints.csv
+Agent File    : Artifacts/DataGamification\AgentPoints.csv
+Group File    : Artifacts/DataGamification\GroupPoints.csv
+Overall File  : Artifacts/DataGamification\OverallGamificationPoints.csv
+================================================================================
+Received DataFrame - AgentGpRNK: (41, 11)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (41, 11)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentGpRNK
+======================================================================
+INSERTING AGENT GROUP RANKING
+======================================================================
+Old rows deleted: 41
+Records prepared: 41
+Rows inserted: 41
+Oracle COMMIT completed
+Rows currently in Oracle: 41
+======================================================================
+AGENT GROUP RANKING INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Received DataFrame - AgentPerSMRY: (15, 5)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 5)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentPerSMRY
+======================================================================
+INSERTING AGENT PERFORMANCE SUMMARY
+======================================================================
+Old rows deleted: 15
+Total records: 15
+Rows inserted: 15
+Commit successful
+Rows currently in Oracle: 15
+======================================================================
+AGENT PERFORMANCE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Incident points saved to : Artifacts/DataGamification/IncidentPoints.csv
+Analyst summary saved to : Artifacts/DataGamification/AnalystPoints.csv
+======================================================================
+BADGE ASSIGNMENT
+======================================================================
+
+1. INCIDENT LEVEL
+
+2. AGENT LEVEL
+Received DataFrame - AgentBdgeSMRY: (15, 20)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (15, 20)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentBdgeSMRY
+======================================================================
+INSERTING AGENT BADGE SUMMARY
+======================================================================
+Old rows deleted: 15
+Total records: 15
+First record: ('ITIL User', 15, 405.0, 27.0, 1, 5, 3, 12, 6, 15, 20.0, 0.0, 15, 0.0, 'Silver', "['SLA Watcher']", 1, 'SLA Watcher', 'Focus on SLA improvement', 'Silver')
+Performance badges: ['SLA Watcher'] <class 'str'>
+Badges: SLA Watcher <class 'str'>
+Rows inserted: 15
+Commit successful
+Rows currently in Oracle: 15
+======================================================================
+AGENT BADGE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Agent CSV saved: Artifacts/DataGamification\agent_badge_summary.csv
+
+3. GROUP LEVEL
+Received DataFrame - GPBdgeSMRY: (13, 19)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 19)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPBdgeSMRY
+======================================================================
+INSERTING AGENT GROUP BADGE SUMMARY
+======================================================================
+Old rows deleted: 13
+Total records: 13
+First record: ('Database', 15, 595.0, 39.67, 1, 7, 5, 10, 8, 15, 33.33, 0.0, 15, 0.0, 'Gold', "['SLA Watcher']", 1, 'SLA Watcher', 'Gold')
+Performance badges: ['SLA Watcher'] <class 'str'>
+Badges: SLA Watcher <class 'str'>
+Rows inserted: 13
+Commit successful
+Rows currently in Oracle: 13
+======================================================================
+AGENT GROUP BADGE SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Group CSV saved: Artifacts/DataGamification\group_badge_summary.csv
+
+4. OVERALL LEVEL
+Overall CSV saved: Artifacts/DataGamification\overall_badge_summary.csv
+
+======================================================================
+BADGE SUMMARY
+======================================================================
+
+AGENT BADGES
+                        assigned_to  total_incidents  resolved_count  closed_count  sla_percentage  fcr_percentage  total_points  level       badges
+                          ITIL User               15               1             5           20.00             0.0         405.0 Silver  SLA Watcher
+                          David Loo                9               0             6            0.00             0.0         250.0 Bronze  SLA Watcher
+                         Fred Luddy                6               0             2           33.33             0.0         240.0 Bronze  SLA Watcher
+                        Beth Anglin                7               0             1            0.00             0.0         235.0 Bronze  SLA Watcher
+                      Don Goodliffe                8               0             4            0.00             0.0         125.0 Bronze  SLA Watcher
+                        Bud Richman                4               0             3            0.00             0.0         100.0 Bronze  SLA Watcher
+                             Venkat                2               1             1           50.00             0.0          80.0 Rookie             
+       ATF Service Level Management                1               0             0            0.00             0.0          55.0 Rookie  SLA Watcher
+                     Howard Johnson                3               0             1            0.00             0.0          50.0 Rookie  SLA Watcher
+ATF_TestItilUser2 ATF_TestItilUser2                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+                 Guillermo Frohlich                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+               Charlie Whitherspoon                1               0             1            0.00             0.0          35.0 Rookie  SLA Watcher
+ATF_TestItilUser1 ATF_TestItilUser1                1               0             0            0.00             0.0          25.0 Rookie  SLA Watcher
+                              Vamsi                2               0             0            0.00             0.0          20.0 Rookie  SLA Watcher
+                        Luke Wilson                3               0             3            0.00             0.0          10.0 Rookie  SLA Watcher
+
+GROUP BADGES
+                   assignment_group  total_incidents  resolved_count  closed_count  sla_percentage  fcr_percentage  total_points  level       badges
+                           Database               15               1             7           33.33             0.0         595.0   Gold  SLA Watcher
+                           Software                9               0             3            0.00             0.0         265.0 Bronze  SLA Watcher
+                            Network                9               1             4           11.11             0.0         250.0 Bronze  SLA Watcher
+                           Hardware                9               0             6            0.00             0.0         210.0 Bronze  SLA Watcher
+                       Service Desk               10               0             7            0.00             0.0         150.0 Bronze  SLA Watcher
+                              NY DB                2               0             0            0.00             0.0          80.0 Rookie  SLA Watcher
+ATF Service Level Management  Group                1               0             0            0.00             0.0          55.0 Rookie  SLA Watcher
+            Application Development                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+              ATF_TestGroup_Network                1               0             0          100.00             0.0          45.0 Rookie SLA Champion
+          ATF_TestGroup_ServiceDesk                1               0             0            0.00             0.0          25.0 Rookie  SLA Watcher
+                              Cloud                2               0             0            0.00             0.0          20.0 Rookie  SLA Watcher
+                               Data                2               0             0            0.00             0.0         -10.0 Rookie  SLA Watcher
+                                 QA                2               0             0            0.00             0.0         -10.0 Rookie  SLA Watcher
+
+OVERALL
+ total_incidents  resolved_count  closed_count  total_points  average_points  sla_percentage  fcr_percentage  level overall_badge      badges  badge_count
+              64               2            27        1720.0           26.88            12.5             0.0 Legend        Legend SLA Watcher            1
+
+======================================================================
+BADGE ASSIGNMENT COMPLETED
+======================================================================
+Badge results saved to : Artifacts/DataGamification/BadgeResults.csv
+Badge summary saved to : Artifacts/DataGamification/BadgeSummary.csv
+================================================================================
+CALCULATING AGENT, GROUP AND OVERALL LEVELS
+================================================================================
+calculate_level columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count'],
+      dtype='object')
+
+Configured Levels:
+Beginner -> 0 points
+Explorer -> 100 points
+Performer -> 250 points
+Expert -> 500 points
+Master -> 750 points
+Champion -> 1000 points
+
+Calculating Agent Level...
+agent_df Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='object')
+Oracle agent level 
+Received DataFrame - AgentLvlSMRY: (64, 8)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (64, 8)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : AgentLvlSMRY
+======================================================================
+INSERTING AGENT LEVEL SUMMARY
+======================================================================
+insert agent level summy  Index(['Agent', 'total_incidents', 'points', 'average_points', 'level',
+       'level_name', 'points_to_next_level', 'level_progress'],
+      dtype='object')
+Old rows deleted: 64
+Total records: 64
+Rows inserted: 64
+Commit successful
+Rows currently in Oracle: 64
+======================================================================
+AGENT LEVEL SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+Calculating Group Level...
+Received DataFrame - GPLvlSMRY: (13, 8)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (13, 8)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GPLvlSMRY
+======================================================================
+INSERTING GROUP LEVEL SUMMARY
+======================================================================
+Old rows deleted: 13
+Total records: 13
+Rows inserted: 13
+Commit successful
+Rows currently in Oracle: 13
+======================================================================
+GROUP LEVEL SUMMARY INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+
+Calculating Overall Level...
+Overall level saved: Artifacts/DataGamification\OverallLevel.csv
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='object')
+Level results saved to : Artifacts/DataGamification/LevelResults.csv
+Level summary saved to : Artifacts/DataGamification/LevelSummary.csv
+l svae : Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='object')
+l df_lead  c: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='object')
+Type of df: <class 'pandas.core.frame.DataFrame'>
+##############################################################
+# Overall Leaderboard
+##############################################################
+l svae   df  : Index(['assigned_to', 'total_incidents', 'total_points', 'sla_met',
+       'average_resolution', 'rank'],
+      dtype='object')
+df_lead columns before Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress'],
+      dtype='object')
+df_lead columns Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='object')
+Type of df: <class 'pandas.core.frame.DataFrame'>
+Type of df: <class 'pandas.core.frame.DataFrame'>
+lead_board_file        number            opened_at  ... level_progress leaderboard_rank
+0  INC0010026  2026-08-26 08:17:38  ...           85.0                3
+1  INC0010025  2026-08-26 08:09:44  ...          100.0                1
+
+[2 rows x 51 columns]
+lead_board_file columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='object')
+team_summary        number            opened_at  ... level_progress leaderboard_rank
+0  INC0010026  2026-08-26 08:17:38  ...           85.0                3
+1  INC0010025  2026-08-26 08:09:44  ...          100.0                1
+
+[2 rows x 51 columns]
+team_summary columns  Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='object')
+
+Generating Assignment Group Leaderboard...
+Input shape: (64, 51)
+
+Assignment Group Leaderboard:
+                       assignment_group  total_incidents  total_points  group_rank
+6                              Database               15         595.0           1
+12                             Software                9         265.0           2
+9                               Network                9         250.0           3
+7                              Hardware                9         210.0           4
+11                         Service Desk               10         150.0           5
+8                                 NY DB                2          80.0           6
+0   ATF Service Level Management  Group                1          55.0           7
+1                 ATF_TestGroup_Network                1          45.0           8
+3               Application Development                1          45.0           8
+2             ATF_TestGroup_ServiceDesk                1          25.0           9
+4                                 Cloud                2          20.0          10
+5                                  Data                2         -10.0          11
+10                                   QA                2         -10.0          11
+Leaderboard saved : Artifacts/DataGamification/Leaderboard.csv
+Top performers saved : Artifacts/DataGamification/TopPerformers.csv
+Bottom performers saved : Artifacts/DataGamification/BottomPerformers.csv
+Team summary saved : Artifacts/DataGamification/TeamSummary.csv
+Assignment Group Leaderboard : Artifacts/DataGamification/AssignmentGroupLeaderboard.csv
+calculate_achievements: Index(['number', 'opened_at', 'resolved_at', 'closed_at', 'priority', 'state',
+       'assigned_to', 'assignment_group', 'category', 'subcategory',
+       'short_description', 'description', 'sys_created_on', 'sys_updated_on',
+       'reopen_count', 'reassignment_count', 'resolution_time',
+       'resolution_hours', 'mttr', 'sla_status', 'fcr', 'total_incidents',
+       'customer_rating', 'incident_closed_points', 'sla_points', 'fcr_points',
+       'priority_points', 'customer_rating_points', 'reopen_penalty_points',
+       'reassignment_penalty_points', 'points', 'average_points',
+       'average_resolution', 'badge', 'agent_level', 'agent_badge',
+       'agent_badges', 'agent_badge_count', 'group_level', 'group_badge',
+       'group_badges', 'group_badge_count', 'overall_level', 'overall_badge',
+       'overall_badges', 'overall_badge_count', 'level', 'level_name',
+       'points_to_next_level', 'level_progress', 'leaderboard_rank'],
+      dtype='object')
+##############################################################
+# Achievement Calculation
+##############################################################
+Received DataFrame - GMFNL: (64, 53)
+======================================================================
+ORACLE DATA LOAD STARTED
+======================================================================
+Received DataFrame: (64, 53)
+======================================================================
+CONNECTING TO ORACLE
+======================================================================
+Oracle connection successful
+Host: localhost
+Service: FREEPDB1
+Stage : GMFNL
+======================================================================
+INSERTING INCIDENT GAMIFICATION FINAL
+======================================================================
+
+Deleting old INCIDENT_GAMIFICATION_FINAL data...
+Old rows deleted: 64
+
+Total records prepared: 64
+
+Checking Python data types...
+Data type validation successful.
+
+Executing Oracle INSERT...
+Rows inserted: 64
+
+Oracle COMMIT successful.
+Rows currently in Oracle: 64
+======================================================================
+INCIDENT GAMIFICATION FINAL INSERT SUCCESSFUL
+======================================================================
+Oracle connection closed
+Achievement results saved : Artifacts/DataGamification/AchievementResults.csv
+Achievement summary saved : Artifacts/DataGamification/AchievementSummary.csv
+##############################################################
+# Generate Monthly Ranking
+##############################################################
+Monthly Ranking saved : Artifacts/DataGamification/MonthlyRanking.csv
+Top Performers saved : Artifacts/DataGamification/TopMonthlyPerformers.csv
+Monthly Summary saved : Artifacts/DataGamification/MonthlySummary.csv
+Calling the Agent Dashboard
+======================================================================
+STARTING AGENT DASHBOARD
+======================================================================
+======================================================================
+AGENT HEADER
+======================================================================
+Reading AchievementResults : C:\Users\RSR\PYTHON\ServicenowGamification\Artifacts\DataGamification\AchievementResults.csv
+Input records : 64
+Agent Header records : 41
+Agent Header saved : C:\Users\RSR\PYTHON\ServicenowGamification\Artifacts\AgentDashBorad\Agent_Header_01.csv
+======================================================================
+AGENT HEADER GENERATED SUCCESSFULLY
+======================================================================
+AGENT header generate
+======================================================================
+AGENT PERFORMANCE SUMMARY
+======================================================================
+mttrcolumns  Index(['agent', 'mttr_hours', 'resolved_incident_count',
+       'closed_incident_count', 'total'],
+      dtype='object')
+======================================================================
+AGENT PERFORMANCE SUMMARY GENERATED SUCCESSFULLY
+======================================================================
+Completed The Agent Dashboard
+###########################################################
+# Data Cleaning
+###########################################################
+Inside Agent Performance
+Achievement columns after merge: ['achievements']
+insdie agent performance :  Index(['number', 'priority', 'state', 'assigned_to', 'assignment_group',
+       'category', 'subcategory', 'short_description', 'description',
+       'sys_created_on', 'sys_updated_on', 'reopen_count',
+       'reassignment_count', 'resolution_hours', 'mttr', 'sla_status', 'fcr',
+       'total_incidents', 'customer_rating', 'incident_closed_points',
+       'sla_points', 'fcr_points', 'priority_points', 'customer_rating_points',
+       'reopen_penalty_points', 'reassignment_penalty_points', 'points',
+       'average_points', 'average_resolution', 'badge', 'agent_level',
+       'agent_badge', 'agent_badges', 'agent_badge_count', 'group_level',
+       'group_badge', 'group_badges', 'group_badge_count', 'overall_level',
+       'overall_badge', 'overall_badges', 'overall_badge_count', 'level',
+       'level_name', 'points_to_next_level', 'level_progress',
+       'sla_percentage', 'quality_score', 'badges', 'achievement',
+       'complexity_score', 'achievements', 'recognition_score',
+       'points_per_ticket', 'resolved_incidents', 'active_incidents',
+       'pending_incidents', 'rewards', 'leaderboard_rank', 'month',
+       'monthly_rank', 'workload', 'workload_level', 'fcr_percentage',
+       'skill_score', 'opened_weekday', 'performance_index',
+       'performance_score', 'performance_rating', 'opened_hour'],
+      dtype='object')
+X_train Shape : (51, 30)
+X_test Shape : (13, 30)
+Selected Features : ['priority', 'assignment_group', 'resolution_hours', 'reopen_count', 'reassignment_count', 'mttr', 'fcr', 'sla_percentage', 'total_incidents', 'resolved_incidents', 'active_incidents', 'pending_incidents', 'points', 'badges', 'rewards', 'achievements', 'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating', 'workload', 'workload_level', 'skill_score', 'opened_hour', 'opened_weekday', 'quality_score', 'recognition_score', 'points_per_ticket', 'complexity_score', 'performance_index']
+Models Created Successfully
+X_train : Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
+       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
+       'total_incidents', 'resolved_incidents', 'active_incidents',
+       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
+       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
+       'workload', 'workload_level', 'skill_score', 'opened_hour',
+       'opened_weekday', 'quality_score', 'recognition_score',
+       'points_per_ticket', 'complexity_score', 'performance_index',
+       'resolution_reopen', 'resolution_rating', 'points_per_level'],
+      dtype='object')
+X_test : Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
+       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
+       'total_incidents', 'resolved_incidents', 'active_incidents',
+       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
+       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
+       'workload', 'workload_level', 'skill_score', 'opened_hour',
+       'opened_weekday', 'quality_score', 'recognition_score',
+       'points_per_ticket', 'complexity_score', 'performance_index',
+       'resolution_reopen', 'resolution_rating', 'points_per_level'],
+      dtype='object')
+
+================================================================================
+Training : Random Forest
+================================================================================
+best_estimator  RandomForestClassifier(max_depth=5, random_state=42)
+Predict Proba Shape: (13, 1)
+Only one class present. ROC AUC skipped.
+
+Best Parameters
+{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}
+
+Accuracy : 1.0
+Precision : 1.0
+Recall : 1.0
+F1 Score : 1.0
+ROC AUC : nan
+
+Confusion Matrix
+[[13]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+        Poor       1.00      1.00      1.00        13
+
+    accuracy                           1.00        13
+   macro avg       1.00      1.00      1.00        13
+weighted avg       1.00      1.00      1.00        13
+
+
+================================================================================
+Training : XGBoost
+================================================================================
+
+XGBoost Failed
+Invalid classes inferred from unique values of `y`.  Expected: [0], got ['Poor']
+
+================================================================================
+Training : Decision Tree
+================================================================================
+best_estimator  DecisionTreeClassifier(max_depth=5, random_state=42)
+Predict Proba Shape: (13, 1)
+Only one class present. ROC AUC skipped.
+
+Best Parameters
+{'max_depth': 5, 'min_samples_split': 2}
+
+Accuracy : 1.0
+Precision : 1.0
+Recall : 1.0
+F1 Score : 1.0
+ROC AUC : nan
+
+Confusion Matrix
+[[13]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+        Poor       1.00      1.00      1.00        13
+
+    accuracy                           1.00        13
+   macro avg       1.00      1.00      1.00        13
+weighted avg       1.00      1.00      1.00        13
+
+
+================================================================================
+Training Completed
+================================================================================
+Best Model : Random Forest
+Best Accuracy : 1.0
+
+Evaluation Results
+           Model  Accuracy  ...  ROC AUC                                    Best Parameters
+0  Random Forest       1.0  ...      NaN  {'max_depth': 5, 'min_samples_split': 2, 'n_es...
+1  Decision Tree       1.0  ...      NaN           {'max_depth': 5, 'min_samples_split': 2}
+
+[2 rows x 7 columns]
+Artifacts Loaded Successfully
+numeric :  Index(['priority', 'assignment_group', 'resolution_hours', 'reopen_count',
+       'reassignment_count', 'mttr', 'fcr', 'sla_percentage',
+       'total_incidents', 'resolved_incidents', 'active_incidents',
+       'pending_incidents', 'points', 'badges', 'rewards', 'achievements',
+       'level', 'leaderboard_rank', 'monthly_rank', 'customer_rating',
+       'workload', 'workload_level', 'skill_score', 'opened_hour',
+       'opened_weekday', 'quality_score', 'recognition_score',
+       'points_per_ticket', 'complexity_score', 'performance_index',
+       'resolution_reopen', 'resolution_rating', 'points_per_level'],
+      dtype='object')
+Data Preprocessing Completed
+Last Step
+Categorizing Agent Performance...
+Performance Categorization Completed
+Generating Recommendations...
+Recommendation Generation Completed
+Generating Performance Summary...
+Generating Incident Level Performance Summary...
+Saving Prediction...
+Prediction Saved Successfully

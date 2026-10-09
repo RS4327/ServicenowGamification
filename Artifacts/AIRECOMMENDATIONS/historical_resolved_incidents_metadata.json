@@ -1,0 +1,9 @@
+{
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "vector_dimension": 384,
+  "total_documents": 66,
+  "index_type": "IndexFlatIP",
+  "normalized_embeddings": true,
+  "document_file": "historical_resolved_incidents.json",
+  "faiss_index_file": "historical_resolved_incidents.index"
+}

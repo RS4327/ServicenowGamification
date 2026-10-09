@@ -1,0 +1,14 @@
+assignment_group,Employees,Total_Points,Average_Level,Average_MTTR
+ATF Service Level Management  Group,1,55.0,1.0,96.0
+ATF_TestGroup_Network,1,25.0,1.0,72.0
+ATF_TestGroup_ServiceDesk,1,25.0,1.0,120.0
+Application Development,1,25.0,1.0,72.0
+Cloud,2,20.0,1.0,1047.32
+Data,2,10.0,1.0,384.83
+Database,17,745.0,1.0,461.97
+Hardware,9,210.0,1.0,940.08
+NY DB,2,80.0,1.0,1507.21
+Network,9,250.0,1.0,765.2
+QA,2,-10.0,1.0,384.83
+Service Desk,10,150.0,1.0,1346.28
+Software,9,265.0,1.0,788.57

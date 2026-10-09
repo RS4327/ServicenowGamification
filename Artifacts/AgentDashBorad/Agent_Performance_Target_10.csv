@@ -1,0 +1,71 @@
+METRIC,AGENT,MTTR_HOURS,TARGET_HRS||'HRS',STATUS,MTTR_HOURS
+MTTR(Hours),ATF Service Level Management,96.0,4.0 hrs,Not Met,
+FCR Count,ATF Service Level Management,,>=5 %,Not Met,1.0
+FCR(%),ATF Service Level Management,,>=80 %,Met,100.0
+Resolved Incident,ATF Service Level Management,,>=10 %,Not Met,0.0
+MTTR(Hours),ATF_TestItilUser1 ATF_TestItilUser1,120.0,24.0 hrs,Not Met,
+FCR Count,ATF_TestItilUser1 ATF_TestItilUser1,,>=5 %,Not Met,1.0
+FCR(%),ATF_TestItilUser1 ATF_TestItilUser1,,>=80 %,Met,100.0
+Resolved Incident,ATF_TestItilUser1 ATF_TestItilUser1,,>=10 %,Not Met,0.0
+MTTR(Hours),ATF_TestItilUser2 ATF_TestItilUser2,72.0,24.0 hrs,Not Met,
+FCR(%),ATF_TestItilUser2 ATF_TestItilUser2,,>=80 %,Met,100.0
+Resolved Incident,ATF_TestItilUser2 ATF_TestItilUser2,,>=10 %,Not Met,0.0
+FCR Count,ATF_TestItilUser2 ATF_TestItilUser2,,>=5 %,Not Met,1.0
+FCR(%),Beth Anglin,,>=80 %,Not Met,57.14
+SLA Compliance(%),Beth Anglin,,>=0 %,Not Met,0.0
+Resolved Incident,Beth Anglin,,>=10 %,Not Met,1.0
+FCR Count,Beth Anglin,,>=5 %,Not Met,4.0
+MTTR(Hours),Beth Anglin,349.1528174603175,44.0 hrs,Not Met,
+MTTR(Hours),Bud Richman,1709.7955555555554,20.0 hrs,Not Met,
+FCR Count,Bud Richman,,>=5 %,Not Met,0.0
+Resolved Incident,Bud Richman,,>=10 %,Not Met,3.0
+FCR(%),Bud Richman,,>=80 %,Not Met,0.0
+SLA Compliance(%),Bud Richman,,>=0 %,Not Met,0.0
+Resolved Incident,Charlie Whitherspoon,,>=10 %,Not Met,1.0
+SLA Compliance(%),Charlie Whitherspoon,,>=0 %,Not Met,0.0
+FCR Count,Charlie Whitherspoon,,>=5 %,Not Met,0.0
+MTTR(Hours),Charlie Whitherspoon,2204.7725,4.0 hrs,Not Met,
+FCR(%),Charlie Whitherspoon,,>=80 %,Not Met,0.0
+SLA Compliance(%),David Loo,,>=0 %,Not Met,0.0
+FCR Count,David Loo,,>=5 %,Not Met,3.0
+FCR(%),David Loo,,>=80 %,Not Met,33.33
+Resolved Incident,David Loo,,>=10 %,Not Met,6.0
+MTTR(Hours),David Loo,1507.20737654321,44.0 hrs,Not Met,
+FCR Count,Don Goodliffe,,>=5 %,Not Met,2.0
+MTTR(Hours),Don Goodliffe,1246.6998611111112,68.0 hrs,Not Met,
+Resolved Incident,Don Goodliffe,,>=10 %,Not Met,4.0
+SLA Compliance(%),Don Goodliffe,,>=0 %,Not Met,0.0
+FCR(%),Don Goodliffe,,>=80 %,Not Met,25.0
+SLA Compliance(%),Fred Luddy,,>=0 %,Met,100.0
+FCR(%),Fred Luddy,,>=80 %,Met,83.33
+FCR Count,Fred Luddy,,>=5 %,Met,5.0
+MTTR(Hours),Fred Luddy,40.05569444444445,96.0 hrs,Met,
+Resolved Incident,Fred Luddy,,>=10 %,Not Met,2.0
+FCR Count,Guillermo Frohlich,,>=5 %,Not Met,1.0
+Resolved Incident,Guillermo Frohlich,,>=10 %,Not Met,0.0
+FCR(%),Guillermo Frohlich,,>=80 %,Met,100.0
+MTTR(Hours),Guillermo Frohlich,72.0,24.0 hrs,Not Met,
+FCR(%),Howard Johnson,,>=80 %,Not Met,0.0
+FCR Count,Howard Johnson,,>=5 %,Not Met,0.0
+Resolved Incident,Howard Johnson,,>=10 %,Not Met,1.0
+MTTR(Hours),Howard Johnson,790.9339814814815,32.0 hrs,Not Met,
+SLA Compliance(%),Howard Johnson,,>=0 %,Not Met,0.0
+SLA Compliance(%),ITIL User,,>=0 %,Not Met,50.0
+FCR(%),ITIL User,,>=80 %,Not Met,41.18
+FCR Count,ITIL User,,>=5 %,Met,7.0
+Resolved Incident,ITIL User,,>=10 %,Not Met,5.0
+MTTR(Hours),ITIL User,384.8272549019608,128.0 hrs,Not Met,
+FCR(%),Luke Wilson,,>=80 %,Not Met,0.0
+Resolved Incident,Luke Wilson,,>=10 %,Not Met,3.0
+FCR Count,Luke Wilson,,>=5 %,Not Met,0.0
+SLA Compliance(%),Luke Wilson,,>=0 %,Not Met,0.0
+MTTR(Hours),Luke Wilson,2011.36287037037,48.0 hrs,Not Met,
+FCR(%),Vamsi,,>=80 %,Not Met,50.0
+FCR Count,Vamsi,,>=5 %,Not Met,1.0
+Resolved Incident,Vamsi,,>=10 %,Not Met,0.0
+MTTR(Hours),Vamsi,60.0,24.0 hrs,Not Met,
+MTTR(Hours),Venkat,36.77736111111111,72.0 hrs,Met,
+FCR(%),Venkat,,>=80 %,Met,100.0
+SLA Compliance(%),Venkat,,>=0 %,Not Met,50.0
+FCR Count,Venkat,,>=5 %,Not Met,2.0
+Resolved Incident,Venkat,,>=10 %,Not Met,1.0

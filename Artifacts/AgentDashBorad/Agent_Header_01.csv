@@ -1,0 +1,42 @@
+ASSIGNED_TO,ASSIGNMENT_GROUP,AGENT_LEVEL,AGENT_LEVEL_NAME,POINTS
+ATF Service Level Management,ATF Service Level Management  Group,Rookie,Beginner,55.0
+ATF_TestItilUser1 ATF_TestItilUser1,ATF_TestGroup_ServiceDesk,Rookie,Beginner,25.0
+ATF_TestItilUser2 ATF_TestItilUser2,ATF_TestGroup_Network,Rookie,Beginner,25.0
+Beth Anglin,Database,Bronze,Beginner,60.0
+Beth Anglin,Hardware,Bronze,Beginner,55.0
+Beth Anglin,Network,Bronze,Beginner,20.0
+Beth Anglin,Service Desk,Bronze,Beginner,55.0
+Beth Anglin,Software,Bronze,Beginner,45.0
+Bud Richman,Cloud,Bronze,Beginner,-5.0
+Bud Richman,Hardware,Bronze,Beginner,35.0
+Bud Richman,Network,Bronze,Beginner,35.0
+Bud Richman,Service Desk,Bronze,Beginner,35.0
+Charlie Whitherspoon,Service Desk,Rookie,Beginner,35.0
+David Loo,Database,Bronze,Beginner,60.0
+David Loo,Hardware,Bronze,Beginner,5.0
+David Loo,NY DB,Bronze,Beginner,80.0
+David Loo,Network,Bronze,Beginner,5.0
+David Loo,Service Desk,Bronze,Beginner,35.0
+David Loo,Software,Bronze,Beginner,65.0
+Don Goodliffe,Database,Bronze,Beginner,0.0
+Don Goodliffe,Hardware,Bronze,Beginner,60.0
+Don Goodliffe,Service Desk,Bronze,Beginner,-10.0
+Don Goodliffe,Software,Bronze,Beginner,75.0
+Fred Luddy,Database,Bronze,Beginner,225.0
+Fred Luddy,Software,Bronze,Beginner,55.0
+Guillermo Frohlich,Application Development,Rookie,Beginner,25.0
+Howard Johnson,Network,Rookie,Beginner,25.0
+Howard Johnson,Service Desk,Rookie,Beginner,-5.0
+Howard Johnson,Software,Rookie,Beginner,30.0
+ITIL User,Cloud,Gold,Beginner,25.0
+ITIL User,Data,Gold,Beginner,10.0
+ITIL User,Database,Gold,Beginner,400.0
+ITIL User,Hardware,Gold,Beginner,55.0
+ITIL User,Network,Gold,Beginner,55.0
+ITIL User,QA,Gold,Beginner,-10.0
+ITIL User,Service Desk,Gold,Beginner,0.0
+Luke Wilson,Network,Rookie,Beginner,5.0
+Luke Wilson,Service Desk,Rookie,Beginner,5.0
+Vamsi,Network,Rookie,Beginner,25.0
+Vamsi,Software,Rookie,Beginner,-5.0
+Venkat,Network,Rookie,Beginner,80.0

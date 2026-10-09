@@ -1,0 +1,17 @@
+Feature,Importance
+resolution_hours,0.17263965
+points_per_level,0.17044993
+points,0.15254033
+hour,0.15151177
+resolution_reopen,0.14133209
+month,0.1228535
+assignment_group,0.07465386
+assigned_to,0.009212931
+weekday,0.0048060436
+reassignment_count,0.0
+reopen_count,0.0
+priority,0.0
+level,0.0
+day,0.0
+priority_score,0.0
+complexity,0.0

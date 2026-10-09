@@ -29,6 +29,7 @@ class MetricsCalculation:
             df[col] = pd.to_datetime(df[col], errors="coerce")
         df["resolution_time"] = df["resolved_at"] - df["opened_at"]
         df["resolution_hours"] = ((df["resolved_at"] - df["opened_at"]).dt.total_seconds() / 3600)
+        df['mttr'] = df["resolution_hours"].mean()
         mttr = df["resolution_hours"].mean()
         print("MTTR:", mttr)
       

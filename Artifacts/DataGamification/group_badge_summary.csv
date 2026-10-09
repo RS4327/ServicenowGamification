@@ -1,0 +1,14 @@
+assignment_group,total_incidents,total_points,average_points,resolved_count,closed_count,sla_met,sla_breached,completed_count,sla_total,sla_percentage,fcr_count,fcr_total,fcr_percentage,level,performance_badges,badge_count,badges,group_badge
+Database,17,745.0,43.82,1,7,7,10,8,17,41.18,0.0,17,0.0,Gold,['SLA Watcher'],1,SLA Watcher,Gold
+Software,9,265.0,29.44,0,3,0,9,3,9,0.0,0.0,9,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Bronze
+Network,9,250.0,27.78,1,4,1,8,5,9,11.11,0.0,9,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Bronze
+Hardware,9,210.0,23.33,0,6,0,9,6,9,0.0,0.0,9,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Bronze
+Service Desk,10,150.0,15.0,0,7,0,10,7,10,0.0,0.0,10,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Bronze
+NY DB,2,80.0,40.0,0,0,0,2,0,2,0.0,0.0,2,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+ATF Service Level Management  Group,1,55.0,55.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+ATF_TestGroup_ServiceDesk,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+ATF_TestGroup_Network,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+Application Development,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+Cloud,2,20.0,10.0,0,0,0,2,0,2,0.0,0.0,2,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie
+Data,2,10.0,5.0,0,0,1,1,0,2,50.0,0.0,2,0.0,Rookie,[],0,,Rookie
+QA,2,-10.0,-5.0,0,0,0,2,0,2,0.0,0.0,2,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Rookie

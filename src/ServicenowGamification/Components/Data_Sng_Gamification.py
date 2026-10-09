@@ -9,6 +9,7 @@ from ServicenowGamification.Entity.Config_Entity import *
 #os.chdir(r"C:\Users\RSR\PYTHON\ServicenowGamification")
 from ServicenowGamification.Components.Data_Sns_Oracle_Loader import IncidentDataLoader
 from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
+from ServicenowGamification.Components.Agent_DashBoard import AgentDashBoard
 
 
 class Gamification: 
@@ -18,6 +19,7 @@ class Gamification:
 
         config_manager=ConfigurationManager()
         self.loader = IncidentDataLoader(config_manager.get_oracle_connect_config() )
+        self.agent_dashboard = AgentDashBoard()
 
     def calculate_points(self,df):
         df=df
@@ -3419,6 +3421,7 @@ class Gamification:
         if self.params.Oracle['Loader'] is None:
             df.to_csv(achievementfile,index=False)
         elif self.params.Oracle['Loader']=='Oracle':
+            df.to_csv(achievementfile,index=False)
             self.loader.run(df,'GMFNL')  
         
         df.to_csv(
@@ -3610,5 +3613,9 @@ class Gamification:
         print(
             f"Monthly Summary saved : {monthlysummaryfile}"
         )
-    
+
+    # +++++++++++++++++++++++Calling THE THE Agent Dashboard #
+        print(f"Calling the Agent Dashboard")
+        self.agent_dashboard.run()
+        print(f"Completed The Agent Dashboard")
     

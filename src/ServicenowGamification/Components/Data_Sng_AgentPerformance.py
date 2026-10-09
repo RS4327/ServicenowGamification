@@ -28,6 +28,7 @@ from sklearn.preprocessing import LabelEncoder
  
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import OrdinalEncoder
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
@@ -91,6 +92,7 @@ class AgentPerformance:
     # Feature Engineering
     ##########################################################
     def feature_engineering(self,df):
+        print('Inside Agent Performance')
          # ============================================================
         # SLA Percentage
         # ============================================================
@@ -200,6 +202,42 @@ class AgentPerformance:
         )
 
 
+
+        # Priority score: higher priority = more complex
+        priority_score = df["priority"].map({
+            1: 100,
+            2: 80,
+            3: 60,
+            4: 40,
+            5: 20
+        }).fillna(50)
+
+        # Resolution time score
+        resolution_score = (
+            df["resolution_hours"] /
+            df["resolution_hours"].quantile(0.95) * 100
+        ).clip(0, 100)
+
+        # Reopen score
+        reopen_score = (
+            df["reopen_count"] / max(df["reopen_count"].max(), 1) * 100
+        ).clip(0, 100)
+
+        # Reassignment score
+        reassignment_score = (
+            df["reassignment_count"] /
+            max(df["reassignment_count"].max(), 1) * 100
+        ).clip(0, 100)
+
+        # Final complexity score
+        df["complexity_score"] = (
+            priority_score * 0.25 +
+            resolution_score * 0.30 +
+            reopen_score * 0.20 +
+            reassignment_score * 0.15
+        ).round(2)
+
+
         # ============================================================
         # Rename
         # ============================================================
@@ -295,11 +333,11 @@ class AgentPerformance:
          #or 
          #df["rewards"] = df["total_points"] // 100
 
-        # df["leaderboard_rank"] = (df["points"].rank(
-        #      ascending=False,
-        #      method="dense"
-        #      ).astype(int)
-        #      )
+        df["leaderboard_rank"] = (df["points"].rank(
+             ascending=False,
+             method="dense"
+             ).astype(int)
+             )
         df["month"] = (pd.to_datetime(df["opened_at"]).dt.to_period("M"))
 
         df["monthly_rank"] = (df.groupby("month")["points"].rank(
@@ -421,6 +459,52 @@ class AgentPerformance:
 
     def encodings(self,df):            
         df_clean=self.encoding.clean_data(df)
+        
+
+        # df["performance_index"] = (
+        #              0.30 * df["sla_percentage"]
+        #              + 0.25 * df["customer_rating"]
+        #              + 0.20 * df["fcr_percentage"]
+        #              + 0.15 * df["skill_score"]
+        #              + 0.10 * (100 - df["mttr"])
+        #              )
+        #             #Calcualte Perfomance
+        #             # Feature	      Weight
+        #             # SLA Percentage	30%
+        #             # Customer Rating	20%
+        #             # FCR Percentage	20%
+        #             # MTTR	15%
+        #             # Total Points	10%
+        #             # Reopen Count	5%
+        
+        # df["performance_score"] = (
+        #              0.30 * df["sla_percentage"]
+        #              + 0.20 * (df["customer_rating"] * 20)   # 1-5 → 20-100
+        #              + 0.20 * df["fcr_percentage"]
+        #              + 0.15 * (100 - df["mttr"])
+        #              + 0.10 * (df["points"] / df["points"].max() * 100)
+        #              + 0.05 * (100 - df["reopen_count"] * 10)
+        #              )
+        # conditions = [
+        #                df["performance_score"] >= 85,
+        #                df["performance_score"] >= 70,
+        #                df["performance_score"] >= 55
+        #                ]
+        
+        # choices = [
+        #               "Excellent",
+        #               "Good",
+        #               "Average"
+        #               ]
+        
+        # df["performance_rating"] = np.select(
+        #               conditions,
+        #               choices,
+        #               default="Poor"
+        #               )
+
+
+
         #original_df=df_clean.copy()
 
         # def select_features(df_clean):
@@ -466,17 +550,20 @@ class AgentPerformance:
     
         def split_dataset(df):
                     df=df
+                   
                     # print('###########################################################')
                     # print('# Encode Categorical Columns')
                     # print('###########################################################')
         
                     target = self.params.agent_performance["target_column"]
+                    df=self.feature_engineering(df)
                     df = df.drop(columns=["resolution_time"])
                     df = df.drop(columns=["opened_at"])
                     df = df.drop(columns=["resolved_at"])
                     df = df.drop(columns=["closed_at"])
-                    X = df.drop(columns=[target])
+                    print('insdie agent performance : ',df.columns)
                     y = df[target]
+                    X = df.drop(columns=[target])
                     X_train, X_test, y_train, y_test = (train_test_split(X,y,test_size=self.params.agent_performance["test_size"],
                                                                                             random_state=self.params.agent_performance["random_state"],
                                                                                             stratify=y
@@ -507,7 +594,7 @@ class AgentPerformance:
         from sklearn.preprocessing import LabelEncoder
         
         def encode_features(X_train, X_test, y_train, y_test):
-
+                
                 feature_columns = self.params.agent_performance["feature_columns"]
 
                 X_train = X_train[feature_columns].copy()
@@ -524,14 +611,23 @@ class AgentPerformance:
                 for col in categorical:
         
                     encoder = LabelEncoder()
-        
+                    encoder = OrdinalEncoder(
+                        handle_unknown="use_encoded_value",
+                        unknown_value=-1
+                    )
                     X_train[col] = encoder.fit_transform(
-                        X_train[col].astype(str)
-                    )
-        
+                          X_train[[col]].astype(str)
+                          ).ravel()
                     X_test[col] = encoder.transform(
-                        X_test[col].astype(str)
-                    )
+                        X_test[[col]].astype(str)).ravel()
+
+                    # X_train[col] = encoder.fit_transform(
+                    #     X_train[col].astype(str)
+                    # )
+        
+                    # X_test[col] = encoder.transform(
+                    #     X_test[col].astype(str)
+                    # )
         
                     encoders[col] = encoder
         

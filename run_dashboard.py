@@ -16,7 +16,7 @@ from ServicenowGamification.PipeLine.Stage_01_Data_Ingestion import DataIngestio
 from ServicenowGamification.PipeLine.Stage_02_Data_PreProcessing import DataPreProcessingPipeLine
 from ServicenowGamification.PipeLine.Stage_03_Data_Metricalculation import DataMetricsCalculationPipeLine
 from ServicenowGamification.PipeLine.Stage_04_Data_Gamification import DataGamificationPipeLine
-from ServicenowGamification.Components.Agent_DashBorad import AgentDashBoard
+from ServicenowGamification.Components.Agent_DashBoard import AgentDashBoard
 from ServicenowGamification.Config.ConfigurationManager import ConfigurationManager
 
 def main():

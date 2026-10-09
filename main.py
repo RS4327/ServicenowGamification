@@ -141,8 +141,8 @@ if __name__=="__main__":
 # sys.stdout = sys.__stdout__
 # log_file.close()
 
-# log_file = open("Log_DataPredictWordLoad.txt", "w")
-# sys.stdout = log_file
+log_file = open("Log_DataPredictWordLoad.txt", "w")
+sys.stdout = log_file
 
 STAGE_NAME='Data Predict WordLoad'
  
@@ -156,11 +156,11 @@ if __name__=="__main__":
     except Exception as e:
         logger.info(e)
         raise e
-# sys.stdout = sys.__stdout__
-# log_file.close()
+sys.stdout = sys.__stdout__
+log_file.close()
 
-# log_file = open("Log_DataAgentPerformance.txt", "w")
-# sys.stdout = log_file
+log_file = open("Log_DataAgentPerformance.txt", "w")
+sys.stdout = log_file
 
 STAGE_NAME='Data Agent Performance'
 try :
@@ -172,8 +172,8 @@ try :
 except Exception as e:
     logger.info(e)
     raise e
-# sys.stdout = sys.__stdout__
-# log_file.close()
+sys.stdout = sys.__stdout__
+log_file.close()
 
 # # log_file = open("Log_DataLLMEmbenddingsPromptBuilder.txt", "w")
 # # sys.stdout = log_file

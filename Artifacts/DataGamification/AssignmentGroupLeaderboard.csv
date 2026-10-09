@@ -1,0 +1,14 @@
+assignment_group,total_incidents,total_points,group_rank
+Database,17,745.0,1
+Software,9,265.0,2
+Network,9,250.0,3
+Hardware,9,210.0,4
+Service Desk,10,150.0,5
+NY DB,2,80.0,6
+ATF Service Level Management  Group,1,55.0,7
+ATF_TestGroup_Network,1,25.0,8
+ATF_TestGroup_ServiceDesk,1,25.0,8
+Application Development,1,25.0,8
+Cloud,2,20.0,9
+Data,2,10.0,10
+QA,2,-10.0,11

@@ -1,0 +1,13 @@
+agent_name,total_incidents,resolved_incident_count,closed_incident_count,opened_count,mttr_hours,sla_compliance,fcr_percentage,total_points,agent_level
+ATF Service Level Management,1,0,0,1,96.0,,100.0,55.0,1
+ATF_TestItilUser1 ATF_TestItilUser1,1,0,0,1,120.0,,100.0,25.0,1
+ATF_TestItilUser2 ATF_TestItilUser2,1,0,0,1,72.0,,100.0,25.0,1
+Beth Anglin,7,0,1,6,349.1528174603175,0.0,57.14,235.0,1
+Bud Richman,4,0,3,1,1709.7955555555554,0.0,0.0,100.0,1
+David Loo,9,0,6,3,1507.20737654321,0.0,33.33,250.0,1
+Don Goodliffe,8,0,4,4,1246.6998611111112,0.0,25.0,125.0,1
+Fred Luddy,6,0,2,4,40.05569444444445,100.0,83.33,280.0,1
+Guillermo Frohlich,1,0,0,1,72.0,,100.0,25.0,1
+Howard Johnson,3,0,1,2,790.9339814814815,0.0,0.0,50.0,1
+ITIL User,17,1,5,11,384.8272549019608,50.0,41.18,535.0,1
+Vamsi,2,0,0,2,60.0,,50.0,20.0,1

@@ -1,0 +1,42 @@
+Assignment_Group,Agent,Average_Resolution_Time,Resolved_Incident_Count
+ATF Service Level Management  Group,ATF Service Level Management,96.0,1
+ATF_TestGroup_Network,ATF_TestItilUser2 ATF_TestItilUser2,72.0,1
+ATF_TestGroup_ServiceDesk,ATF_TestItilUser1 ATF_TestItilUser1,120.0,1
+Application Development,Guillermo Frohlich,72.0,1
+Cloud,Bud Richman,24.0,1
+Cloud,ITIL User,48.0,1
+Data,ITIL User,36.0,2
+Database,Beth Anglin,1042.03,2
+Database,David Loo,1294.91,2
+Database,Don Goodliffe,2181.05,1
+Database,Fred Luddy,38.47,5
+Database,ITIL User,27.47,7
+Hardware,Beth Anglin,72.0,1
+Hardware,Bud Richman,2137.12,1
+Hardware,David Loo,2396.61,1
+Hardware,Don Goodliffe,1742.53,3
+Hardware,ITIL User,1365.9,3
+NY DB,David Loo,108.0,2
+Network,Beth Anglin,120.0,1
+Network,Bud Richman,2640.61,1
+Network,David Loo,2011.92,1
+Network,Howard Johnson,72.0,1
+Network,ITIL User,96.0,1
+Network,Luke Wilson,2035.37,1
+Network,Vamsi,72.0,1
+Network,Venkat,36.78,2
+QA,ITIL User,72.0,2
+Service Desk,Beth Anglin,24.0,1
+Service Desk,Bud Richman,2037.45,1
+Service Desk,Charlie Whitherspoon,2204.77,1
+Service Desk,David Loo,2037.1,1
+Service Desk,Don Goodliffe,1210.48,2
+Service Desk,Howard Johnson,96.0,1
+Service Desk,ITIL User,1892.06,1
+Service Desk,Luke Wilson,1999.36,2
+Software,Beth Anglin,72.0,2
+Software,David Loo,2156.71,2
+Software,Don Goodliffe,72.0,2
+Software,Fred Luddy,48.0,1
+Software,Howard Johnson,2204.8,1
+Software,Vamsi,48.0,1

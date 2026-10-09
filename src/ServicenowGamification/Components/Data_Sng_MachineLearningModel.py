@@ -45,7 +45,10 @@ class MachineLearningModels:
           
     def clean_data(self,df):
         if df is None:
+            print('df is none')
             df=pd.read_csv(self.config.data_path)
+
+            
         
 
         print('###########################################################')

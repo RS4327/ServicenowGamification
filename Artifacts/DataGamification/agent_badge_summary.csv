@@ -1,0 +1,16 @@
+assigned_to,total_incidents,total_points,average_points,resolved_count,closed_count,sla_met,sla_breached,completed_count,sla_total,sla_percentage,fcr_count,fcr_total,fcr_percentage,level,performance_badges,badge_count,badges,badge_descriptions,agent_badge
+ITIL User,17,535.0,31.47,1,5,4,13,6,17,23.53,0.0,17,0.0,Gold,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Gold
+Fred Luddy,6,280.0,46.67,0,2,4,2,2,6,66.67,0.0,6,0.0,Bronze,[],0,,,Bronze
+David Loo,9,250.0,27.78,0,6,0,9,6,9,0.0,0.0,9,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Bronze
+Beth Anglin,7,235.0,33.57,0,1,0,7,1,7,0.0,0.0,7,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Bronze
+Don Goodliffe,8,125.0,15.62,0,4,0,8,4,8,0.0,0.0,8,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Bronze
+Bud Richman,4,100.0,25.0,0,3,0,4,3,4,0.0,0.0,4,0.0,Bronze,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Bronze
+Venkat,2,80.0,40.0,1,1,1,1,2,2,50.0,0.0,2,0.0,Rookie,[],0,,,Rookie
+ATF Service Level Management,1,55.0,55.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+Howard Johnson,3,50.0,16.67,0,1,0,3,1,3,0.0,0.0,3,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+Charlie Whitherspoon,1,35.0,35.0,0,1,0,1,1,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+ATF_TestItilUser2 ATF_TestItilUser2,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+ATF_TestItilUser1 ATF_TestItilUser1,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+Guillermo Frohlich,1,25.0,25.0,0,0,0,1,0,1,0.0,0.0,1,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+Vamsi,2,20.0,10.0,0,0,0,2,0,2,0.0,0.0,2,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie
+Luke Wilson,3,10.0,3.33,0,3,0,3,3,3,0.0,0.0,3,0.0,Rookie,['SLA Watcher'],1,SLA Watcher,Focus on SLA improvement,Rookie

@@ -1,0 +1,16 @@
+Agent,Total_Incidents,FCR_Count,Non_FCR_Count,FCR_Percentage,Non_FCR_Percentage
+ATF Service Level Management,1,1,0,100.0,0.0
+ATF_TestItilUser1 ATF_TestItilUser1,1,1,0,100.0,0.0
+ATF_TestItilUser2 ATF_TestItilUser2,1,1,0,100.0,0.0
+Beth Anglin,7,4,3,57.14,42.86
+Bud Richman,4,0,4,0.0,100.0
+Charlie Whitherspoon,1,0,1,0.0,100.0
+David Loo,9,3,6,33.33,66.67
+Don Goodliffe,8,2,6,25.0,75.0
+Fred Luddy,6,5,1,83.33,16.67
+Guillermo Frohlich,1,1,0,100.0,0.0
+Howard Johnson,3,0,3,0.0,100.0
+ITIL User,17,7,10,41.18,58.82
+Luke Wilson,3,0,3,0.0,100.0
+Vamsi,2,1,1,50.0,50.0
+Venkat,2,2,0,100.0,0.0

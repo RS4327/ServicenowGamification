@@ -1,0 +1,9 @@
+CHALLENGE_ID,CHALLENGE_NAME,CHALLENGE_DESCRIPTION,CHALLENGE_TYPE,TARGET_VALUE,CURRENT_VALUE,START_DATE,END_DATE,STATUS,POINTS_REWARD,BADGE_REWARD
+1,SLA Champion,Maintain SLA compliance for assigned incidents,SLA,95,0,24-Aug-26,23-Sep-26,ACTIVE,500,SLA_CHAMPION
+2,First Contact Hero,Achieve a high First Contact Resolution rate,FCR,90,0,24-Aug-26,23-Sep-26,ACTIVE,500,FCR_HERO
+3,Fast Resolver,Resolve incidents within the target resolution time,RESOLUTION_TIME,90,0,24-Aug-26,23-Sep-26,ACTIVE,400,FAST_RESOLVER
+4,Customer Favorite,Maintain an excellent customer rating,CUSTOMER_RATING,4.5,0,24-Aug-26,23-Sep-26,ACTIVE,500,CUSTOMER_FAVORITE
+5,Zero Reopen,Minimize incidents that are reopened,REOPEN,0,0,24-Aug-26,23-Sep-26,ACTIVE,300,ZERO_REOPEN
+6,Team Player,Minimize unnecessary incident reassignments,REASSIGNMENT,2,0,24-Aug-26,23-Sep-26,ACTIVE,300,TEAM_PLAYER
+7,Priority Master,Successfully resolve high-priority incidents,PRIORITY,20,0,24-Aug-26,23-Sep-26,ACTIVE,500,PRIORITY_MASTER
+8,Points Hunter,Earn the required number of gamification points,POINTS,1000,0,24-Aug-26,23-Sep-26,ACTIVE,750,POINTS_HUNTER

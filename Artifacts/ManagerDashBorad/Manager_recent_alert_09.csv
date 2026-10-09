@@ -1,0 +1,6 @@
+alert_type,alert_title,alert_message,incident_details,incident_date,duration,priority,metric_value,threshold_value
+HIGH,High MTTR for 2 - High incidents,Average MTTR is 48.00 hours; target is 8.00 hours,INC0010025,2026-08-26,48.0,2.0,48.0,8
+HIGH,High Incident Duration,Maximum duration is 48.00 hours; limit is 16.00 hours,INC0010025,2026-08-26,48.0,2.0,48.0,16
+HIGH,High P1/P2 Incident Volume,P1/P2 incidents today: 4,"INC0010025, INC0010026, INC0010023, INC0010024",2026-08-26,,,4.0,3
+WARNING,Low SLA Compliance for 2 - High,SLA compliance is 0.00%; target is 90%,INC0010025,2026-08-26,48.0,2.0,0.0,90
+MEDIUM,High Reopen Rate for 2 - High,Reopen rate is 100.00%; threshold is 14%,INC0010025,2026-08-26,48.0,2.0,100.0,14

@@ -13,8 +13,8 @@ Reading YAML : params.yaml
 
 *----------------- Remove duplicates from Incident Data Frame -----------------*
 
- Data Frame Shape before Remove duplicates (59, 16)
- Data Frame Shape after Remove duplicatess (59, 16)
+ Data Frame Shape before Remove duplicates (66, 16)
+ Data Frame Shape after Remove duplicatess (66, 16)
 
 *-------- Date Features: Convert to datetime from Incident Data Frame ---------*
 
@@ -29,10 +29,10 @@ Checking Missing Values count for every object features  before Handle missing v
 *-------------- Handle missing values from Incident Data Frame ----------------*
 
 Checking Missing Values Before Handling
-assigned_to : 3
-assignment_group : 12
+assigned_to : 4
+assignment_group : 13
 category : 3
-subcategory : 46
+subcategory : 49
 description : 0
 
 Checking Missing Values After Handling
@@ -43,19 +43,19 @@ subcategory : 0
 description : 0
 
 Checking Missing Values count for Date features before Handle missing values 
-  resolved_at- Missing count :34 
-  closed_at- Missing count :26 
+  resolved_at- Missing count :37 
+  closed_at- Missing count :31 
 
 resolved_at-Handle missing values based on opened_at 
 
 closed_at-Handle missing values based on closed_at 
 Preprocessed data saved to: Artifacts/DataPreProcessing/Datapreprocessing.csv
 Connecting the Oracle Database and loading the csv file into oracle table
-Received DataFrame - Incidents: (59, 16)
+Received DataFrame - Incidents: (66, 16)
 ======================================================================
 ORACLE DATA LOAD STARTED
 ======================================================================
-Received DataFrame: (59, 16)
+Received DataFrame: (66, 16)
 ======================================================================
 CONNECTING TO ORACLE
 ======================================================================
@@ -67,7 +67,7 @@ Incidents
 ======================================================================
 PREPARING DATA
 ======================================================================
-Input DataFrame shape: (59, 16)
+Input DataFrame shape: (66, 16)
 
 Columns received:
  - number
@@ -103,11 +103,11 @@ INCIDENTS table truncated successfully
 ======================================================================
 INSERTING DATA INTO ORACLE
 ======================================================================
-Total records prepared: 59
+Total records prepared: 66
 ======================================================================
 DATA INSERTED SUCCESSFULLY
 ======================================================================
-Records inserted: 59
+Records inserted: 66
 ======================================================================
 ORACLE DATA LOAD COMPLETED
 ======================================================================

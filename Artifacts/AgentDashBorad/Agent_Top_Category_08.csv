@@ -1,0 +1,38 @@
+ASSIGNED_TO,CATEGORY,INCIDENT_COUNT,CATEGORY_PERCENTAGE
+ATF Service Level Management,Inquiry / Help,1,100.0
+ATF_TestItilUser1 ATF_TestItilUser1,Inquiry / Help,1,100.0
+ATF_TestItilUser2 ATF_TestItilUser2,Database,1,100.0
+Beth Anglin,Inquiry / Help,3,42.86
+Beth Anglin,Hardware,2,28.57
+Beth Anglin,Database,1,14.29
+Beth Anglin,Network,1,14.29
+Bud Richman,Inquiry / Help,2,50.0
+Bud Richman,Hardware,1,25.0
+Bud Richman,Software,1,25.0
+Charlie Whitherspoon,Network,1,100.0
+David Loo,Inquiry / Help,4,44.44
+David Loo,Database,2,22.22
+David Loo,Software,2,22.22
+David Loo,Hardware,1,11.11
+Don Goodliffe,Inquiry / Help,3,37.5
+Don Goodliffe,Software,2,25.0
+Don Goodliffe,Database,1,12.5
+Don Goodliffe,Hardware,1,12.5
+Fred Luddy,Database,3,50.0
+Fred Luddy,Hardware,1,16.67
+Fred Luddy,Inquiry / Help,1,16.67
+Fred Luddy,Software,1,16.67
+Guillermo Frohlich,Inquiry / Help,1,100.0
+Howard Johnson,Inquiry / Help,1,33.33
+Howard Johnson,Network,1,33.33
+Howard Johnson,Software,1,33.33
+ITIL User,Inquiry / Help,7,41.18
+ITIL User,Database,4,23.53
+ITIL User,Hardware,3,17.65
+ITIL User,Software,2,11.76
+Luke Wilson,Inquiry / Help,2,66.67
+Luke Wilson,Software,1,33.33
+Vamsi,Network,1,50.0
+Vamsi,Software,1,50.0
+Venkat,Hardware,1,50.0
+Venkat,Inquiry / Help,1,50.0

@@ -1,0 +1,67 @@
+NUMBER_ID,Short Description,State,Priority,Opened At,Resolved At
+INC0010028,Getting multiple records ,IN PROGRESS,1 - Critical,2026-08-31 02:17:59,2026-09-01 02:17:59
+INC0010027,"table or view ""SERVICENOWGAMIFICATION"".""AI_SIMILAR_INCIDENTSS""",IN PROGRESS,1 - Critical,2026-08-31 02:06:22,2026-09-02 02:06:22
+INC0010026,Ora-0010,CLOSED,1 - Critical,2026-08-26 08:17:38,2026-08-26 08:37:36
+INC0010025,Unable to reset my password ,IN PROGRESS,2 - High,2026-08-26 08:09:44,2026-08-30 08:09:44
+INC0010024,Unable to connect server,CLOSED,1 - Critical,2026-08-26 08:05:52,2026-08-26 08:12:32
+INC0010023,Unable to upgrade the antivirus,RESOLVED,1 - Critical,2026-08-26 08:01:31,2026-08-26 08:09:27
+INC0010021,Issue with networking,RESOLVED,3 - Moderate,2026-08-26 07:54:47,2026-08-26 08:01:07
+INC0010020,"ORA-00257: archiver is stuck. CONNECT INTERNAL only, until freed",ON HOLD,3 - Moderate,2026-08-09 07:22:36,2026-08-12 07:22:36
+INC0010019,"ORA-00257: archiver is stuck. CONNECT INTERNAL only, until freed",IN PROGRESS,3 - Moderate,2026-08-09 07:07:35,2026-08-13 07:07:35
+INC0010018,"ORA-00068: invalid value num for parameter num, must be between num and num",IN PROGRESS,1 - Critical,2026-08-09 07:02:27,2026-08-14 07:02:27
+INC0010017,ORA-00051: time-out occurred while waiting for resource,IN PROGRESS,3 - Moderate,2026-08-09 06:57:40,2026-08-10 06:57:40
+INC0010014,ORA-00001: unique constraint (constraint_name) violated,IN PROGRESS,1 - Critical,2026-08-09 06:41:40,2026-08-11 06:41:40
+INC0010013,not able to upgrate the antivirus automatically,IN PROGRESS,3 - Moderate,2026-08-09 06:36:28,2026-08-12 06:36:28
+INC0010012,Install antivirus,IN PROGRESS,1 - Critical,2026-08-09 06:32:28,2026-08-13 06:32:28
+INC0010011,Issue with laptop,IN PROGRESS,3 - Moderate,2026-08-09 06:30:34,2026-08-14 06:30:34
+INC0010010,Antivirus unable to upgrade,IN PROGRESS,1 - Critical,2026-08-09 06:27:20,2026-08-10 06:27:20
+INC0010009,Invalide object,IN PROGRESS,4 - Low,2026-08-09 06:21:09,2026-08-11 06:21:09
+INC0010008,Returning multiple records ,CLOSED,2 - High,2026-08-01 02:15:21,2026-08-01 02:39:15
+INC0010007,Getting Duplicate records,CLOSED,1 - Critical,2026-08-01 02:10:06,2026-08-01 02:14:12
+INC0000601,The USB port on my PC stopped working,CLOSED,4 - Low,2026-06-07 02:42:59,2026-07-30 01:22:08
+INC0000055,SAP Sales app is not accessible,IN PROGRESS,1 - Critical,2026-05-21 21:47:23,2026-05-22 21:47:23
+INC0000046,Can't access SFA software,NEW,3 - Moderate,2026-05-21 15:04:15,2026-05-23 15:04:15
+INC0000050,Can't access Exchange server - is it down?,IN PROGRESS,1 - Critical,2026-05-21 14:58:24,2026-05-24 14:58:24
+INC0000049,Network storage unavailable,IN PROGRESS,2 - High,2026-05-21 14:56:37,2026-05-25 14:56:37
+INC0000047,Issue with email,IN PROGRESS,3 - Moderate,2026-05-21 13:53:18,2026-05-26 13:53:18
+INC0000053,The SAP HR application is not accessible,IN PROGRESS,1 - Critical,2026-05-21 13:48:46,2026-05-22 13:48:46
+INC0000052,SAP Financial Accounting application appears to be down,IN PROGRESS,1 - Critical,2026-05-21 13:48:40,2026-05-23 13:48:40
+INC0000051,Manager can't access SAP Controlling application,IN PROGRESS,1 - Critical,2026-05-21 13:48:32,2026-05-24 13:48:32
+INC0000024,Issue with a web page on wiki,CLOSED,5 - Planning,2026-03-24 16:52:52,2026-03-24 16:53:08
+INC0000013,EMAIL is slow when an attachment is involved,CLOSED,1 - Critical,2026-03-23 16:15:58,2026-03-24 16:18:40
+INC0000035,Reset my password,CLOSED,5 - Planning,2026-03-21 17:32:47,2026-03-24 17:33:33
+INC0000030,Lost connection to the wireless network,CLOSED,5 - Planning,2026-03-19 17:01:12,2026-03-19 18:02:14
+INC0000008,Printer in my office is out of toner,CLOSED,1 - Critical,2026-03-19 16:08:39,2026-03-24 16:08:57
+INC0000011,Need new Blackberry set up,CLOSED,3 - Moderate,2026-03-19 16:01:12,2026-03-23 16:02:54
+INC0000038,my PDF docs are all locked from editing,CLOSED,4 - Low,2026-03-18 17:36:44,2026-03-25 17:37:14
+INC0000036,Issue with networking,CLOSED,5 - Planning,2026-03-18 17:33:49,2026-03-22 17:34:21
+INC0000021,New employee hire,CLOSED,5 - Planning,2026-03-18 16:52:01,2026-03-23 16:52:17
+INC0000009,Reset my password,CLOSED,1 - Critical,2026-03-18 15:50:23,2026-03-19 15:55:16
+INC0000004,Forgot email password,CLOSED,1 - Critical,2026-03-18 15:49:22,2026-03-19 17:40:24
+INC0000044,Can't log into SAP from my laptop today,IN PROGRESS,2 - High,2026-03-13 17:47:08,2026-03-18 17:47:08
+INC0000041,My desk phone does not work,IN PROGRESS,3 - Moderate,2026-03-13 17:44:53,2026-03-14 17:44:53
+INC0000040,JavaScript error on hiring page of corporate website,ON HOLD,3 - Moderate,2026-03-13 17:42:45,2026-03-15 17:42:45
+INC0000039,Trouble getting to Oregon mail server,NEW,5 - Planning,2026-03-13 17:41:01,2026-03-16 17:41:01
+INC0000037,Request for a new service,IN PROGRESS,3 - Moderate,2026-03-13 17:34:56,2026-03-17 17:34:56
+INC0000003,Wireless access is down in my area,IN PROGRESS,1 - Critical,2026-03-12 16:07:30,2026-03-17 16:07:30
+INC0000010,Need Oracle 10GR2 installed,CLOSED,4 - Low,2026-03-12 15:53:02,2026-03-17 15:54:55
+INC0000029,I can't get my weather report,IN PROGRESS,5 - Planning,2026-03-11 17:00:44,2026-03-13 17:00:44
+INC0000001,Can't read email,CLOSED,1 - Critical,2026-03-11 16:09:51,2026-03-12 16:10:06
+INC0000006,Hangs when trying to print VISIO document,CLOSED,1 - Critical,2026-03-11 16:08:05,2026-03-24 17:36:40
+INC0000020,"I need a replacement iPhone, please",IN PROGRESS,5 - Planning,2026-03-10 16:51:35,2026-03-15 16:51:35
+INC0000027,Please remove the latest hotfix from my PC,IN PROGRESS,2 - High,2026-03-09 16:55:55,2026-03-10 16:55:55
+INC0000005,CPU load high for over 10 minutes,CLOSED,1 - Critical,2026-03-07 15:06:52,2026-06-12 15:58:47
+INC0000002,Network file shares access issue,ON HOLD,1 - Critical,2026-03-05 15:07:12,2026-03-08 15:07:12
+INC0000028,My disk is still having issues. Can't delete a file,CLOSED,5 - Planning,2026-03-04 15:58:00,2026-03-09 16:58:58
+INC0000032,EMAIL Server Down Again,CLOSED,5 - Planning,2026-03-03 16:19:36,2026-03-03 16:35:27
+INC0000019,Can't launch 64-bit Windows 7 virtual machine,IN PROGRESS,2 - High,2026-02-28 15:44:39,2026-03-01 15:44:39
+INC0000018,Sales forecast spreadsheet is READ ONLY,IN PROGRESS,1 - Critical,2026-02-26 15:42:46,2026-02-28 15:42:46
+INC0000015,I can't launch my VPN client since the last software update,IN PROGRESS,1 - Critical,2026-02-25 15:38:46,2026-02-28 15:38:46
+INC0000033,File Server is 80% full - Needs upgrade,CLOSED,1 - Critical,2026-02-25 14:22:52,2026-02-25 16:24:08
+INC0000012,Customer didn't receive eFax,CLOSED,5 - Planning,2026-02-24 15:07:00,2026-03-19 16:12:02
+INC0000026,Seem to have an issue with my hard drive...,CLOSED,5 - Planning,2026-02-23 15:54:59,2026-02-25 15:56:53
+INC0000034,Does not look like a backup occurred last night,CLOSED,1 - Critical,2026-02-22 12:25:29,2026-02-23 16:26:41
+INC0000016,Rain is leaking on main DNS Server,IN PROGRESS,1 - Critical,2026-02-20 15:40:23,2026-02-23 15:40:23
+INC0000025,Need to add more memory to laptop,IN PROGRESS,1 - Critical,2026-02-18 15:53:46,2026-02-22 15:53:46
+INC0000014,Missing my home directory,CLOSED,1 - Critical,2026-02-14 15:37:35,2026-06-12 15:58:47
+INC0000031,Need help with Remedy. Can we configure UI?,IN PROGRESS,1 - Critical,2026-02-13 16:18:03,2026-02-14 16:18:03

@@ -1,0 +1,4 @@
+goal,current,target,progress,remaining,unit,due_date,status
+Improve SLA Compliance,9.35,90.0,10.39,80.65,%,"May 31, 2025",At Risk
+Achieve FCR 80%,0.0,80.0,0.0,80.0,%,"May 31, 2025",At Risk
+Resolve 15 Incidents,29.0,15.0,100.0,0.0,,"May 31, 2025",On Track

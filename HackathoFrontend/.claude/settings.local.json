@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Hack-Demo\\\\src\" -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Hack-Demo\\\\\", \"\"\\) })",
+      "PowerShell(netstat -ano)",
+      "PowerShell(Start-Process \"http://localhost:5173\")",
+      "Bash(node -e ' *)",
+      "PowerShell(cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 4; Write-Host \"Dev server launched\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 4; Start-Process \"http://localhost:5173\"; Write-Host \"Server started and browser opened\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 4; Start-Process \"http://localhost:5173\"; Write-Host \"Server started\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Hack-Demo\\\\backend\\\\routes\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\\\\backend\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"node server.js\" -WindowStyle Normal; Start-Sleep -Seconds 5; Write-Host \"Backend server started\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 5; Start-Process \"http://localhost:5173\"; Write-Host \"Dev server restarted with database mode\")",
+      "PowerShell($portProc = \\(netstat -ano | Select-String \":5173\" | ForEach-Object { \\($_ -split \"\\\\s+\"\\)[-1] } | Select-Object -First 1\\); if \\($portProc -match '^\\\\d+$'\\) { Stop-Process -Id \\([int]$portProc\\) -Force -ErrorAction SilentlyContinue; Write-Host \"Killed PID $portProc\" } else { Write-Host \"No process on 5173\" })",
+      "PowerShell(cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 5; Start-Process \"http://localhost:5173\"; Write-Host \"Restarted with correct API URL\")",
+      "PowerShell($p = \\(netstat -ano | Select-String \":5173\" | ForEach-Object { \\($_ -split \"\\\\s+\"\\)[-1] } | Select-Object -First 1\\); if \\($p -match '^\\\\d+$'\\) { Stop-Process -Id \\([int]$p\\) -Force -ErrorAction SilentlyContinue }; cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\",\"-Command\",\"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 5; Start-Process \"http://localhost:5173\"; Write-Host \"Restarted on port 1521 API URL\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\\\\backend\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"node server.js\" -WindowStyle Normal; Start-Sleep -Seconds 4; $r = Invoke-WebRequest -Uri \"http://localhost:3001/health\" -UseBasicParsing -TimeoutSec 5; Write-Host \"Backend health: $\\($r.Content\\)\")",
+      "PowerShell($p = \\(netstat -ano | Select-String \":5173\" | ForEach-Object { \\($_ -split \"\\\\s+\"\\)[-1] } | Select-Object -First 1\\); if \\($p -match '^\\\\d+$'\\) { Stop-Process -Id \\([int]$p\\) -Force -ErrorAction SilentlyContinue }; cd \"c:\\\\Hack-Demo\"; Start-Process powershell -ArgumentList \"-NoExit\",\"-Command\",\"npm run dev\" -WindowStyle Normal; Start-Sleep -Seconds 5; Start-Process \"http://localhost:5173\"; Write-Host \"Frontend restarted\")",
+      "PowerShell(cd \"c:\\\\Hack-Demo\\\\backend\"; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"node server.js\" -WindowStyle Normal; Start-Sleep -Seconds 4; $r = Invoke-WebRequest -Uri \"http://localhost:3001/health\" -UseBasicParsing -TimeoutSec 5; Write-Host \"✅ Backend live: $\\($r.Content\\)\")",
+      "PowerShell($r = Invoke-WebRequest -Uri \"http://localhost:3001/api/v1/auth/login\" -Method POST -Body '{\"username\":\"manager\",\"password\":\"demo\",\"role\":\"manager\"}' -ContentType \"application/json\" -UseBasicParsing -ErrorAction SilentlyContinue; Write-Host \"Status: $\\($r.StatusCode\\)\"; Write-Host \"Body: $\\($r.Content\\)\")",
+      "PowerShell($p = \\(netstat -ano | Select-String \":3001\\\\s\" | ForEach-Object { \\($_ -split \"\\\\s+\"\\)[-1] } | Select-Object -First 1\\); if \\($p -match '^\\\\d+$'\\) { Stop-Process -Id \\([int]$p\\) -Force -ErrorAction SilentlyContinue }; Start-Sleep 1; cd \"c:\\\\Hack-Demo\\\\backend\"; Start-Process powershell -ArgumentList \"-NoExit\",\"-Command\",\"node server.js\" -WindowStyle Normal; Start-Sleep 5; Write-Host \"Backend restarted\")",
+      "PowerShell($ProgressPreference='SilentlyContinue'; try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/api/v1/auth/login\" -Method POST -Body '{\"username\":\"manager\",\"password\":\"demo\",\"role\":\"manager\"}' -ContentType \"application/json\" -UseBasicParsing; Write-Host \"200: $\\($r.Content\\)\" } catch { Write-Host \"Error $\\($_.Exception.Response.StatusCode\\): $\\($_.Exception.Response | Select-Object -ExpandProperty StatusDescription\\)\"; $stream = $_.Exception.Response.GetResponseStream\\(\\); $reader = New-Object System.IO.StreamReader\\($stream\\); Write-Host \"Body: $\\($reader.ReadToEnd\\(\\)\\)\" })",
+      "PowerShell($p=\\(netstat -ano|Select-String \":5173\"|ForEach-Object{\\($_ -split \"\\\\s+\"\\)[-1]}|Select-Object -First 1\\);if\\($p -match '^\\\\d+$'\\){Stop-Process -Id\\([int]$p\\)-Force -ErrorAction SilentlyContinue};cd \"c:\\\\Hack-Demo\";Start-Process powershell -ArgumentList \"-NoExit\",\"-Command\",\"npm run dev\" -WindowStyle Normal;Start-Sleep 4;Start-Process \"http://localhost:5173\";Write-Host \"Restarted\")",
+      "PowerShell(gh auth status 2>&1)",
+      "PowerShell(winget install --id GitHub.cli --silent --accept-package-agreements --accept-source-agreements 2>&1)"
+    ]
+  }
+}
+ 
